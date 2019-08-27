@@ -6,14 +6,12 @@
 <body>
 <div class="container">
 		<div class="row">
-
 			<h2 th:text="${userModel.title}">Welcome to waylau.com</h2>
-
 		</div><!-- /.row -->
 
 		<div class="row">
 			<p>
-				<a class="btn btn-primary" href="/users" role="button">返回</a>
+				<a class="btn btn-primary" href="/users" th:href="@{/users}" role="button">返回</a>
 			</p>
 		</div><!-- /.row -->
  		<div class="row">
