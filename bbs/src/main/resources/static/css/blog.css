@@ -50,8 +50,20 @@
     resize: none;
 }
 
-
+.blog-label-success {
+	color: #5cb85c;
+}
   
+.blog-label-error {
+	color: #d9534f;
+}
+
+/* blog avatar */
+.blog-avatar-img {
+  max-width: 100%; 
+}
+
+
 /* go to top */
 #goToTop{
   display:block;
