@@ -29,7 +29,6 @@ $(function() {
 		 });
 	});
 	
-	
 	// 选中菜单第一项
 	 $(".blog-menu .list-group-item:first").trigger("click");
 });

@@ -1,37 +1,9 @@
-@charset "utf-8";
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    -ms-touch-action: none; /* 阻止windows Phone 的默认触摸事件 */
-}
-
-body,
-div,
-p,
-ul,
-li {
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
-}
-
-body {
-    width: 100%;
-    *cursor: default;
-    overflow: hidden;
-    font: 16px/1.5 "Microsoft YaHei", Helvetica, STHeiti STXihei, Microsoft JhengHei, Arial;
-}
-
+/*!
+ * 图片剪切 style.
+ *
+ * @since: 1.0.0
+ * @author Way Lau <https://waylau.com>
+ */
 .crop {
     display: none;
 }
