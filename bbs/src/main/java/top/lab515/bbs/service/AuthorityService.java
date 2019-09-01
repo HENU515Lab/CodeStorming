@@ -2,6 +2,8 @@ package top.lab515.bbs.service;
 
 import top.lab515.bbs.domain.Authority;
 
+import java.util.Optional;
+
 /**
  * @author ：Yixiang Zhao
  * @date ：Created in 2019/8/27 16:41
@@ -14,6 +16,6 @@ public interface AuthorityService {
      * @param id
      * @return
      */
-    Authority getAuthorityById(Long id);
+    Optional<Authority> getAuthorityById(Long id);
 
 }
