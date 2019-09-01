@@ -12,7 +12,9 @@ import top.lab515.bbs.repository.UserRepository;
 import top.lab515.bbs.service.UserService;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author ：Yixiang Zhao
@@ -27,7 +29,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public User saveUser(User user) {
+    public User saveOrUpateUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public User registerUser(User user) {
+        //  加密密码
+        user.setEncodePassword(user.getPassword());
         return userRepository.save(user);
     }
 
@@ -37,30 +47,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
-    @Transactional
     @Override
-    public void removeUsersInBatch(List<User> users) {
-        userRepository.deleteInBatch(users);
-    }
-
-    @Transactional
-    @Override
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    public User getUserById(Long id) {
-        return userRepository.getOne(id);
-    }
-
-    @Override
-    public List<User> listUsers() {
-        return userRepository.findAll();
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override
     public Page<User> listUsersByNameLike(String name, Pageable pageable) {
+
         // 模糊查询
         name = "%" + name + "%";
         Page<User> users = userRepository.findByNameLike(name, pageable);
@@ -72,5 +66,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-}
+    @Override
+    public List<User> listUsersByUsernames(Collection<String> usernames) {
+        return userRepository.findByUsernameIn(usernames);
+    }
 
+}
