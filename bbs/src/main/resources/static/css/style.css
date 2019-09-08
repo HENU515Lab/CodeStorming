@@ -2,7 +2,7 @@
 * Override Bootstrap style.
 *
 * @since: 1.0.0
-* @author Way Lau <https://waylau.com>
+* @author Yixiang Zhao
 */
 
 .badge {
@@ -11,4 +11,40 @@
 
 .hidden { 
 	display: none !important; 
+}
+
+/*.navbar {*/
+    /*height: 50px;*/
+/*}*/
+
+body {
+    background: url("/images/background.png");
+}
+
+.btn-lg {
+    border-radius: 5px;
+    background-color: #66afe9;
+    padding: 10px 16px;
+    font-size: 18px;
+    box-shadow: 3px 3px 3px silver;
+}
+
+.btn-dark {
+    top: 0;
+    bottom: 0;
+    background-color: #222;
+    border-color: #222;
+    color: rgba(255,255,255,.5);
+}
+
+.btn-dark:hover {
+    top: 0;
+    bottom: 0;
+    background-color: #222;
+    border-color: #222;
+    color: #fff;
+}
+
+.dropdown {
+    background-color: #222222;
 }

@@ -82,6 +82,13 @@
             <version>0.16</version>
         </dependency>
 
+        <!--让项目支持热更新-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
 
     </dependencies>
 
