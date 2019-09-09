@@ -42,8 +42,8 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<Catalog> listCatalogs(User user) {
-        return catalogRepository.findByUser(user);
+    public List<Catalog> listCatalogs() {
+        return catalogRepository.findAll();
     }
 
 }

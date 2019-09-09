@@ -41,5 +41,5 @@ public interface CatalogService {
      *
      * @return
      */
-    List<Catalog> listCatalogs(User user);
+    List<Catalog> listCatalogs();
 }

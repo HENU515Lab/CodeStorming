@@ -187,8 +187,8 @@ public class UserspaceController {
     public ModelAndView createBlog(@PathVariable("username") String username,
                                    Model model) {
         // 获取用户分类列表
-        User user = (User) userDetailsService.loadUserByUsername(username);
-        List<Catalog> catalogs = catalogService.listCatalogs(user);
+//        User user = (User) userDetailsService.loadUserByUsername(username);
+        List<Catalog> catalogs = catalogService.listCatalogs();
 
         model.addAttribute("catalogs", catalogs);
         model.addAttribute("blog", new Blog(null, null, null));
@@ -206,8 +206,8 @@ public class UserspaceController {
     public ModelAndView editBlog(@PathVariable("username") String username,
                                  @PathVariable("id") Long id, Model model) {
         // 获取用户分类列表
-        User user = (User) userDetailsService.loadUserByUsername(username);
-        List<Catalog> catalogs = catalogService.listCatalogs(user);
+//        User user = (User) userDetailsService.loadUserByUsername(username);
+        List<Catalog> catalogs = catalogService.listCatalogs();
 
         model.addAttribute("catalogs", catalogs);
         model.addAttribute("blog", blogService.getBlogById(id).get());

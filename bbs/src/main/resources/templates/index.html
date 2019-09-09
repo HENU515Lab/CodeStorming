@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragments/header :: header}">
 </head>
 <body>
@@ -14,9 +14,15 @@
 
         <br/>
 
-        <a type="button"
-           class="btn btn-primary btn-lg" style="float: right">写分享</a>
-
+        <div class="text-right">
+            <div sec:authorize="isAuthenticated()">
+                <a th:href="'/u/' + ${#authentication.principal.username} + '/blogs/edit'"
+                   class="btn btn-info btn-index btn-lg">
+                    写分享&nbsp;
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
 
         <div id="mainContainerRepleace">
             <table class="table table-hover">

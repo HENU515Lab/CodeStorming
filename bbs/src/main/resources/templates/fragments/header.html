@@ -99,45 +99,40 @@
 
             </ul>
 
-
-        </div>
-
-        <div sec:authorize="isAuthenticated()">
-
-            <div class="dropdown">
-                <a class="btn btn-dark dropdown-toggle" href="/u/waylau"
-                   th:href="@{'/u/' + ${#authentication.principal.username}}"
-                   role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">
-                    <img th:src="${#authentication.principal.avatar} == null
+            <div sec:authorize="isAuthenticated()">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="/u/waylau"
+                       th:href="@{'/u/' + ${#authentication.principal.username}}"
+                       id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="${#authentication.principal.avatar} == null
 									? '/images/avatar-defualt.jpg'
 									: ${#authentication.principal.avatar}"
-                            class="blog-avatar-35">
-                    &nbsp;
+                             width="40" height="40" class="rounded-circle">
+                        <strong><span sec:authentication="name"></span></strong>
+                    </a>
 
-                    <strong><span sec:authentication="name"></span></strong>
-                    <b class="caret"></b>
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class=" dropdown-item" href="/u/waylau"
-                       th:href="@{'/u/' + ${#authentication.principal.username}}">个人主页</a>
-                    <a class="dropdown-item" href="/u/waylau/profile"
-                       th:href="@{'/u/' + ${#authentication.principal.username}} + '/profile'">个人设置</a>
-                    <li class="divider"></li>
-                    <form action="/logout" th:action="@{/logout}" method="post">
-                        <a class="dropdown-item"><input type="submit" value="退出"></a>
-                    </form>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class=" dropdown-item" href="/u/waylau"
+                           th:href="@{'/u/' + ${#authentication.principal.username}}">个人主页</a>
+                        <a class="dropdown-item" href="/u/waylau/profile"
+                           th:href="@{'/u/' + ${#authentication.principal.username}} + '/profile'">个人设置</a>
+                        <div class="dropdown-divider"></div>
+                        <form action="/logout" th:action="@{/logout}" method="post">
+                            <a class="dropdown-item"><input type="submit" value="退出"></a>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-outline-success my-2 my-sm-0"
+                   type="submit">登录</a>
+                <a href="/register"
+                   class="btn btn-outline-success my-2 my-sm-0" type="submit">注册</a>
+            </div>
+
         </div>
 
-        <div sec:authorize="isAnonymous()">
-            <a href="/login" class="btn btn-outline-success my-2 my-sm-0"
-               type="submit">登录</a>
-            <a href="/register"
-               class="btn btn-outline-success my-2 my-sm-0" type="submit">注册</a>
-        </div>
 
     </div>
 

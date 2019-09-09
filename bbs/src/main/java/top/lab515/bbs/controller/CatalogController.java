@@ -33,7 +33,7 @@ public class CatalogController {
     private CatalogService catalogService;
 
     @Autowired
-    private UserServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     /**
      * 获取分类列表
@@ -43,22 +43,21 @@ public class CatalogController {
      * @return
      */
     @GetMapping
-    public String listComments(@RequestParam(value = "username", required = true) String username, Model model) {
-        User user = (User) userDetailsService.loadUserByUsername(username);
-        List<Catalog> catalogs = catalogService.listCatalogs(user);
+    public String listComments(@RequestParam(value = "username", required = false) String username, Model model) {
+        List<Catalog> catalogs = catalogService.listCatalogs();
 
         // 判断操作用户是否是分类的所有者
-        boolean isOwner = false;
+        boolean isOwner = true;
 
-        if (SecurityContextHolder.getContext().getAuthentication() != null
-                && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
-                && !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()
-                .equals("anonymousUser")) {
-            User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (principal != null && user.getUsername().equals(principal.getUsername())) {
-                isOwner = true;
-            }
-        }
+//        if (SecurityContextHolder.getContext().getAuthentication() != null
+//                && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+//                && !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString()
+//                .equals("anonymousUser")) {
+//            User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//            if (principal != null && user.getUsername().equals(principal.getUsername())) {
+//                isOwner = true;
+//            }
+//        }
 
         model.addAttribute("isCatalogsOwner", isOwner);
         model.addAttribute("catalogs", catalogs);

@@ -17,7 +17,7 @@
 <!-- Page Content -->
 <div class="container blog-content-container">
 
-    <div class="row">
+    <div class="row blogedit-container">
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
@@ -29,6 +29,7 @@
 					id="title" name="title" th:value="*{title}" maxlength="50">
 
 				<textarea class="blog-textarea" placeholder="请填写博客摘要" id="summary"
+						  style="margin-top: 10px;"
 					name="summary" th:text="*{summary}" maxlength="300"></textarea>
 
 				<hr>
@@ -45,7 +46,7 @@
         <div class="col-md-4">
             <div>
             	<!-- 图片上传 -->
-				<div class="card ">
+				<div class="card " style="margin-top: 15px;">
 					<h5 class="card-header">
 						<i class="fa fa-file-image-o" aria-hidden="true"></i> 图片上传
 					</h5>
@@ -66,7 +67,7 @@
 
 				</div>
 				<!-- 文章设置 -->
-                <div class="card ">
+                <div class="card " style="margin-top: 30px;">
                     <h5 class="card-header"><i class="fa fa-cog" aria-hidden="true"></i> 博客设置</h5>
                     <div class="card-block">
                     
