@@ -150,17 +150,17 @@
                         <tr>
                             <td>
                                 <a href="/u/waylau/blogs/1" class="card-link" title="waylau"
-                                   th:href="'/u/' + ${blog.username} + '/blogs/'+ ${blog.blogId}"
+                                   th:href="'/u/' + ${blog.user.username} + '/blogs/'+ ${blog.id}"
                                    th:title="${blog.title}" th:text="${blog.title}"> OAuth
                                     2.0 认证的原理与实践 </a>
                             </td>
                             <td>
                                 <a href="/u/waylau" title="waylau"
-                                   th:href="'/u/' + ${blog.username}" th:title="${blog.username}">
+                                   th:href="'/u/' + ${blog.user.username}" th:title="${blog.user.username}">
                                     <img src="/images/avatar-defualt.jpg"
-                                         th:src="${blog.avatar} == null
+                                         th:src="${blog.user.avatar} == null
 										? '/images/avatar-defualt.jpg'
-										: ${blog.avatar}"
+										: ${blog.user.avatar}"
                                          class="blog-avatar-25">
                                 </a>
                             </td>

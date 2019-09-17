@@ -36,8 +36,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public User registerUser(User user) {
-        //  加密密码
-        user.setEncodePassword(user.getPassword());
         return userRepository.save(user);
     }
 

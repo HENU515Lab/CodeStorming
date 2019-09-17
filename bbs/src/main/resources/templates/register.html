@@ -34,7 +34,9 @@
 			<div class="form-group col-md-5">
 				<button type="submit" class="btn btn-primary">提交</button>
 			</div>
-
+			<div class=" col-md-5" th:if="${registerError}">
+				<p class="blog-label-error" th:text="${errorMsg}"></p>
+			</div>
 		</form>
 
 	</div><!-- /container -->

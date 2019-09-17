@@ -63,6 +63,14 @@ public class User implements UserDetails, Serializable {
     @Column(length = 200)
     private String avatar; // 头像图片地址
 
+    @Size(min = 2, max = 5)
+    @Column(length = 20)
+    private String trueName;    // 真实姓名
+
+    @Column(length = 50)
+    private String grade;   // 年级专业
+
+
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
@@ -134,9 +142,8 @@ public class User implements UserDetails, Serializable {
     }
 
     public void setEncodePassword(String password) {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePasswd = encoder.encode(password);
-        this.password = encodePasswd;
+        PasswordEncoder  encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
     public String getAvatar() {

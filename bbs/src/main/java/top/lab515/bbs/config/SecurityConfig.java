@@ -25,7 +25,7 @@ import top.lab515.bbs.service.impl.UserServiceImpl;
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 启用方法安全设置
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String KEY = "waylau.com";
+    private static final String KEY = "bbs.seriouszyx.com";
 
     @Autowired
     private UserDetailsService userDetailsService;

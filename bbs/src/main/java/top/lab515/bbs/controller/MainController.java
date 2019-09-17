@@ -63,11 +63,19 @@ public class MainController {
      * @return
      */
     @PostMapping("/register")
-    public String registerUser(User user) {
+    public String registerUser(User user, Model model) {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID).get());
         user.setAuthorities(authorities);
-        userService.registerUser(user);
+        user.setEncodePassword(user.getPassword()); // 加密密码
+        try {
+            userService.registerUser(user);
+        } catch (RuntimeException e) {
+            model.addAttribute("registerError", true);
+            model.addAttribute("errorMsg", "注册信息填写有误!");
+            return "register";
+        }
+
         return "redirect:/login";
     }
 

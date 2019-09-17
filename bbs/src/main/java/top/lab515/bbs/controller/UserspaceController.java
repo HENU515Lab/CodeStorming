@@ -44,7 +44,7 @@ public class UserspaceController {
     private UserService userService;
 
     @Autowired
-    private UserServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Value("${file.server.url}")
     private String fileServerUrl;
