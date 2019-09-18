@@ -1,0 +1,62 @@
+.about-index-file-panel{
+    margin: 12px;
+}
+
+.about-index-file-panel-body{
+    padding: 10px;
+}
+
+.about-index-file-type{
+    font-size: medium;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.panel{
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.08);
+    transition-duration: 0.5s;
+}
+
+.panel:hover{
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.08);
+    transition-duration: 0.5s;
+}
+
+.about-index-file-panel-username{
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: #333333;
+}
+
+.about-index-file-panel-username:hover{
+    color: yellowgreen;
+}
+
+.about-index-file-panel-time{
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #808080;
+}
+
+.vote-active{
+    color: red;
+}
+
+.collect-active{
+    color: #FFCC00;
+}
+
+.file-content-field{
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.file-field-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: black;
+}
+
+.file-field-title:hover {
+    color: yellowgreen;
+}

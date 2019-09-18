@@ -1,0 +1,9 @@
+div.notification-unread-field{
+    background: #e2f5ff;
+}
+
+span.datetime{
+    color: #999;
+    text-align: left;
+    font-size: 13px;
+}

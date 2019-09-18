@@ -1,0 +1,109 @@
+#chat_list{
+    width: 264px;
+    position: fixed;
+    bottom: -20px;
+    right: 25px;
+    z-index: 100;
+}
+
+#chat_list_body{
+    height: 390px;
+}
+
+.chat_friend{
+    padding: 0 15px 0 15px;
+}
+
+.chat_friend:hover{
+    background: #F3F4F5;
+}
+
+#chat_room{
+    width: 336px;
+    position: fixed;
+    bottom: -20px;
+    right: 305px;
+    z-index: 100;
+}
+
+#chat_room_body{
+    height: 357px;
+}
+
+.chat_message_history{
+    height: 285px;
+    border-bottom-color: #BCBDBD;
+    border-bottom-style: solid !important;
+    width: 100%;
+}
+
+#message_send_input{
+    width:100%;
+    height:100%;
+    box-sizing: border-box;         /* For IE and modern versions of Chrome */
+    -moz-box-sizing: border-box;    /* For Firefox                          */
+    -webkit-box-sizing: border-box; /* For Safari                           */
+    resize: none;
+    margin-top: -20px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.chat-bubble-you{
+    background: white;
+    padding: 5px 7px 5px 7px;
+    border-radius: 3px;
+    word-break: break-all;
+    display: block;
+    max-width: 100%;
+}
+
+.chat-bubble-me{
+    background: #bce8f1;
+    padding: 5px 7px 5px 7px;
+    border-radius: 3px;
+    word-break: break-all;
+    display: block;
+    max-width: 100%;
+}
+
+.chat_input_board:focus-within{
+    background: white;
+}
+
+.chat-time-format{
+    width: 100%;
+    font-size: 12px;
+    background: #DADADA;
+    padding: 4px;
+    color: white;
+}
+
+#message_send_input{
+    font-size: 14px;
+}
+
+.chat-room-option{
+    z-index: 101;
+    min-width: 160px;
+    margin-left: 160px;
+    font-size: 14px;
+    text-align: left;
+    background-clip: padding-box;
+    border-radius: 4px;
+    line-height: 1.4287143;
+    color: #333;
+    box-sizing: border-box;
+}
+
+#message_emoticon_collection{
+    position:fixed;
+    right: 455px;
+    bottom:90px;
+    z-index: 101;
+    width:320px;
+    height:450px;
+}

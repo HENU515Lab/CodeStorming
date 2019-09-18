@@ -1,0 +1,31 @@
+.count_number{
+    font-size: 18px;
+    color: #6a737c;
+}
+
+.count_description{
+    font-size: 11px;
+    color: #6a737c;
+}
+
+.community_question_title{
+    font-size: 18px;
+}
+
+.community_question_author{
+    font-size: 15px;
+}
+
+.community_question_keywords{
+    font-size: 12px;
+    color: #39739d;
+    background-color: #E1ECF4;
+}
+
+.vote_accept{
+    background: #5fba7d;
+}
+
+.vote_accept_text{
+    color: #FFF;
+}

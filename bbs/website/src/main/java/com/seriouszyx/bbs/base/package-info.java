@@ -1,0 +1,1 @@
+package com.seriouszyx.bbs.base;

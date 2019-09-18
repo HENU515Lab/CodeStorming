@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seriouszyx.bbs.base.mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.Blog">
+    <id column="bid" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+<!--    <result column="author_id" jdbcType="BIGINT" property="authorId" />-->
+    <result column="comment_size" jdbcType="INTEGER" property="commentSize" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="read_size" jdbcType="INTEGER" property="readSize" />
+    <result column="vote_size" jdbcType="INTEGER" property="voteSize" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <association property="author" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap" />
+  </resultMap>
+
+  <resultMap id="blogWithComments" type="com.seriouszyx.bbs.base.domain.Blog">
+    <id column="bid" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="comment_size" jdbcType="INTEGER" property="commentSize" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="read_size" jdbcType="INTEGER" property="readSize" />
+    <result column="vote_size" jdbcType="INTEGER" property="voteSize" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <association property="author" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap" />
+    <collection property="comments" column="bid"
+                select="com.seriouszyx.bbs.base.mapper.BlogCommentMapper.selectByBid" />
+  </resultMap>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `blog`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.seriouszyx.bbs.base.domain.Blog" useGeneratedKeys="true">
+    insert into `blog` (title, author_id, comment_size,
+      create_time, read_size, vote_size,
+      content)
+    values (#{title,jdbcType=VARCHAR}, #{author.id,jdbcType=BIGINT}, #{commentSize,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{readSize,jdbcType=INTEGER}, #{voteSize,jdbcType=INTEGER},
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
+    update `blog`
+    set title = #{title,jdbcType=VARCHAR},
+      comment_size = #{commentSize,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      read_size = #{readSize,jdbcType=INTEGER},
+      vote_size = #{voteSize,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
+     select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
+    u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
+    from `user` u inner join `blog` b
+    on u.id = b.author_id
+    where b.id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+ select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
+    u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
+    from `user` u inner join `blog` b
+    on u.id = b.author_id
+    order by b.create_time desc
+  </select>
+  <select id="selectByAuthorId" resultMap="BaseResultMap">
+    select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
+    u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
+    from `user` u inner join `blog` b
+    on u.id = b.author_id
+    where b.author_id = #{authorId}
+    order by b.create_time desc
+  </select>
+</mapper>

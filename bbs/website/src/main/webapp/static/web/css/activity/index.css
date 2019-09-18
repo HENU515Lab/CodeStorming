@@ -1,0 +1,42 @@
+span.activity_title{
+    font-size: 21px;
+    font-weight: 500;
+    color: #0d71bb;
+}
+
+span.activity_title:hover{
+    color: deepskyblue;
+}
+
+span.activity_status{
+    font-size: 18px;
+    margin-top: -5px;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    box-shadow: 3px 3px 3px silver;
+}
+
+span.activity_abstract{
+    font-size: 15px;
+    color: #999;
+}
+
+span.activity_th{
+    font-size: 17px;
+    color: #696969;
+}
+
+span.activity_td{
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+}
+
+.activity-index-block {
+    padding: 15px 10px 15px 10px;
+}
+
+.activity-index-block:hover{
+    background: #f6f9fa;
+}
