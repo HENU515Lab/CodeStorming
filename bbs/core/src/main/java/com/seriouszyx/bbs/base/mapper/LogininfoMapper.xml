@@ -28,7 +28,12 @@
         email = #{email}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    <update id="updatePassword">
+      update `logininfo`
+      set password = #{password,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
     select <include refid="base_column" />
     from `logininfo`
     where id = #{id,jdbcType=BIGINT}
@@ -46,6 +51,6 @@
   <select id="login" resultMap="BaseResultMap">
     SELECT <include refid="base_column" />
     FROM logininfo
-    WHERE username = #{username} AND password = #{password} AND userType= #{userType}
+    WHERE username = #{username} AND password = #{password}
   </select>
 </mapper>

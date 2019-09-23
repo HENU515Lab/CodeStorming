@@ -9,6 +9,7 @@
     <result column="introduce" property="introduce" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="visitors" property="visitors" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from `user`
@@ -16,9 +17,9 @@
   </delete>
   <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.User" useGeneratedKeys="true" keyProperty="id" >
     insert into `user` (id, trueName, avatar, grade,
-      introduce, username, email)
+      introduce, username, email, visitors)
     values (#{id,jdbcType=BIGINT}, #{truename,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR},
-      #{introduce,jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+      #{introduce,jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{visitors,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.User" >
     update `user`
@@ -27,16 +28,17 @@
       grade = #{grade,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      email = #{email}
+      email = #{email},
+      visitors = #{visitors}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select id, trueName, avatar, grade, introduce, username, email
+    select id, trueName, avatar, grade, introduce, username, email, visitors
     from `user`
     where id = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, trueName, avatar, grade, introduce, username, email
+    select id, trueName, avatar, grade, introduce, username, email, visitors
     from `user`
   </select>
 </mapper>

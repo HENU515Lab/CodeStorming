@@ -29,10 +29,11 @@ public class BlogServiceImpl implements IBlogService {
     @Override
     public void saveBlog(Blog blog) throws RuntimeException {
         boolean isNew = (blog.getId() == null);
-        User user = userMapper.selectByPrimaryKey(UserContext.getCurrentUser().getId());
-        blog.setAuthor(user);
-        blog.setCreateTime(new Date());
         if (isNew) {
+            User user = userMapper.selectByPrimaryKey(UserContext.getCurrentUser().getId());
+            blog.setAuthor(user);
+            blog.setCreateTime(new Date());
+            blog.setBlogType(1);
             blogMapper.insert(blog);
         } else {
             blogMapper.updateByPrimaryKey(blog);

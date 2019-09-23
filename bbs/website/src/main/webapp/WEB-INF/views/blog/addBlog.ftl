@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>新建文章-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">
@@ -17,7 +17,7 @@
         <div class="row">
 
 
-            <div class="col-xs-4 col-sm-4 col-md-3">
+            <div class="col-sm-4 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body" align="center">
 
@@ -30,19 +30,19 @@
                         </div>
                         <hr>
                         <p class="personal-info text-center" style="font-size:100%;">
-                            <strong>访客：330347</strong>
+                            <strong>访客：${user.visitors}</strong>
                         </p>
 
-                        <label class="btn btn-success text-center" style="border-radius: 5px;" data-toggle="modal" data-target="#login-modal">
-                            发消息
-                        </label>
+<#--                        <label class="btn btn-success text-center" style="border-radius: 5px;" data-toggle="modal" data-target="#login-modal">-->
+<#--                            发消息-->
+<#--                        </label>-->
 
                     </div>
                 </div>
             </div>
 
 
-            <div class="col-xs-8 col-sm-8 col-md-9">
+            <div class="col-sm-8 col-md-9">
 
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -50,9 +50,9 @@
                             <li role="presentation" class="active">
                                 <a href="javascript:;" class="user-myspace-base-subtitle">分享</a>
                             </li>
-                            <li role="presentation" class="">
-                                <a href="javascript:;" class="user-myspace-base-subtitle">视频</a>
-                            </li>
+<#--                            <li role="presentation" class="">-->
+<#--                                <a href="javascript:;" class="user-myspace-base-subtitle">视频</a>-->
+<#--                            </li>-->
                             <li role="presentation" class="">
                                 <a href="javascript:;" class="user-myspace-base-subtitle">问答</a>
                             </li>
@@ -61,22 +61,22 @@
                             </li>
 
 <#--                            my-->
-                            <li role="presentation" class="">
-                                <a href="" class="dropdown-toggle user-myspace-base-subtitle" data-toggle="dropdown">
-                                    收藏
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:;">题解</a></li>
-                                    <li><a href="javascript:;">分享</a></li>
-                                    <li><a href="javascript:;">问答</a></li>
-                                    <li><a href="javascript:;">代码</a></li>
-                                </ul>
-                            </li>
-                            <li role="presentation" class="">
-                                <a href="../../notification/1/Index.html" class="user-myspace-base-subtitle">通知</a>
+<#--                            <li role="presentation" class="">-->
+<#--                                <a href="" class="dropdown-toggle user-myspace-base-subtitle" data-toggle="dropdown">-->
+<#--                                    收藏-->
+<#--                                    <b class="caret"></b>-->
+<#--                                </a>-->
+<#--                                <ul class="dropdown-menu">-->
+<#--                                    <li><a href="javascript:;">题解</a></li>-->
+<#--                                    <li><a href="javascript:;">分享</a></li>-->
+<#--                                    <li><a href="javascript:;">问答</a></li>-->
+<#--                                    <li><a href="javascript:;">代码</a></li>-->
+<#--                                </ul>-->
+<#--                            </li>-->
+<#--                            <li role="presentation" class="">-->
+<#--                                <a href="../../notification/1/Index.html" class="user-myspace-base-subtitle">通知</a>-->
 
-                            </li>
+<#--                            </li>-->
 
 
                             <li class="nav pull-right active" role="presentation">
@@ -109,9 +109,9 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-offset-8 col-md-2 col-sm-offset-6 col-sm-3 col-xs-offset-2 col-xs-5">
-                                    <button id="save_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">保存</button>
-                                </div>
+<#--                                <div class="col-md-offset-8 col-md-2 col-sm-offset-6 col-sm-3 col-xs-offset-2 col-xs-5">-->
+<#--                                    <button id="save_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">保存</button>-->
+<#--                                </div>-->
                                 <div class="col-md-2 col-sm-3 col-xs-5">
                                     <button id="submit_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">提交</button>
                                 </div>

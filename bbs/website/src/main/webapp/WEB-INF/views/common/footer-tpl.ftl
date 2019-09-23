@@ -11,9 +11,9 @@
             </div>
             <div class="text-right col-sm-4 region-us">
                 <div class="links">
-                    <a href="footer/contactus/Index.html">联系我们</a>
+                    <a href="/about.do">关于本站</a>
                     &nbsp;|&nbsp;
-                    <a href="footer/faq/Index.html">常见问题</a>
+                    <a href="">常见问题</a>
                 </div>
             </div>
         </div>

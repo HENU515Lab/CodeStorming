@@ -39,14 +39,14 @@
 					<a href="" data-toggle="modal" data-target="#login-modal">登录/注册</a>
 				</li>
 				<#else>
-				<li>
-					<a href="/userspace.do?id=${user.id}">
-						<span class="glyphicon glyphicon-bell" style="font-size: 20px;"></span>
-					</a>
-				</li>
+<#--				<li>-->
+<#--					<a href="/userspace.do?id=${user.id}">-->
+<#--						<span class="glyphicon glyphicon-bell" style="font-size: 20px;"></span>-->
+<#--					</a>-->
+<#--				</li>-->
 				<li>
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
-						<img class="img-circle" src="static/web/img/default-avatar.jpg" alt="${logininfo.username}的头像" style="margin: -5px;" width="35px">
+						<img class="img-circle" src="${user.avatar}" alt="${logininfo.username}的头像" style="margin: -5px;" width="35px">
 						&nbsp;
 						<strong id="id_user_username">${logininfo.username}</strong>
 						<b class="caret"></b>
@@ -54,7 +54,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="userspace.do?id=${logininfo.id}">我的空间</a></li>
 						<li><a href="/profile.do">个人信息</a></li>
-						<li><a href="user/account/changepassword/Index.html">修改密码</a></li>
+						<li><a href="/toChangePassword.do">修改密码</a></li>
 						<li class="divider"></li>
 						<li><a href="/logout.do">登出</a></li>
 					</ul>
@@ -89,7 +89,7 @@
 							<div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
 							<span id="text-login-msg">请输入登录信息</span>
 						</div>
-						<input id="login_username" name="username" class="form-control" type="text" placeholder="用户名或邮箱"
+						<input id="login_username" name="username" class="form-control" type="text" placeholder="用户名"
 							   maxlength="30" required="">
 						<input id="login_password" name="password" class="form-control" type="password" placeholder="密码"
 							   maxlength="16" required="">
@@ -167,6 +167,8 @@
 							   placeholder="密码" maxlength="16" required="">
 						<input id="register_email" name="email" class="form-control" type="email" placeholder="邮箱地址"
 							   maxlength="50" required="">
+						<input id="register_active_code" name="activeCode" class="form-control" type="text" placeholder="激活码(没有可不填写)"
+							   maxlength="50">
 					</div>
 					<div class="modal-footer">
 						<div>

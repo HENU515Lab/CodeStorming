@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>${blog.title}-515lab</title>
     <#include "../common/links-tpl.ftl" />
+    <style>
+        .blog-content {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body id="acwing_body">
 
@@ -43,16 +48,30 @@
                             <div class="row">
                                 <div class="vote_cut col-xs-1" align="center">
 
-                                    <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-triangle-top vote"></span></a>
-                                    <br>
-                                    <span class="votecnt">${blog.voteSize}</span>
-                                    <br>
-                                    <a href='' data-toggle="modal" data-target="#login-modal">
-                                        <span class="glyphicon glyphicon-triangle-bottom vote"></span>
-                                    </a>
-                                    <br>
-                                    <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-star vote"></span></a>
-                                    <br>
+                                    <#if !logininfo??>
+                                        <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-triangle-top vote"></span></a>
+                                        <br>
+                                        <span class="votecnt">${blog.voteSize}</span>
+                                        <br>
+                                        <a href='' data-toggle="modal" data-target="#login-modal">
+                                            <span class="glyphicon glyphicon-triangle-bottom vote"></span>
+                                        </a>
+                                        <br>
+                                        <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-star vote"></span></a>
+                                        <br>
+                                    <#else >
+                                        <a href=''><span class="glyphicon glyphicon-triangle-top vote"></span></a>
+                                        <br>
+                                        <span class="votecnt">${blog.voteSize}</span>
+                                        <br>
+                                        <a href='' >
+                                            <span class="glyphicon glyphicon-triangle-bottom vote"></span>
+                                        </a>
+                                        <br>
+                                        <a href=''><span class="glyphicon glyphicon-star vote"></span></a>
+                                        <br>
+                                    </#if>
+
 <#--                                    <span class="favoritecnt">-->
 
 <#--            2-->
@@ -61,7 +80,7 @@
 
                                 </div>
                                 <div class="col-xs-11 vote_cut">
-                                    <div id="test-editormd-view">
+                                    <div id="test-editormd-view" class="blog-content">
                                         <textarea style="display:none;" name="test-editormd-markdown-doc">${blog.content}</textarea>
                                     </div>
                                 </div>
@@ -86,7 +105,7 @@
                                     <div class="col-xs-12">
                                         <form class="ui form" role="form" enctype="multipart/form-data" >
                                             <div data-toggle="modal" data-target="#login-modal" >
-                    <textarea name="content" cols="40" rows="2" placeholder="在这里写评论...（支持MarkDown和Latex语法）" maxlength="10000" required="" id="id_content">
+                    <textarea name="content" cols="40" rows="2" placeholder="在这里写评论..." maxlength="10000" required="" id="id_content">
 </textarea>
                                             </div>
                                         </form>

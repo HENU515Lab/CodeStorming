@@ -57,5 +57,6 @@ public class BidConst {
 	/**
 	 * 存储图片的公共文件夹地址
 	 */
-	public static final String PUBLIC_IMG_SHARE_PATH="E:/www/upload/";
+//	public static final String PUBLIC_IMG_SHARE_PATH="E:/www/upload/";
+	public static final String PUBLIC_IMG_SHARE_PATH="/usr/etc/bbs";
 }

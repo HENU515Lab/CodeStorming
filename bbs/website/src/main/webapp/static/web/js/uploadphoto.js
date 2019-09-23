@@ -46,8 +46,7 @@ $(function () {
         formData.append("photo", this.file, this.getName());
         formData.append("upload_file", true);
 
-        var csrfData = $form_submit_photo.serializeArray();
-        formData.append(csrfData[0].name, csrfData[0].value);
+        console.log(formData)
 
         $.ajax({
             type: "POST",
@@ -68,8 +67,6 @@ $(function () {
                     //$uploaded_photo.attr('src', photo_url);
                     $uploaded_photo.cropper({
                         aspectRatio: 1,
-                        minContainerWidth: minImageWidth,
-                        minContainerHeight: minImageHeight,
                         autoCropArea: 0.7,
                         zoomable: false,
                         crop: function (event) {
@@ -138,8 +135,6 @@ $(function () {
             $form_upload_clippedphoto_btn = $('#form_upload_clippedphoto_btn');
             formData.append('photo', blob);
 
-            var csrfData = $form_upload_clippedphoto_btn.serializeArray();
-            formData.append(csrfData[0].name, csrfData[0].value);
             formData.append('photo_name', $('#uploaded_photo').attr('src'));
 
             $.ajax({

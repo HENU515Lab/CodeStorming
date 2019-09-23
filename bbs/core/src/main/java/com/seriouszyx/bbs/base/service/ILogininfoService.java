@@ -15,7 +15,7 @@ public interface ILogininfoService {
 	 * @param username
 	 * @param password
 	 */
-	void register(String username, String password, String email);
+	void register(String username, String password, String email, String activeCode);
 
 	/**
 	 * 检查用户名是否存在 如果存在,返回true 如果不存在,返回false
@@ -32,6 +32,19 @@ public interface ILogininfoService {
 	 * @param password
 	 * @return
 	 */
-	Logininfo login(String username, String password, int userType);
+	Logininfo login(String username, String password);
+
+	/**
+	 * 检查当前用户与所给密码是否一致
+	 * @param password
+	 * @return
+	 */
+	boolean checkPassword(String password);
+
+	/**
+	 * 更新密码
+	 * @param password
+	 */
+	void updatePassword(String password);
 
 }

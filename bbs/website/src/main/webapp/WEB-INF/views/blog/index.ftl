@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>技术分享-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">
@@ -15,22 +15,22 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <h1 class="text-center">AcWing技术分享</h1>
+                <h1 class="text-center">515lab技术分享</h1>
 
                 <br>
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                        <form id="form_search" action="/blog/search/1/" method="get">
-                            <input type='hidden' name='csrfmiddlewaretoken' value='TCRnFsGHNn9mmmcn8HC6buwSoYRjBHBSPtfXGqPn5fJCXBUtyfq6GlP1mctIOeV7'>
-                            <div class="input-group">
-                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、搜索标题、关键字、文章内容" style="border-radius: 5px;" maxlength="200">
-                                <span class="input-group-btn">
-                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">
-                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>
-                                </button>
-                              </span>
-                            </div>
-                        </form>
+<#--                        <form id="form_search" action="/blog/search/1/" method="get">-->
+<#--                            <input type='hidden' name='csrfmiddlewaretoken' value='TCRnFsGHNn9mmmcn8HC6buwSoYRjBHBSPtfXGqPn5fJCXBUtyfq6GlP1mctIOeV7'>-->
+<#--                            <div class="input-group">-->
+<#--                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、搜索标题、关键字、文章内容" style="border-radius: 5px;" maxlength="200">-->
+<#--                                <span class="input-group-btn">-->
+<#--                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">-->
+<#--                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>-->
+<#--                                </button>-->
+<#--                              </span>-->
+<#--                            </div>-->
+<#--                        </form>-->
                     </div>
                 </div>
 
@@ -65,7 +65,13 @@
                         <tbody>
                         <#list blogList as blog>
                             <tr>
-                                <td><a href="/content.do?id=${blog.id}">${blog.title}</a></td>
+                                <td>
+                                    <a href="/content.do?id=${blog.id}">${blog.title}
+                                        <#if blog.weight gt 10><span class="glyphicon glyphicon-arrow-up" style="color: rgb(192, 162, 100)"></span></#if>
+                                        <#if blog.readSize gt 100><span class="glyphicon glyphicon-fire" style="color: red"></span></#if>
+                                        <#if blog.blogType == 0><span class="glyphicon glyphicon-lock" style="color: darkgreen"></span></#if>
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="/userspace.do?id=${blog.author.id}">
                                         <img class="img-circle" src="${blog.author.avatar}" width="30px">

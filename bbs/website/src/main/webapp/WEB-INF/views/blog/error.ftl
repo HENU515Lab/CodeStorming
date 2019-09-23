@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>问答-515lab</title>
+    <title>error-515lab</title>
     <#include "../common/links-tpl.ftl" />
+    <style>
+        .content {
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body id="acwing_body">
 
@@ -13,13 +21,8 @@
 <div class="base_body">
 
     <div class="container">
-        <div class="row">
-            <div id="file_display_field"
-                 class="col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
-
-                <center><h1>问答功能待完成！正在熬夜开发ing</h1></center>
-
-            </div>
+        <div class="row text-center">
+            <h1>很抱歉，只有实验室成员才能访问这篇文章！</h1>
         </div>
     </div>
 

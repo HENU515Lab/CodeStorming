@@ -1,4 +1,3 @@
-
 <script src="static/web/js/copy_with_link.js"></script>
 <script>
     let article_author = "AcWing";
@@ -21,6 +20,31 @@
     let GLOBAL_FILE_COUNT = 10;
     let GLOBAL_PULL_FILES_URL = "/about/pull_files/5642/666/";
     let GLOBAL_COMMENT_SONS = {};
+
+
+</script>
+<script>
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if (r != null) return decodeURIComponent(r[2]);
+        return null;
+    }
+
+    $(function () {
+        var myurl = GetQueryString("error_message");
+        if (myurl != null && myurl.toString().length > 1) {
+            setTimeout(function () {
+                $.bootstrapGrowl(myurl, {
+                    type: 'danger',
+                    align: 'right',
+                    width: 'auto',
+                    allow_dismiss: false
+                });
+            }, 0);
+        }
+    });
 </script>
 <script src="static/plugins/js/highlight.min.js"></script>
 <script type="text/x-mathjax-config">
@@ -28,6 +52,7 @@
               tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
               showMathMenu: false
             });
+
 
 </script>
 <script type="text/javascript" src="static/MathJax-2.6-latest/MathJax-TeX-AMS-MML_HTMLorMML.js"></script>
@@ -46,6 +71,13 @@
 <script src="static/web/js/about/pull_files-0.0.9.js"></script>
 <script type="text/javascript" src="static/web/js/file_system/file/operation/comment/add-0.0.4.js"></script>
 <script type="text/javascript" src="static/web/js/file_system/file/operation/comment/delete-0.0.3.js"></script>
+<script type="text/javascript" src="static/web/js/upload_profileinfo.js"></script>
+<script type="text/javascript" src="static/web/js/uploadphoto.js"></script>
+<script type="text/javascript" src="static/web/node_modules/cropper/dist/cropper.js"></script>
+<script type="text/javascript" src="static/web/node_modules/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="static/web/js/canvas-toBlob.js"></script>
+<script type="text/javascript" src="static/web/js/jquery.bootstrap-growl.min.js"></script>
+
 
 <script>
 

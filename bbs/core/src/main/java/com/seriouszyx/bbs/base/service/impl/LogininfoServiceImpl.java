@@ -22,7 +22,7 @@ public class LogininfoServiceImpl implements ILogininfoService {
 
 
     @Override
-    public void register(String username, String password, String email) {
+    public void register(String username, String password, String email, String activeCode) {
         // 判断用户名是否存在
         int count = this.logininfoMapper.getCountByUsername(username);
         // 如果不存在,设值并保存这个对象
@@ -31,7 +31,10 @@ public class LogininfoServiceImpl implements ILogininfoService {
             li.setUsername(username);
             li.setPassword(MD5.encode(password));
             li.setState(Logininfo.STATE_NORMAL);
-            li.setUserType(Logininfo.USER_CLIENT);
+            if (activeCode.equals(Logininfo.USER_MANAGER_CODE))
+                li.setUserType(Logininfo.USER_MANAGER);
+            else
+                li.setUserType(Logininfo.USER_CLIENT);
             li.setEmail(email);
             this.logininfoMapper.insert(li);
 //            UserContext.putCurrent(li);
@@ -47,9 +50,9 @@ public class LogininfoServiceImpl implements ILogininfoService {
     }
 
     @Override
-    public Logininfo login(String username, String password, int userType) {
+    public Logininfo login(String username, String password) {
         Logininfo current = this.logininfoMapper.login(username,
-                MD5.encode(password), userType);
+                MD5.encode(password));
 
         if (current != null) {
             // 放到UserContext
@@ -64,6 +67,7 @@ public class LogininfoServiceImpl implements ILogininfoService {
                 user1.setEmail(current.getEmail());
                 user1.setGrade("");
                 user1.setTruename("");
+                user1.setIntroduce("");
                 userMapper.insert(user1);
                 UserContext.putCurrentUser(user1);
             } else {
@@ -73,6 +77,22 @@ public class LogininfoServiceImpl implements ILogininfoService {
 
         }
         return current;
+    }
+
+    @Override
+    public boolean checkPassword(String password) {
+        Logininfo current = UserContext.getCurrent();
+        Logininfo logininfo = logininfoMapper.selectByPrimaryKey(current.getId());
+        if (logininfo.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updatePassword(String password) {
+        Logininfo current = UserContext.getCurrent();
+        logininfoMapper.updatePassword(password, current.getId());
     }
 
 

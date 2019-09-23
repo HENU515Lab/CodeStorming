@@ -1,10 +1,8 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html">
 
-<meta name="keywords" content="AcWing,Leetcode,题解,编程,算法">
-<meta name="description" content="一个专属于程序员的平台，为大家在漫漫的刷题之旅中，提供最优质的解答">
-<meta name="baidu-site-verification" content="UW1SBiMHO7">
-<meta name="google-site-verification" content="YTgbOq_0TDShJS6KTcUYCQoAAZTm308SJ7ibsafBD_Y">
+<meta name="keywords" content="515lab,实验室,web，交流">
+<meta name="description" content="515实验室官方论坛，欢迎大家一起交流分享学习！">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 
@@ -129,6 +127,7 @@
 
 
 <link rel="stylesheet" href="static/web/css/style-0.0.1.css">
+<link rel="stylesheet" href="static/web/node_modules/cropper/dist/cropper.css">
 
 
 <link rel="stylesheet" href="static/plugins/css/ace.min.css">

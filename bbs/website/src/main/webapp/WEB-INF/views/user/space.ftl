@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>用户空间-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">
@@ -17,7 +17,7 @@
         <div class="row">
 
 
-            <div class="col-xs-4 col-sm-4 col-md-3">
+            <div class="col-sm-4 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body" align="center">
 
@@ -30,7 +30,7 @@
                         </div>
                         <hr>
                         <p class="personal-info text-center" style="font-size:100%;">
-                            <strong>访客：330347</strong>
+                            <strong>访客：${userspace.visitors}</strong>
                         </p>
 
 <#--                        <label class="btn btn-success text-center" style="border-radius: 5px;" data-toggle="modal" data-target="#login-modal">-->
@@ -42,7 +42,7 @@
             </div>
 
 
-            <div class="col-xs-8 col-sm-8 col-md-9">
+            <div class="col-sm-8 col-md-9">
 
                 <div class="panel panel-default">
                     <div class="panel-body">

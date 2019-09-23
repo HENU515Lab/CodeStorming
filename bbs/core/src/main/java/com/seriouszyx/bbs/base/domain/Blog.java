@@ -16,6 +16,8 @@ public class Blog extends BaseDomain {
     private Date createTime;
     private int readSize;
     private int voteSize;
+    private int weight;
+    private int blogType;
 
     private User author;
 

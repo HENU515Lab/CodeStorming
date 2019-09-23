@@ -25,17 +25,22 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void updateUser(User user) {
-        User currentUser = UserContext.getCurrentUser();
+        User currentUser = userMapper.selectByPrimaryKey(user.getId());
         currentUser.setUsername(user.getUsername());
         currentUser.setTruename(user.getTruename());
         currentUser.setGrade(user.getGrade());
         currentUser.setEmail(user.getEmail());
         currentUser.setIntroduce(user.getIntroduce());
+        if (user.getAvatar() != null)
+            currentUser.setAvatar(user.getAvatar());
+        currentUser.setVisitors(user.getVisitors());
         userMapper.updateByPrimaryKey(currentUser);
         Logininfo current = UserContext.getCurrent();
-        current.setEmail(user.getEmail());
-        current.setUsername(user.getUsername());
-        logininfoMapper.updateByPrimaryKey(current);
+        if (current != null && current.getId() == user.getId()) {
+            current.setEmail(user.getEmail());
+            current.setUsername(user.getUsername());
+            logininfoMapper.updateByPrimaryKey(current);
+        }
     }
 
 }

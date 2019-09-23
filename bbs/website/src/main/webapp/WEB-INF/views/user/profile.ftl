@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>个人设置-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">
@@ -17,11 +17,11 @@
             <div class="col-sm-4 col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="my_head_photo_container"><img id="my_head_photo" class="img-responsive center-block" src="../../../media/user/profile/photo/2462_lg_ca091bc249.jpg" style="display: none;"></div>
+                        <div class="my_head_photo_container"><img id="my_head_photo" class="img-responsive center-block" src="${user.avatar}" style="display: none;"></div>
                         <img id="my_head_photo_loading" class="img-responsive center-block" src="${user.avatar}">
                         <hr>
                         <div align="center">
-                            <form id="form_submit_photo" class="form-horizontal" role="form" action="/user/profile/saverawphoto/" method="post" enctype="multipart/form-data">
+                            <form id="form_submit_photo" class="form-horizontal" role="form" action="/getAvatarUrl.do" method="post" enctype="multipart/form-data">
                                 <label class="btn btn-default btn-file">
                                     更新头像
                                     <input id="ingredient_file" type="file" style="display: none;" name="photo" required="">
@@ -48,8 +48,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <form id="form_upload_clippedphoto_btn" class="form-horizontal" role="form" action="/user/profile/saveclippedphoto/" method="post" enctype="multipart/form-data">
-                                                <input type='hidden' name='csrfmiddlewaretoken' value='fWY6FJ9k4LmdrZAvTj14sYGiXDNpaeIibNmGGHi0mDWt2eiBjRP4XPZrVRpOnL2x'>
+                                            <form id="form_upload_clippedphoto_btn" class="form-horizontal" role="form" action="/uploadAvatar.do" method="post" enctype="multipart/form-data">
                                                 <button id="upload_clippedphoto_btn" type="button" class="btn btn-info" data-dismiss="modal">选定头像</button>
                                             </form>
                                         </div>
@@ -70,7 +69,7 @@
 
                                 <div class="form-group">
                                     <label class="control-label col-md-3"><label for="id_username">用户名:</label></label>
-                                    <div class="col-md-7"><input type="text" name="username" value="${logininfo.username}" class="form-control" maxlength="30" required="" id="id_username"></div>
+                                    <div class="col-md-7"><input type="text" readonly="true" name="username" value="${logininfo.username}" class="form-control" maxlength="30" required="" id="id_username"></div>
                                     <span class="text-danger small"></span>
                                 </div>
 
@@ -97,6 +96,8 @@
                                     <div class="col-md-7"><input type="text" name="grade" value="${user.grade}" class="form-control" maxlength="100" id="id_organization"></div>
                                     <span class="text-danger small"></span>
                                 </div>
+
+                                <input type="hidden" name="id" value="${user.id}">
 
                                 <div class="col-xs-offset-5">
                                     <button type="submit" class="btn btn-success" style="border-radius: 5px">更新信息</button>
@@ -149,10 +150,10 @@
                                 </div>
 
                                 <div class="col-xs-4">
-                                    已绑定
+                                    未绑定
                                 </div>
                                 <div class="col-xs-4 text-right">
-                                    <a href="javascript:;">解绑</a>
+                                    <a href="javascript:;">绑定</a>
                                 </div>
 
                             </div>
