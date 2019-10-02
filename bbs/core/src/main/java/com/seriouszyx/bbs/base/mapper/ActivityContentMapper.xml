@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.ActivityContentMapper" >
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.ActivityContent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="activity_content_abstract" property="activityContentAbstract" jdbcType="VARCHAR" />
+    <result column="finish" property="finish" jdbcType="INTEGER" />
+    <result column="activity_id" property="activityId" jdbcType="BIGINT" />
+    <result column="problem" property="problem" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `activity_content`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.ActivityContent" useGeneratedKeys="true" keyProperty="id" >
+    insert into `activity_content` (title, activity_content_abstract, finish, 
+      activity_id, problem)
+    values (#{title,jdbcType=VARCHAR}, #{activityContentAbstract,jdbcType=VARCHAR}, #{finish,jdbcType=INTEGER}, 
+      #{activityId,jdbcType=BIGINT}, #{problem,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.ActivityContent" >
+    update `activity_content`
+    set title = #{title,jdbcType=VARCHAR},
+      activity_content_abstract = #{activityContentAbstract,jdbcType=VARCHAR},
+      finish = #{finish,jdbcType=INTEGER},
+      activity_id = #{activityId,jdbcType=BIGINT},
+      problem = #{problem,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, title, activity_content_abstract, finish, activity_id, problem
+    from `activity_content`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, activity_content_abstract, finish, activity_id, problem
+    from `activity_content`
+  </select>
+  <select id="selectByActivityId" resultMap="BaseResultMap">
+    select id, title, activity_content_abstract, finish, activity_id, problem
+    from `activity_content`
+    where activity_id = #{id,jdbcType=BIGINT}
+    order by id desc
+  </select>
+</mapper>

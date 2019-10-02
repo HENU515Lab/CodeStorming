@@ -141,6 +141,10 @@
 
 <link rel="stylesheet" href="static/web/css/about/index-0.0.6.css">
 
+<link rel="stylesheet" href="static/web/css/activity/index.css">
+<link rel="stylesheet" href="static/web/css/activity/content.css">
+<link rel="stylesheet" href="static/web/css/activity/punch_the_clock.css">
+
 
 <link href="static/web/third_party/videojs/video.js/dist/video-js.min.css" rel="stylesheet">
 <link href="static/web/third_party/videojs/videojs-watermark/dist/videojs-watermark.css" rel="stylesheet">

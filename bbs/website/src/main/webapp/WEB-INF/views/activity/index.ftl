@@ -13,13 +13,130 @@
 <div class="base_body">
 
     <div class="container">
-        <div class="row">
-            <div id="file_display_field"
-                 class="col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-                <center><h1>活动功能待完成！正在熬夜开发ing</h1></center>
+                <h1 class="text-center">515lab 活动</h1>
+
+                <#list activityList as activity>
+
+                    <#if .now?date gt activity.startTime?date
+                    && activity.endTime?date gt .now?date>
+                    <#--        活动中            -->
+                        <hr style="margin: 30px 0 1px 0;">
+
+                        <div class="activity-index-block">
+                            <div class="row">
+                                <div class="hidden-sm hidden-xs col-md-1" style="max-width: 100px;">
+                                    <img src="${activity.surface}" width="80px" alt="活动封面">
+                                </div>
+                                <div class="col-xs-sm col-md-11">
+                                    <a href="/activityDetail.do?id=${activity.id}">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <span class="activity_title">${activity.title}</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4" align="right">
+                                                <span class="btn btn-success activity_status">进行中</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="visible-xs-block">
+                                                    <hr>
+                                                </div>
+                                                <span class="activity_abstract">${activity.activityAbstract}</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 text-center">
+                                                <div class="visible-xs-block">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <span class="activity_th">参与人数</span>
+                                                    <br>
+                                                    <span class="activity_td">${activity.joinNum}</span>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <span class="activity_th">起止时间</span>
+                                                    <br>
+
+                                                    <span class="activity_td">
+                                                    ${activity.startTime?string('MM-dd')}
+                                                    ~
+                                                    ${activity.endTime?string('MM-dd')}
+                                                </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <#else>
+                    <#--        活动结束            -->
+                        <hr style="margin: 30px 0 1px 0;">
+
+                        <div class="activity-index-block">
+                            <div class="row">
+                                <div class="hidden-sm hidden-xs col-md-1" style="max-width: 100px;">
+                                    <img src="${activity.surface}" width="80px" alt="活动封面">
+                                </div>
+                                <div class="col-xs-sm col-md-11">
+                                    <a href="">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <span class="activity_title">${activity.title}</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4" align="right">
+                                                <span class="btn btn-info activity_status disabled">已结束</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="visible-xs-block">
+                                                    <hr>
+                                                </div>
+                                                <span class="activity_abstract">${activity.activityAbstract}</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 text-center">
+                                                <div class="visible-xs-block">
+                                                    <hr>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <span class="activity_th">参与人数</span>
+                                                    <br>
+                                                    <span class="activity_td">${activity.joinNum}</span>
+                                                </div>
+                                                <div class="col-xs-8">
+                                                    <span class="activity_th">起止时间</span>
+                                                    <br>
+
+                                                    <span class="activity_td">
+                                                        ${activity.startTime?string('YY-MM-dd')}
+                                                        ~
+                                                        ${activity.endTime?string('YY-MM-dd')}
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </#if>
+                </#list>
+
+
+
 
             </div>
+        </div>
+        <div align="right">
+            <ul class="pagination">
+                <li><a href="">&laquo;</a></li>
+
+                <li class="active"><a href="javascript:;">1</a></li>
+
+                <li><a href="javascript:;">&raquo;</a></li>
+            </ul>
         </div>
     </div>
 

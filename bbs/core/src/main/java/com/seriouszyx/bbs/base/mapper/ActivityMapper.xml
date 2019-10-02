@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.Activity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="surface" property="surface" jdbcType="VARCHAR" />
+    <result column="activity_abstract" property="activityAbstract" jdbcType="VARCHAR" />
+    <result column="join_num" property="joinNum" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ActivityWithContent" type="com.seriouszyx.bbs.base.domain.Activity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="surface" property="surface" jdbcType="VARCHAR" />
+    <result column="activity_abstract" property="activityAbstract" jdbcType="VARCHAR" />
+    <result column="join_num" property="joinNum" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+    <collection property="activityContent" column="id"
+                select="com.seriouszyx.bbs.base.mapper.ActivityContentMapper.selectByActivityId" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `activity`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.Activity" useGeneratedKeys="true" keyProperty="id" >
+    insert into `activity` (title, surface, activity_abstract, 
+      join_num, start_time, end_time, 
+      detail)
+    values (#{title,jdbcType=VARCHAR}, #{surface,jdbcType=VARCHAR}, #{activityAbstract,jdbcType=VARCHAR}, 
+      #{joinNum,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Activity" >
+    update `activity`
+    set title = #{title,jdbcType=VARCHAR},
+      surface = #{surface,jdbcType=VARCHAR},
+      activity_abstract = #{activityAbstract,jdbcType=VARCHAR},
+      join_num = #{joinNum,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, title, surface, activity_abstract, join_num, start_time, end_time, detail
+    from `activity`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, surface, activity_abstract, join_num, start_time, end_time, detail
+    from `activity`
+    order by start_time desc
+  </select>
+  <select id="selectWithContent" resultMap="ActivityWithContent">
+    select id, title, surface, activity_abstract, join_num, start_time, end_time, detail
+    from `activity`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+</mapper>

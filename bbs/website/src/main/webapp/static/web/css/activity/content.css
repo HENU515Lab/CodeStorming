@@ -1,0 +1,19 @@
+.activity-sub-btn{
+    font-size: 18px;
+}
+
+.nice_font{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+span.datetime{
+    color: #999;
+    text-align: left;
+    font-size: 13px;
+}
+
+div.information_card{
+    background-color: #E1ECF4;
+    max-width: 200px;
+    padding: 5px 6px 7px 7px;
+}
