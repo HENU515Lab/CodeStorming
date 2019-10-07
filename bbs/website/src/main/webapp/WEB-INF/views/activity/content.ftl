@@ -42,9 +42,24 @@
                     </div>
                     <div class="col-xs-6 text-right">
 
-                        <a href="#" class="btn btn-info btn-lg btn-index" data-toggle="modal" data-target="#login-modal">
-                            报名
-                        </a>
+                        <#if !logininfo??>
+                            <#-- 未登录 -->
+                            <a href="#" class="btn btn-info btn-lg btn-index" data-toggle="modal" data-target="#login-modal">
+                                报名
+                            </a>
+                        <#else>
+                            <#-- 已登录 -->
+                            <#if apply == 0>
+                                <a href="/activityApply.do?id=${activity.id}" class="btn btn-info btn-lg btn-index">
+                                    报名
+                                </a>
+                            <#else>
+                                <a href="#" class="btn btn-info btn-lg btn-index">
+                                    已报名
+                                </a>
+                            </#if>
+                        </#if>
+
 
                     </div>
                 </div>
@@ -57,12 +72,12 @@
                     <li role="presentation" class="active">
                         <a href="/activityContent.do?id=${activity.id}">内容</a>
                     </li>
-                    <li role="presentation" class="">
-                        <a href="/activityRecord.do?id=${activity.id}">动态</a>
-                    </li>
-                    <li role="presentation" class="">
-                        <a href="/activityDiscuss.do?id=${activity.id}">贴吧</a>
-                    </li>
+<#--                    <li role="presentation" class="">-->
+<#--                        <a href="/activityRecord.do?id=${activity.id}">动态</a>-->
+<#--                    </li>-->
+<#--                    <li role="presentation" class="">-->
+<#--                        <a href="/activityDiscuss.do?id=${activity.id}">贴吧</a>-->
+<#--                    </li>-->
                 </ul>
                 <br>
 

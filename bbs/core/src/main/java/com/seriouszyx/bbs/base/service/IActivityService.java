@@ -21,4 +21,17 @@ public interface IActivityService {
      */
     Activity selectWithContent(Long id);
 
+    /**
+     * 查询用户是否报名活动
+     * @param userId
+     * @param activityId
+     */
+    int selectApplyInfo(Long userId, Long activityId);
+
+    /**
+     * 报名活动
+     * @param userId
+     * @param id
+     */
+    void applyActivity(Long userId, Long id);
 }

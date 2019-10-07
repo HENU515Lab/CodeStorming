@@ -36,7 +36,16 @@
       #{joinNum,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{detail,jdbcType=LONGVARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Activity" >
+  <insert id="applyActivity">
+    insert into `user_activity_relation` (user_id, activity_id)
+    values (#{userId}, #{activityId})
+  </insert>
+    <update id="addJoinNum">
+      update `activity`
+      set join_num = join_num + 1
+      where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Activity" >
     update `activity`
     set title = #{title,jdbcType=VARCHAR},
       surface = #{surface,jdbcType=VARCHAR},
@@ -62,4 +71,9 @@
     from `activity`
     where id = #{id,jdbcType=BIGINT}
   </select>
+    <select id="selectApplyInfo" resultType="java.lang.Integer">
+      select count(*)
+      from `user_activity_relation`
+      where `user_id` = #{userId} and `activity_id` = #{activityId}
+    </select>
 </mapper>

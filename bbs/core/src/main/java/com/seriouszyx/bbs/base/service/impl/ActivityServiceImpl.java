@@ -28,4 +28,15 @@ public class ActivityServiceImpl implements IActivityService {
     public Activity selectWithContent(Long id) {
         return activityMapper.selectWithContent(id);
     }
+
+    @Override
+    public int selectApplyInfo(Long userId, Long activityId) {
+        return activityMapper.selectApplyInfo(userId, activityId);
+    }
+
+    @Override
+    public void applyActivity(Long userId, Long id) {
+        activityMapper.applyActivity(userId, id);
+        activityMapper.addJoinNum(id);
+    }
 }
