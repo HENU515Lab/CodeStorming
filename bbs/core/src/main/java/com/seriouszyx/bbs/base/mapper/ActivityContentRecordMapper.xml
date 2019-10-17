@@ -61,7 +61,7 @@
     where activity_content_id = #{activityContentId} and user_id = #{userId}
   </select>
   <select id="selectRecordList" resultMap="BaseResultMap1">
-       SELECT acr.id as aid, acr.user_id, acr.create_time, ac.id, ac.title
+       SELECT acr.id as aid, acr.user_id, acr.create_time, ac.id, ac.title, acr.file_path
       FROM `activity_content_record` acr left join `activity_content` ac
       on acr.activity_content_id = ac.id
       where ac.activity_id = #{activityId}

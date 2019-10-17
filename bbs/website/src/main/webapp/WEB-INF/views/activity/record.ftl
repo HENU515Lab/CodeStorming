@@ -44,7 +44,8 @@
 
                         <#if !logininfo??>
                         <#-- 未登录 -->
-                            <a href="#" class="btn btn-info btn-lg btn-index" data-toggle="modal" data-target="#login-modal">
+                            <a href="#" class="btn btn-info btn-lg btn-index" data-toggle="modal"
+                               data-target="#login-modal">
                                 报名
                             </a>
                         <#else>
@@ -68,7 +69,7 @@
                     </li>
 
                     <#if !logininfo??>
-                        <li role="presentation" class=""  data-toggle="modal" data-target="#login-modal">
+                        <li role="presentation" class="" data-toggle="modal" data-target="#login-modal">
                             <a href="#">内容</a>
                         </li>
                     <#else>
@@ -80,9 +81,9 @@
                     <li role="presentation" class="active">
                         <a href="/activityRecord.do?id=${activity.id}">动态</a>
                     </li>
-<#--                    <li role="presentation" class="">-->
-<#--                        <a href="/activityDiscuss.do?id=${activity.id}">贴吧</a>-->
-<#--                    </li>-->
+                    <#--                    <li role="presentation" class="">-->
+                    <#--                        <a href="/activityDiscuss.do?id=${activity.id}">贴吧</a>-->
+                    <#--                    </li>-->
                 </ul>
                 <br>
 
@@ -101,13 +102,19 @@
                     </span>
                             </div>
                             <div style="min-height: 15px; margin-top: 8px;">
-
-                                <a href="#">
-                            <span style="font-size: 15px; font-weight: bold;">
-                            ${record.activityContent.title}
-                            </span>
-                                </a>
-
+                                <#if logininfo?? && logininfo.userType == 0>
+                                    <a href="${record.filePath}">
+                                        <span style="font-size: 15px; font-weight: bold;">
+                                        ${record.activityContent.title}
+                                        </span>
+                                    </a>
+                                <#else>
+                                    <a href="#">
+                                        <span style="font-size: 15px; font-weight: bold;">
+                                        ${record.activityContent.title}
+                                        </span>
+                                    </a>
+                                </#if>
                             </div>
 
 
@@ -128,8 +135,6 @@
     </div>
 
 </div>
-
-
 
 
 <div id="modal-warning" class="modal modal-message modal-warning fade" style="display: none;" aria-hidden="true">
@@ -158,12 +163,12 @@
 <script src="static/editor.md/editormd.min.js"></script>
 <script type="text/javascript">
     testEditormdView2 = editormd.markdownToHTML("test-editormd-view", {
-        htmlDecode      : "style,script,iframe",  // you can filter tags decode
-        emoji           : true,
-        taskList        : true,
-        tex             : true,  // 默认不解析
-        flowChart       : true,  // 默认不解析
-        sequenceDiagram : true,  // 默认不解析
+        htmlDecode: "style,script,iframe",  // you can filter tags decode
+        emoji: true,
+        taskList: true,
+        tex: true,  // 默认不解析
+        flowChart: true,  // 默认不解析
+        sequenceDiagram: true,  // 默认不解析
     });
 </script>
 </body>
