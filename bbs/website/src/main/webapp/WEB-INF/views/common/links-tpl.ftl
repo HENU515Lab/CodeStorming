@@ -154,3 +154,6 @@
 <link rel="stylesheet" href="static/web/css/video/player.css">
 
 <link rel="stylesheet" href="static/editor.md/css/editormd.min.css" />
+
+<link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput.min.css" />
+<link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput-rtl.min.css" />

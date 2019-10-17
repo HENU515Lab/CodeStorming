@@ -29,6 +29,11 @@
       problem = #{problem,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <update id="addFinishNum">
+    update `activity_content`
+    set finish = finish + 1
+    where id = #{activityContentId}
+  </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, title, activity_content_abstract, finish, activity_id, problem
     from `activity_content`

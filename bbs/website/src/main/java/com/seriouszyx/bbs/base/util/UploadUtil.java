@@ -1,60 +1,67 @@
 package com.seriouszyx.bbs.base.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
-/**
- * 上传工具
- */
 public class UploadUtil {
+    public UploadUtil() {
+    }
 
-    /**
-     * 处理文件上传
-     *
-     * @param file
-     * @param basePath 存放文件的目录的绝对路径 servletContext.getRealPath("/upload")
-     * @return
-     */
     public static String upload(MultipartFile file, String basePath) {
         String orgFileName = file.getOriginalFilename();
-        String fileName = UUID.randomUUID().toString() + "."
-                + FilenameUtils.getExtension(orgFileName);
+        String fileName = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(orgFileName);
+
         try {
             File targetFile = new File(basePath, fileName);
             FileUtils.writeByteArrayToFile(targetFile, file.getBytes());
-
-            //把文件同步到公共文件夹
-            File publicFile = new File(BidConst.PUBLIC_IMG_SHARE_PATH, fileName);
+            File publicFile = new File("/usr/etc/bbs", fileName);
             FileUtils.writeByteArrayToFile(publicFile, file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException var6) {
+            var6.printStackTrace();
         }
+
         return fileName;
     }
 
     public static String replace(MultipartFile file, String name, String basePath) throws IOException {
-        String orgFileName = name.substring(name.lastIndexOf('/') + 1).replaceAll("[.][^.]+$", ""); // 无文件后缀
+        String orgFileName = name.substring(name.lastIndexOf(47) + 1).replaceAll("[.][^.]+$", "");
         File path = new File(basePath);
-        for (File f : path.listFiles()) {
+        File[] var5 = path.listFiles();
+        int var6 = var5.length;
+
+        int var7;
+        for(var7 = 0; var7 < var6; ++var7) {
+            File f = var5[var7];
             String filename = f.getName().replaceAll("[.][^.]+$", "");
             if (filename.equals(orgFileName)) {
                 FileUtils.writeByteArrayToFile(new File(basePath, f.getName()), file.getBytes());
             }
         }
-        File publicPath = new File(BidConst.PUBLIC_IMG_SHARE_PATH);
-        for (File f : publicPath.listFiles()) {
+
+        File publicPath = new File("/usr/etc/bbs");
+        File[] var12 = publicPath.listFiles();
+        var7 = var12.length;
+
+        for(int var13 = 0; var13 < var7; ++var13) {
+            File f = var12[var13];
             String filename = f.getName().replaceAll("[.][^.]+$", "");
             if (filename.equals(orgFileName)) {
-                FileUtils.writeByteArrayToFile(new File(BidConst.PUBLIC_IMG_SHARE_PATH,
-                        f.getName()), file.getBytes());
+                FileUtils.writeByteArrayToFile(new File("/usr/etc/bbs", f.getName()), file.getBytes());
             }
         }
+
         return name;
     }
 
+    public static void delete(String path, String basePath) {
+        String filename = (new File(path)).getName();
+        File file = new File(basePath, filename);
+        File publicFile = new File("/usr/etc/bbs", filename);
+        file.delete();
+        publicFile.delete();
+    }
 }

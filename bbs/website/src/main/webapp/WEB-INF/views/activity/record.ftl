@@ -63,8 +63,8 @@
                 </div>
                 <br>
                 <ul class="nav nav-tabs nav-justified activity-sub-btn">
-                    <li role="presentation" class="active">
-                        <a href="">详情</a>
+                    <li role="presentation" class="">
+                        <a href="/activityDetail.do?id=${activity.id}">详情</a>
                     </li>
 
                     <#if !logininfo??>
@@ -77,7 +77,7 @@
                         </li>
                     </#if>
 
-                    <li role="presentation" class="">
+                    <li role="presentation" class="active">
                         <a href="/activityRecord.do?id=${activity.id}">动态</a>
                     </li>
 <#--                    <li role="presentation" class="">-->
@@ -86,13 +86,38 @@
                 </ul>
                 <br>
 
-                <div class="main-martor main-martor-content" data-field-name="content">
-                    <div class="section-martor">
-                        <div id="test-editormd-view" class="ui bottom attached tab active martor-preview" data-tab="preview-tab-content">
-                            <textarea style="display:none;" name="test-editormd-markdown-doc">${activity.detail}</textarea>
+                <#list activityContentRecordList as record>
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-1">
+                            <a href="/userspace.do?id=${record.user.id}">
+                                <img class="img-circle" src="${record.user.avatar}" width="40">
+                            </a>
+                        </div>
+                        <div class="col-xs-10 col-sm-11">
+                            <div style="height: 18px; line-height: 1;">
+                    <span class="nice_font" style="font-size: 16px;">
+                        <a href="/userspace.do?id=${record.user.id}">${record.user.username}</a>
+                        已完成
+                    </span>
+                            </div>
+                            <div style="min-height: 15px; margin-top: 8px;">
+
+                                <a href="#">
+                            <span style="font-size: 15px; font-weight: bold;">
+                            ${record.activityContent.title}
+                            </span>
+                                </a>
+
+                            </div>
+
+
+                            <span class="datetime" style="float: right;">
+                    上传于 ${record.createTime?string('MM-dd hh:mm:ss')}
+                </span>
                         </div>
                     </div>
-                </div>
+                    <hr>
+                </#list>
 
             </div>
         </div>

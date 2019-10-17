@@ -72,9 +72,9 @@
                     <li role="presentation" class="active">
                         <a href="/activityContent.do?id=${activity.id}">内容</a>
                     </li>
-<#--                    <li role="presentation" class="">-->
-<#--                        <a href="/activityRecord.do?id=${activity.id}">动态</a>-->
-<#--                    </li>-->
+                    <li role="presentation" class="">
+                        <a href="/activityRecord.do?id=${activity.id}">动态</a>
+                    </li>
 <#--                    <li role="presentation" class="">-->
 <#--                        <a href="/activityDiscuss.do?id=${activity.id}">贴吧</a>-->
 <#--                    </li>-->
@@ -102,6 +102,10 @@
                                 <div id="test-editormd-view-${content.id}">
                                     <textarea style="display:none;" name="test-editormd-markdown-doc">${content.problem}</textarea>
                                 </div>
+                                <hr>
+                                <a href="/toUploadActivity.do?id=${content.id}" class="btn btn-info btn-lg btn-index">
+                                    提交文件
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -169,6 +173,7 @@
     </#list>
 
 </script>
+
 
 </body>
 </html>
