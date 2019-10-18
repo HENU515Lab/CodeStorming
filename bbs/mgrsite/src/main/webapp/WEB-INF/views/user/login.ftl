@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>登入 - layuiAdmin</title>
+  <title>登入 - 515lab</title>
   <#include "../common/links-tpl.ftl" />
 
 </head>
@@ -11,8 +11,8 @@
 
     <div class="layadmin-user-login-main">
       <div class="layadmin-user-login-box layadmin-user-login-header">
-        <h2>layuiAdmin</h2>
-        <p>layui 官方出品的单页面后台管理模板系统</p>
+        <h2>515labAdmin</h2>
+        <p>515实验室后台管理系统</p>
       </div>
       <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
         <div class="layui-form-item">
@@ -31,7 +31,7 @@
             </div>
             <div class="layui-col-xs5">
               <div style="margin-left: 10px;">
-                <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+                <img src="/captcha.do" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
     
       //请求登入接口
       admin.req({
-        url: layui.setter.base + 'json/user/login.js' //实际使用请改成服务端真实接口
+        url: '/login.do' //实际使用请改成服务端真实接口
         ,data: obj.field
         ,done: function(res){
         
@@ -116,7 +116,7 @@
             ,icon: 1
             ,time: 1000
           }, function(){
-            location.href = '../'; //后台主页
+            location.href = '/index.do'; //后台主页
           });
         }
       });
@@ -125,10 +125,10 @@
     
     
     //实际使用时记得删除该代码
-    layer.msg('为了方便演示，用户名密码可随意输入', {
-      offset: '15px'
-      ,icon: 1
-    });
+    // layer.msg('为了方便演示，用户名密码可随意输入', {
+    //   offset: '15px'
+    //   ,icon: 1
+    // });
     
   });
   </script>
