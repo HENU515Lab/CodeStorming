@@ -1,0 +1,62 @@
+span.week_title{
+    font-size: 20px;
+}
+
+.panel-week{
+    box-shadow: 2px 2px 2px silver;
+}
+
+.panel-week:hover{
+    box-shadow: 2px 2px 2px silver;
+}
+
+span.week_finish{
+    float: right;
+    color: #0d71bb;
+}
+
+span.week_datetime{
+    float: right;
+    color: #6a737c;
+}
+
+.panel-problems{
+    box-shadow: 2px 2px 2px silver;
+    margin-top: -20px;
+}
+
+.panel-problems:hover{
+    box-shadow: 2px 2px 2px silver;
+    margin-top: -20px;
+}
+
+span.dayname{
+    color: lightslategray;
+    font-size: 16px;
+}
+
+span.problem-ok{
+    float: right;
+    color: #5fba7d;
+    text-align: center;
+    min-width: 30px;
+}
+
+span.problem-submit{
+    float: right;
+    color: deepskyblue;
+    text-align: center;
+    min-width: 30px;
+}
+
+span.problem-persons{
+    float: right;
+    color: lightslategray;
+    text-align: center;
+    min-width: 30px;
+    margin-right: 30px;
+}
+
+.punch-line:hover{
+    background-color: #eee;
+}

@@ -1,0 +1,12 @@
+.video-js.vjs-webfullscreen {
+  display: block;
+}
+.video-js .vjs-webfullscreen-container {
+  padding: 8px;
+  position: relative;
+}
+
+.player-web-full-screen {
+  margin: auto;
+  width: 85%;
+}

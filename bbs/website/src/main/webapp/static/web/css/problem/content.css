@@ -1,0 +1,36 @@
+.problem-content-sub-btn{
+    font-size: 17px;
+    color: grey;
+}
+
+.problem-content-title{
+    font-size: 28px;
+    margin: 20px 0 30px 0;
+    font-weight: 300;
+}
+
+.submit-code-status-label {
+    font-size: 18px;
+}
+
+.submit-code-status-value {
+    font-size: 21px;
+}
+
+.submit-code-status-value-chinese {
+    font-size: 17px;
+}
+
+.submit-code-status-compilation-log{
+    font-size: 15px;
+}
+
+.code-detail-language{
+    margin: 15px 0 0 20px;
+    font-size: 18px;
+}
+
+.code-detail-information{
+    width: 100%;
+    border: 1px solid #e0e0e0;
+}

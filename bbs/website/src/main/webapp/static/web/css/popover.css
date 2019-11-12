@@ -1,0 +1,7 @@
+.popover.bottom .arrow {
+    visibility:hidden;
+}
+
+.popover.bottom{
+    margin-top: 35px;
+}

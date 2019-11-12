@@ -1,0 +1,274 @@
+body {
+    background: white url("../img/background.png"); !important;
+}
+
+ul.errorlist {
+    padding-left: 0;
+}
+
+ul.errorlist > li {
+    list-style: none;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    font-family: 'Satisfy', cursive;
+    font-size: 25px;
+}
+
+.navbar-nav > li{
+    padding-left: 0;
+    padding-right: 20px;
+    font-size: 15px;
+}
+
+.copyright{
+    color: #8c8c8c;
+}
+
+.acwing-brand {
+    font-family: 'Satisfy', cursive;
+    font-size: 40px;
+    color: #eb9316;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 80px !important;
+}
+
+.body_content {
+  min-height: calc(100vh - 170px);
+}
+.footer {
+  height: 30px;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.row.text-center > div {
+    display: inline-block;
+    float: none;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+
+#progress-wrp {
+    border: 1px solid #0099CC;
+    padding: 1px;
+    position: relative;
+    height: 30px;
+    border-radius: 3px;
+    margin: 10px;
+    text-align: center;
+    background: #fff;
+    box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
+}
+#progress-wrp .progress-bar{
+    height: 100%;
+    border-radius: 3px;
+    background-color: #5cb85c;
+    width: 0;
+    box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
+}
+#progress-wrp .status{
+    top:3px;
+    left:45%;
+    position:absolute;
+    display:inline-block;
+    color: #000000;
+}
+
+.round{
+    border-radius: 1020px;
+}
+
+.btn-subtitle {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.btn-index{
+    color: #FFF;
+    box-shadow: 3px 3px 3px silver;
+}
+
+.personal-info{
+    font-size: 20px;
+}
+
+blockquote{
+    font-size: 13px;
+}
+
+.panel{
+    box-shadow: 0 5px 15px 0 rgba(0,0,0,0.08);
+    transition-duration: 0.5s;
+}
+
+.panel:hover{
+    box-shadow: 0 10px 15px 0 rgba(0,0,0,0.18);
+    transition-duration: 0.5s;
+}
+
+.nice_font{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.notification-number{
+    position: absolute;
+    left: 25px;
+    top: 10px;
+    min-width: 15px;
+    padding: 0 3px 0 3px;
+    font-weight: bold;
+    text-align: center;
+    background: red;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.chat-list-status-online {
+    position: absolute;
+    left: 25px;
+    top: 10px;
+    min-width: 15px;
+    padding: 0 3px 0 3px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.modal {
+  text-align: center;
+}
+
+.modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#code_editor {
+    position: relative !important;
+    border: 1px solid lightgray;
+    margin: auto;
+    min-height: 400px;
+    height: auto;
+    width: 100%;
+}
+
+#code_tool_bar {
+    height: 60px;
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px solid #c2c7d0;
+    margin-bottom: 0;
+}
+
+#chat_code_editor {
+    position: relative !important;
+    border: 1px solid lightgray;
+    margin: auto;
+    min-height: 400px;
+    height: auto;
+    width: 100%;
+}
+
+#chat_code_tool_bar {
+    height: 60px;
+    width: 100%;
+    background: #f8f9fa;
+    border: 1px solid #c2c7d0;
+    margin-bottom: 0;
+}
+
+.editor_tool_btn {
+    font-size: 25px;
+    padding: 10px 20px 10px 10px;
+}
+
+.editor_tool_refresh_btn {
+    font-size: 21px;
+    padding: 13px 0 10px 15px;
+}
+
+.code-editor-option-head{
+    font-size: 20px;
+}
+
+.code-editor-option-title{
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.code-editor-option-description{
+    font-size: 13px;
+    color: grey;
+}
+
+.comment-title {
+    color:#999999;
+    font-size: 13px;
+}
+
+a.hand-cursor:hover {
+    cursor:pointer;
+}
+
+.acwing-window {
+    width: 80%;
+    position: fixed;
+    height: 90%;
+    top: 6%;
+    right: 10%;
+    z-index: 102;
+}
+
+.acwing-window-body {
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.base_body{
+    padding-top: 75px;
+}

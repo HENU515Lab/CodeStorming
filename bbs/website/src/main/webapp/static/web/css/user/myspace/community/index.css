@@ -1,0 +1,56 @@
+span.vote_accepted{
+    box-sizing: border-box;
+    border: 1px solid #5fba7d;
+    background: #5fba7d;
+    color: #FFF;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+    min-width: 36px;
+    height: auto;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 2px;
+    float: left;
+    vertical-align: baseline;
+}
+
+span.vote{
+    box-sizing: border-box;
+    border: 1px solid #b9b9b9;
+    background: white;
+    color: #6a737c;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+    min-width: 36px;
+    height: auto;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 2px;
+    float: left;
+    vertical-align: baseline;
+}
+
+span.type{
+    box-sizing: border-box;
+    border: 1px solid #b9b9b9;
+    background: white;
+    color: #6a737c;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+    min-width: 36px;
+    height: auto;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 2px;
+    float: right;
+    vertical-align: baseline;
+}
+
+span.datetime{
+    color: #999;
+    text-align: left;
+    font-size: 13px;
+}

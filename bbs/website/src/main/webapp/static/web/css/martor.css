@@ -1,0 +1,37 @@
+.martor-preview{
+    background-color: white;
+}
+
+.martor-preview p{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-kerning: auto;
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-variant-ligatures: normal;
+    font-weight: normal;
+}
+
+.martor-preview pre{
+    padding: 2px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-kerning: auto;
+    font-size: 100%;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-variant-ligatures: normal;
+    font-weight: normal;
+}
+
+hr{
+    background: none !important;
+    height: 1px !important;
+    border: 0 !important;
+    border-top: 1px solid #eee !important;
+}
+
+body {
+    height: auto;
+}
