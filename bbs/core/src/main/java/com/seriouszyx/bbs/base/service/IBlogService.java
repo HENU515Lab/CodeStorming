@@ -42,4 +42,23 @@ public interface IBlogService {
      */
     List<Blog> listByAuthorId(Long authorId);
 
+    /**
+     * 为指定文章点赞
+     * @param blogId
+     * @return 当前文章的点赞数
+     */
+    Integer addBlogVote(Long blogId);
+
+    /**
+     * 为指定文章取消点赞
+     * @param blogId
+     * @return 当前文章的点赞数
+     */
+    Integer removeBlogVote(Long blogId);
+
+    /**
+     * 根据文章id和用户id查询文章投票信息
+     * @param blogId
+     */
+    int selectBlogVoteRecord(Long blogId);
 }

@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -55,6 +60,8 @@ public class BlogController {
         }
         blog.setReadSize(blog.getReadSize() + 1);
         blogService.saveBlog(blog);
+        int voteOffset = blogService.selectBlogVoteRecord(id);
+        model.addAttribute("voteOffset", voteOffset);
         model.addAttribute("blog", blog);
         return "blog/content";
     }
@@ -64,6 +71,24 @@ public class BlogController {
     public String submitBlogComment(String content, Long blogId) {
         blogService.comment(content, blogId);
         return "redirect:content.do?id=" + blogId;
+    }
+
+    @RequestMapping("blogVoteUp")
+    @ResponseBody
+    public Map<String, Object> blogVoteUp(@RequestParam("blogId") String blogId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("error_message", "add_success");
+        result.put("votecnt", blogService.addBlogVote(Long.valueOf(blogId)));
+        return result;
+    }
+
+    @RequestMapping("blogVoteDown")
+    @ResponseBody
+    public Map<String, Object> blogVoteDown(@RequestParam("blogId") String blogId) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("error_message", "remove_success");
+        result.put("votecnt", blogService.removeBlogVote(Long.valueOf(blogId)));
+        return result;
     }
 
     private boolean isNullOrEmpty(String s) {

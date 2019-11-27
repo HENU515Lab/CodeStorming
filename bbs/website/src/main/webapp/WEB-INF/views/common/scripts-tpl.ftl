@@ -67,6 +67,7 @@
 <script src="static/web/js/video/player-0.0.2.js"></script>
 
 <script src="static/web/js/file_system/file/content/abstract/vote-0.0.1.js"></script>
+<script src="static/web/js/file_system/file/operation/vote/vote.js"></script>
 <script src="static/web/js/file_system/file/content/abstract/collect-0.0.2.js"></script>
 <script src="static/web/js/about/pull_files-0.0.9.js"></script>
 <script type="text/javascript" src="static/web/js/file_system/file/operation/comment/add-0.0.4.js"></script>

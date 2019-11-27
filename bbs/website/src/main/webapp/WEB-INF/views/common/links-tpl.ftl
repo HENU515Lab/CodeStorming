@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/web/css/signform.css">
 <link rel="stylesheet" href="static/jquery-ui-dist/jquery-ui.min.css">
-
+<link rel="shortcut icon" type="image/png" href="static/web/img/icons/logo.ico">
 
 <!--link rel="stylesheet" href="https://cdn.acwing.com/static/web/css/pace.css"-->
 <!--script src="https://cdn.acwing.com/static/web/js/pace.js"></script-->
@@ -157,3 +157,4 @@
 
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput.min.css" />
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput-rtl.min.css" />
+

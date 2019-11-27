@@ -9,6 +9,8 @@ import com.seriouszyx.bbs.base.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -26,11 +28,16 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void updateUser(User user) {
         User currentUser = userMapper.selectByPrimaryKey(user.getId());
-        currentUser.setUsername(user.getUsername());
-        currentUser.setTruename(user.getTruename());
-        currentUser.setGrade(user.getGrade());
-        currentUser.setEmail(user.getEmail());
-        currentUser.setIntroduce(user.getIntroduce());
+        if (user.getUsername() != null)
+            currentUser.setUsername(user.getUsername());
+        if (user.getTruename() != null)
+            currentUser.setTruename(user.getTruename());
+        if (user.getGrade() != null)
+            currentUser.setGrade(user.getGrade());
+        if (user.getEmail() != null)
+            currentUser.setEmail(user.getEmail());
+        if (user.getEmail() != null)
+            currentUser.setIntroduce(user.getIntroduce());
         if (user.getAvatar() != null)
             currentUser.setAvatar(user.getAvatar());
         currentUser.setVisitors(user.getVisitors());
@@ -41,6 +48,11 @@ public class UserServiceImpl implements IUserService {
             current.setUsername(user.getUsername());
             logininfoMapper.updateByPrimaryKey(current);
         }
+    }
+
+    @Override
+    public List<User> listAll() {
+        return userMapper.selectAll();
     }
 
 }
