@@ -19,4 +19,9 @@ public class CommunityServiceImpl implements ICommunityService {
         return communityMapper.selectAll();
     }
 
+    @Override
+    public Community listById(Long id) {
+        return communityMapper.selectByPrimaryKey(id);
+    }
+
 }

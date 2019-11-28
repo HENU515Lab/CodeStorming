@@ -15,4 +15,11 @@ public interface ICommunityService {
      */
     List<Community> listAll();
 
+    /**
+     * 根据问题id查询问题详细内容
+     * @param id
+     * @return
+     */
+    Community listById(Long id);
+
 }

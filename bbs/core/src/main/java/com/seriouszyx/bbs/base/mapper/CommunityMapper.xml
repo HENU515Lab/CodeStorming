@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.seriouszyx.bbs.base.mapper.CommunityMapper" >
   <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.Community" >
-    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="cid" property="id" jdbcType="BIGINT" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="vote_size" property="voteSize" jdbcType="INTEGER" />
     <result column="answer_size" property="answerSize" jdbcType="INTEGER" />
@@ -14,6 +14,24 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <association property="asker" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap" />
   </resultMap>
+
+  <resultMap id="BaseResultMapWithAnswers" type="com.seriouszyx.bbs.base.domain.Community" >
+    <id column="cid" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="cvs" property="voteSize" jdbcType="INTEGER" />
+    <result column="answer_size" property="answerSize" jdbcType="INTEGER" />
+    <result column="read_size" property="readSize" jdbcType="INTEGER" />
+    <!--    <result column="asker_id" property="askerId" jdbcType="BIGINT" />-->
+    <result column="cct" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="labels" property="labels" jdbcType="VARCHAR" />
+    <result column="solve" property="solve" jdbcType="TINYINT" />
+    <result column="cc" property="content" jdbcType="LONGVARCHAR" />
+    <association property="asker" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap" />
+    <collection property="answers" column="cid"
+                select="com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper.selectByCommunityId" />
+  </resultMap>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from `community`
     where id = #{id,jdbcType=BIGINT}
@@ -41,16 +59,19 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select id, title, vote_size, answer_size, read_size, asker_id, create_time, labels, 
-    solve, content
-    from `community`
-    where id = #{id,jdbcType=BIGINT}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMapWithAnswers" parameterType="java.lang.Long" >
+    select c.id as cid, c.title, c.vote_size as cvs, c.answer_size,
+    c.read_size, c.content as cc,
+    c.asker_id, c.create_time as cct, c.labels, c.solve,
+    u.username, u.id, u.avatar, u.visitors
+    from `user` u inner join `community` c
+    on u.id = c.asker_id
+    where c.id = #{id}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select c.id as cid, c.title, c.vote_size, c.answer_size, c.read_size,
     c.asker_id, c.create_time, c.labels, c.solve, c.content,
-    u.username, u.id
+    u.username, u.id, u.avatar, u.visitors
     from `user` u inner join `community` c
     on u.id = c.asker_id
     order by c.create_time desc
