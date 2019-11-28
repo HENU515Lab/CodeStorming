@@ -17,6 +17,7 @@ public class CommunityController {
     @Autowired
     private ICommunityService communityService;
 
+
     @RequestMapping("community")
     public String community(Model model) {
         List<Community> communityList = communityService.listAll();
@@ -71,11 +72,18 @@ public class CommunityController {
     }
 
     @RequireLogin
-    @RequestMapping("submitAnswer")
-    public String submitAnswer(Long id, Model model) {
+    @RequestMapping("addAnswer")
+    public String addAnswer(Long id, Model model) {
         Community community = communityService.listById(id);
         model.addAttribute("community", community);
         return "community/answerCommunity";
+    }
+
+    @RequireLogin
+    @RequestMapping("submitAnswer")
+    public String submitAnswer(CommunityAnswer communityAnswer) {
+        communityService.saveAnswer(communityAnswer);
+        return "redirect:communityContent.do?id=" + communityAnswer.getCommunityId();
     }
 
     private boolean isNullOrEmpty(String s) {

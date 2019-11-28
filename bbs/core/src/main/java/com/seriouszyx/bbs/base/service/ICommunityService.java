@@ -1,6 +1,7 @@
 package com.seriouszyx.bbs.base.service;
 
 import com.seriouszyx.bbs.base.domain.Community;
+import com.seriouszyx.bbs.base.domain.CommunityAnswer;
 
 import java.util.List;
 
@@ -43,4 +44,11 @@ public interface ICommunityService {
      * @return 添加后的新问题
      */
     void saveCommunity(Community community);
+
+    /**
+     * 为指定问题添加回答
+     * @param communityAnswer
+     */
+    void saveAnswer(CommunityAnswer communityAnswer);
+
 }

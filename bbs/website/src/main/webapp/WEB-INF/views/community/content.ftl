@@ -278,7 +278,7 @@
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                             <#else>
-                                <a href="/submitAnswer.do?id=${community.id}" class="btn btn-default btn-subtitle">
+                                <a href="/addAnswer.do?id=${community.id}" class="btn btn-default btn-subtitle">
                                     我来回答
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>

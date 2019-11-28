@@ -13,4 +13,6 @@ public interface CommunityMapper {
     List<Community> selectAll();
 
     int updateByPrimaryKey(Community record);
+
+    void addAnswerSizeByPrimaryId(Long communityId);
 }

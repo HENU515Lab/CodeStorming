@@ -1,8 +1,10 @@
 package com.seriouszyx.bbs.base.service.impl;
 
 import com.seriouszyx.bbs.base.domain.Community;
+import com.seriouszyx.bbs.base.domain.CommunityAnswer;
 import com.seriouszyx.bbs.base.domain.CommunityComment;
 import com.seriouszyx.bbs.base.domain.User;
+import com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper;
 import com.seriouszyx.bbs.base.mapper.CommunityCommentMapper;
 import com.seriouszyx.bbs.base.mapper.CommunityMapper;
 import com.seriouszyx.bbs.base.mapper.UserMapper;
@@ -25,6 +27,9 @@ public class CommunityServiceImpl implements ICommunityService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private CommunityAnswerMapper communityAnswerMapper;
 
     @Override
     public List<Community> listAll() {
@@ -71,6 +76,22 @@ public class CommunityServiceImpl implements ICommunityService {
             communityMapper.insert(community);
         } else {
             communityMapper.updateByPrimaryKey(community);
+        }
+    }
+
+    @Override
+    public void saveAnswer(CommunityAnswer communityAnswer) {
+        boolean isNew = (communityAnswer.getId() == null);
+        if (isNew) {
+            User user = userMapper.selectByPrimaryKey(UserContext.getCurrentUser().getId());
+            communityAnswer.setAnswerUser(user);
+            communityAnswer.setCreateTime(new Date());
+            communityAnswer.setVoteSize(0);
+            communityAnswerMapper.insert(communityAnswer);
+
+            communityMapper.addAnswerSizeByPrimaryId(communityAnswer.getCommunityId());
+        } else {
+            communityAnswerMapper.updateByPrimaryKey(communityAnswer);
         }
     }
 

@@ -49,17 +49,42 @@
       #{labels,jdbcType=VARCHAR}, #{solve,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
+    <insert id="addAnswerSizeByPrimaryId">
+        update `community`
+        set answer_size = answer_size + 1
+        where id = #{communityId}
+    </insert>
     <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Community">
     update `community`
-    set title = #{title,jdbcType=VARCHAR},
-      vote_size = #{voteSize,jdbcType=INTEGER},
-      answer_size = #{answerSize,jdbcType=INTEGER},
-      read_size = #{readSize,jdbcType=INTEGER},
-      asker_id = #{asker.id,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      labels = #{labels,jdbcType=VARCHAR},
-      solve = #{solve,jdbcType=TINYINT},
-      content = #{content,jdbcType=LONGVARCHAR}
+    <set>
+        <if test="title != null and title != ''">
+            title = #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="vote_size != null">
+            vote_size = #{voteSize,jdbcType=INTEGER},
+        </if>
+        <if test="answer_size != null">
+            answer_size = #{answerSize,jdbcType=INTEGER},
+        </if>
+        <if test="read_size != null">
+            read_size = #{read_size,jdbcType=INTEGER},
+        </if>
+        <if test="asker_id != null">
+            asker_id = #{asker.id,jdbcType=BIGINT},
+        </if>
+        <if test="create_time != null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="labels != null and labels != ''">
+            labels = #{labels,jdbcType=VARCHAR},
+        </if>
+        <if test="solve != null">
+            solve = #{solve,jdbcType=TINYINT},
+        </if>
+        <if test="content != null and content != ''">
+            content = #{content,jdbcType=LONGVARCHAR},
+        </if>
+    </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapWithAnswers" parameterType="java.lang.Long">

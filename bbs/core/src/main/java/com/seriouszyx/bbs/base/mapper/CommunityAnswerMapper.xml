@@ -20,12 +20,12 @@
   <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.CommunityAnswer" useGeneratedKeys="true" keyProperty="id" >
     insert into `community_answer` (answer_user_id, community_id, create_time, 
       vote_size, content)
-    values (#{answerUserId,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{answerUser.id,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
       #{voteSize,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.CommunityAnswer" >
     update `community_answer`
-    set answer_user_id = #{answerUserId,jdbcType=BIGINT},
+    set answer_user_id = #{answerUser.id,jdbcType=BIGINT},
       community_id = #{communityId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       vote_size = #{voteSize,jdbcType=INTEGER},

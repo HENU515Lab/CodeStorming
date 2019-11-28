@@ -145,14 +145,14 @@
                             我来回答
                         </p>
                         <hr>
-                        <form id="add_a_solution_form" method="post" action="/community/answer/content/add/655/11146/" enctype="multipart/form-data">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="rPEANW6CMqvqSik4v4yxhlWet8mYvnIOI4sbBgIJgNYQLy22dgdRejzy3Mssc224">
+                        <form id="add_a_solution_form" method="post" action="/submitAnswer.do" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div id="editor">
                                         <textarea name="content" style="display:none;">### 请写下你的分享或见解</textarea>
                                     </div>
                                 </div>
+                                <input type="hidden" name="communityId" value="${community.id}">
 <#--                                <div class="col-md-offset-8 col-md-2 col-sm-offset-6 col-sm-3 col-xs-offset-2 col-xs-5">-->
 <#--                                    <button id="save_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">保存</button>-->
 <#--                                </div>-->
