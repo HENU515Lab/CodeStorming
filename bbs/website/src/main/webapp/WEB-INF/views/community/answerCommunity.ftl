@@ -141,149 +141,26 @@
                             </div>
                         </div>
                         <br><br>
-                        <p class="nice_font answer_title">
-                            ${community.answerSize}
-                            个问答
+                        <p class="nice_font answer_title" id="write_my_answer_anchor" style="">
+                            我来回答
                         </p>
                         <hr>
-                        <#list community.answers as answer>
-                            <div class="row answer_field" id="answer_666">
-                                <div class="col-xs-1 vote_cut" align="center">
-
-                                    <a href='#' data-toggle="modal" data-target="#login-modal">
-                                        <span class="glyphicon glyphicon-triangle-top vote "></span>
-                                    </a>
-                                    <br>
-                                    <span class="votecnt">${answer.voteSize}</span>
-                                    <br>
-                                    <a href='#' data-toggle="modal" data-target="#login-modal">
-                                        <span class="glyphicon glyphicon-triangle-bottom vote "></span>
-                                    </a>
-                                    <br>
-                                    <span class="votecnt glyphicon glyphicon-ok " style="color: #5fba7d;"></span>
-
-                                </div>
-                                <div class="col-xs-11 vote_cut">
-                                    <div class="main-martor main-martor-content" data-field-name="content">
-                                        <div class="section-martor">
-                                            <div class="ui bottom attached tab active martor-preview"
-                                                 data-tab="preview-tab-content">
-                                                <div id="community-answer-${answer.id}" class="blog-content">
-                                                    <textarea style="display:none;" name="test-editormd-markdown-doc">${answer.content}</textarea>
-                                                </div>
-                                                <div align="right">
-
-                                                    <div class="information_card" align="left">
-                                                        <span class="datetime"
-                                                              title="${answer.createTime?string('yyyy-MM-dd hh:mm:ss')}">
-                                                            回答于${answer.createTime?string('yyyy-MM-dd hh:mm:ss')}
-                                                        </span>
-                                                        <div class="row">
-                                                            <div class="col-xs-4" style="padding-right:0;">
-                                                                <a href="/userspace.do?id=${answer.answerUser.id}">
-                                                                    <img class="img photo"
-                                                                         src="${answer.answerUser.avatar}"
-                                                                         width="40px" height="40px">
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-xs-8" style="padding-left:0;">
-                                                                <div style="height: 13px; line-height: 1;">
-                                                                    <a href="/userspace.do?id=${answer.answerUser.id}">
-                                                                        <span class="nice_font"
-                                                                              title="${answer.answerUser.username}"
-                                                                              style="font-size: 16px;">
-                                                                            ${answer.answerUser.username}
-                                                                        </span>
-                                                                    </a>
-                                                                </div>
-                                                                <div style="height: 13px; margin-top: 8px;" title="声望值">
-                                                                    <span class="glyphicon glyphicon-star"
-                                                                          style="color: #f5d500; font-size: 14px;"></span>
-                                                                    <span style="font-size: 14px; font-weight: bold; color: #6a737c">
-                                                                        ${answer.answerUser.visitors}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div><!-- end  /.section-martor -->
+                        <form id="add_a_solution_form" method="post" action="/community/answer/content/add/655/11146/" enctype="multipart/form-data">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="rPEANW6CMqvqSik4v4yxhlWet8mYvnIOI4sbBgIJgNYQLy22dgdRejzy3Mssc224">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="editor">
+                                        <textarea name="content" style="display:none;">### 请写下你的分享或见解</textarea>
                                     </div>
                                 </div>
-
-                                <div class="col-xs-offset-1 col-xs-11">
-                                    <div class="comment_field">
-                                        <hr class="comment_hr">
-                                        <#list answer.communityAnswerCommentList as answerComment>
-                                            <div id="ac_${answer.id}_${answerComment.id}" class="subcomment">
-                                                <span class="nice_font">
-                                                    ${answerComment.content}&nbsp;–&nbsp;
-                                                </span>
-                                                <a href="/userspace.do?id=${answerComment.user.id}">
-                                                    <span class="nice_font" style="font-size: 16px;">
-                                                        ${answerComment.user.username}
-                                                    </span>
-                                                </a>
-                                                &nbsp;
-                                                <span class="datetime"
-                                                      title="${answerComment.createTime?string('yyyy-MM-dd hh:mm:ss')}">
-                                                    ${answerComment.createTime?string('yyyy-MM-dd hh:mm:ss')}
-                                                </span>
-                                            </div>
-                                            <hr class="comment_hr">
-                                        </#list>
-
-                                        <#if !logininfo??>
-                                            <button class="add_a_comment btn btn-link"
-                                                    data-toggle="modal" data-target="#login-modal">
-                                                发表评论
-                                            </button>
-                                        <#else>
-                                            <button class="add_a_comment btn btn-link"
-                                                    id="cs_${answer.id}_btn">
-                                                发表评论
-                                            </button>
-                                            <div id="cs_${answer.id}_content" class="row" style="margin-top: 10px; display: none;">
-                                                <div class="col-md-1 col-sm-2 col-xs-3" style="padding-right:5px;">
-                                                    <a href="/userspace.do?id=${user.id}">
-                                                        <img width="50px" src="${user.avatar}">
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-11 col-sm-10 col-xs-9" style="padding-left:5px;">
-                                                    <form action="/addCommunityAnswerComment.do" class="form" method="post">
-                                                        <textarea class="form-control" name="content" rows="2" maxlength="1000" required="" title="回复"></textarea>
-                                                        <input type="hidden" name="communityId" value="${community.id}">
-                                                        <input type="hidden" name="communityAnswerId" value="${answer.id}">
-                                                        <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-7 col-xs-5">
-                                                            <button class="form-control btn btn-link" style="border-radius: 5px">提交评论</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </#if>
-
-                                    </div>
+<#--                                <div class="col-md-offset-8 col-md-2 col-sm-offset-6 col-sm-3 col-xs-offset-2 col-xs-5">-->
+<#--                                    <button id="save_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">保存</button>-->
+<#--                                </div>-->
+                                <div class="col-md-2 col-sm-3 col-xs-5">
+                                    <button id="submit_solution_btn" class="form-control btn btn-success" style="border-radius: 5px">提交</button>
                                 </div>
                             </div>
-                            <hr>
-                        </#list>
-
-                        <div class="text-right">
-                            <#if !logininfo??>
-                                <a class="btn btn-default btn-subtitle" data-toggle="modal" data-target="#login-modal">
-                                    我来回答
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                            <#else>
-                                <a href="/submitAnswer.do?id=${community.id}" class="btn btn-default btn-subtitle">
-                                    我来回答
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                            </#if>
-                        </div>
+                        </form>
 
                     </div>
                 </div>
@@ -349,17 +226,18 @@
         flowChart       : true,  // 默认不解析
         sequenceDiagram : true,  // 默认不解析
     });
-    <#list community.answers as answer>
-        communityAnswer${answer.id} =
-            editormd.markdownToHTML("community-answer-${answer.id}", {
-            htmlDecode      : "style,script,iframe",  // you can filter tags decode
-            emoji           : true,
-            taskList        : true,
-            tex             : true,  // 默认不解析
-            flowChart       : true,  // 默认不解析
-            sequenceDiagram : true,  // 默认不解析
-        });
-    </#list>
+
+    var editor = editormd("editor", {
+        width: "100%",
+        height: "400",
+        syncScrolling : "single",
+        tex: true,// 开启科学公式TeX语言支持，默认关闭
+        emoji: true,//emoji表情，默认关闭
+        path : "static/editor.md/lib/",
+        toolbarIcons : function() {
+            return ["undo", "redo", "|", "bold", "hr", "||", "watch", "preview"]
+        }
+    });
 </script>
 <script>
     $(document).ready(function () {
@@ -367,12 +245,6 @@
         $('#qc_btn').click(function () {
             $('#qc_content').toggle(500);
         });
-
-        <#list community.answers as answer>
-            $('#cs_${answer.id}_btn').click(function () {
-                $('#cs_${answer.id}_content').toggle(500);
-            });
-        </#list>
     });
 </script>
 </body>

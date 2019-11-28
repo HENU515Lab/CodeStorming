@@ -70,6 +70,14 @@ public class CommunityController {
         return "redirect:addCommunity.do";
     }
 
+    @RequireLogin
+    @RequestMapping("submitAnswer")
+    public String submitAnswer(Long id, Model model) {
+        Community community = communityService.listById(id);
+        model.addAttribute("community", community);
+        return "community/answerCommunity";
+    }
+
     private boolean isNullOrEmpty(String s) {
         return s == null || s.trim().equals("");
     }
