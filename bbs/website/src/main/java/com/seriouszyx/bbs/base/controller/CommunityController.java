@@ -1,6 +1,7 @@
 package com.seriouszyx.bbs.base.controller;
 
 import com.seriouszyx.bbs.base.domain.Community;
+import com.seriouszyx.bbs.base.domain.CommunityAnswer;
 import com.seriouszyx.bbs.base.service.ICommunityService;
 import com.seriouszyx.bbs.base.util.RequireLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,13 @@ public class CommunityController {
     @RequestMapping("addCommunity")
     public String addCommunity(String id) {
         return "community/addCommunity";
+    }
+
+    @RequestMapping("communityContent")
+    public String communityContent(Long id, Model model) {
+        Community community = communityService.listById(id);
+        model.addAttribute("community", community);
+        return "community/content";
     }
 
 }

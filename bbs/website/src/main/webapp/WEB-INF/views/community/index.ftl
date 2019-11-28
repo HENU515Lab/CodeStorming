@@ -105,7 +105,7 @@
                         <div class="col-xs-12 col-sm-9 col-md-10">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <a class="community_question_title" href="777ed242-238f-4806-a247-fc1ca4dcd1ba.html">
+                                    <a class="community_question_title" href="/communityContent.do?id=${community.id}">
                                         ${community.title}
                                     </a>
                                 </div>
