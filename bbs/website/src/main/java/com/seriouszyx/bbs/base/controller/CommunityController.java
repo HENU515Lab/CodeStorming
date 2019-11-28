@@ -33,9 +33,23 @@ public class CommunityController {
     @RequestMapping("communityContent")
     public String communityContent(Long id, Model model) {
         Community community = communityService.listById(id);
-        System.out.println(community);
         model.addAttribute("community", community);
         return "community/content";
+    }
+
+    @RequireLogin
+    @RequestMapping("addCommunityComment")
+    public String addCommunityComment(Long communityId, String content) {
+        communityService.
+                addCommunityComment(communityId, content);
+        return "redirect:communityContent.do?id=" + communityId;
+    }
+
+    @RequireLogin
+    @RequestMapping("addCommunityAnswerComment")
+    private String addCommunityAnswerComment(Long communityId, Long communityAnswerId, String content) {
+        communityService.addCommunityAnswerComment(communityId, communityAnswerId, content);
+        return "redirect:communityContent.do?id=" + communityId;
     }
 
 }

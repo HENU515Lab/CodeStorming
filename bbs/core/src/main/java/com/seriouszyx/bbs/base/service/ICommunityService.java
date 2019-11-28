@@ -22,4 +22,19 @@ public interface ICommunityService {
      */
     Community listById(Long id);
 
+    /**
+     * 为指定问题添加评论
+     * @param communityId
+     * @param content
+     */
+    void addCommunityComment(Long communityId, String content);
+
+    /**
+     * 为指定问题的指定回答添加评论
+     * @param communityId
+     * @param communityAnswerId
+     * @param content
+     */
+    void addCommunityAnswerComment(Long communityId, Long communityAnswerId, String content);
+
 }

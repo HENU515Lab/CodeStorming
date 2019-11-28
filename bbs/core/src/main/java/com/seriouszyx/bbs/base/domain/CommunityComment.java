@@ -11,7 +11,7 @@ public class CommunityComment {
 
     private String content;
 
-//    private Long userId;
+    private Long userId;
     private User user;
 
     private Date createTime;

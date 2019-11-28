@@ -19,7 +19,6 @@
                 <div class="panel panel-default copy-with-link">
                     <div class="panel-body">
 
-
                         <h2 class="nice_font" style="font-weight: normal;">
                             ${community.title}
                         </h2>
@@ -85,8 +84,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div><!-- end  /.section-martor -->
                                 </div>
@@ -129,8 +126,9 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-11 col-sm-10 col-xs-9" style="padding-left:5px;">
-                                                <form id="question_comment_add_form" action="/community/question/comment/add/698/0/" class="form" method="post">
+                                                <form id="question_comment_add_form" action="/addCommunityComment.do" class="form" method="post">
                                                     <textarea class="form-control" name="content" rows="2" maxlength="1000" required="" title="回复"></textarea>
+                                                    <input type="hidden" name="communityId" value="${community.id}">
                                                     <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-7 col-xs-5">
                                                         <button class="form-control btn btn-link" style="border-radius: 5px">提交评论</button>
                                                     </div>
@@ -255,8 +253,10 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-11 col-sm-10 col-xs-9" style="padding-left:5px;">
-                                                    <form action="/community/answer/comment/add/698/690/0/" class="form" method="post">
+                                                    <form action="/addCommunityAnswerComment.do" class="form" method="post">
                                                         <textarea class="form-control" name="content" rows="2" maxlength="1000" required="" title="回复"></textarea>
+                                                        <input type="hidden" name="communityId" value="${community.id}">
+                                                        <input type="hidden" name="communityAnswerId" value="${answer.id}">
                                                         <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-7 col-xs-5">
                                                             <button class="form-control btn btn-link" style="border-radius: 5px">提交评论</button>
                                                         </div>
