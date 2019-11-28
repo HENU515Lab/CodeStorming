@@ -28,4 +28,6 @@ public class Community {
     private String content;
 
     private List<CommunityAnswer> answers;
+
+    private List<CommunityComment> communityCommentList;
 }

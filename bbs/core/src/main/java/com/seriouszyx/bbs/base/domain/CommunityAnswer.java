@@ -3,6 +3,7 @@ package com.seriouszyx.bbs.base.domain;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class CommunityAnswer {
@@ -18,5 +19,7 @@ public class CommunityAnswer {
     private Integer voteSize;
 
     private String content;
+
+    private List<CommunityComment> communityAnswerCommentList;
 
 }

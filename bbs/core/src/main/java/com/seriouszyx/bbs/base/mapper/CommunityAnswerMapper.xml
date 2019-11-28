@@ -10,6 +10,8 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
     <association property="answerUser" column="answer_user_id"
                  select="com.seriouszyx.bbs.base.mapper.UserMapper.selectByPrimaryKey" />
+    <collection property="communityAnswerCommentList" column="id"
+                select="com.seriouszyx.bbs.base.mapper.CommunityCommentMapper.selectByCommunityAnswerId" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from `community_answer`

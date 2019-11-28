@@ -29,6 +29,8 @@
     <association property="asker" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap" />
     <collection property="answers" column="cid"
                 select="com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper.selectByCommunityId" />
+    <collection property="communityCommentList" column="cid"
+                select="com.seriouszyx.bbs.base.mapper.CommunityCommentMapper.selectByCommunityIdWithNullCommunityAnswerId" />
   </resultMap>
 
 

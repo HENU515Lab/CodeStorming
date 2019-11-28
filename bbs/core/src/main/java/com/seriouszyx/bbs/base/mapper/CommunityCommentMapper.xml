@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.CommunityCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.CommunityComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+<!--    <result column="user_id" property="userId" jdbcType="BIGINT" />-->
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="community_id" property="communityId" jdbcType="BIGINT" />
+    <result column="community_answer_id" property="communityAnswerId" jdbcType="BIGINT" />
+    <association property="user"  column="user_id"
+                 select="com.seriouszyx.bbs.base.mapper.UserMapper.selectByPrimaryKey" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `community_comment`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.CommunityComment" useGeneratedKeys="true" keyProperty="id" >
+    insert into `community_comment` (content, user_id, create_time, 
+      community_id, community_answer_id)
+    values (#{content,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{communityId,jdbcType=BIGINT}, #{communityAnswerId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.CommunityComment" >
+    update `community_comment`
+    set content = #{content,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      community_id = #{communityId,jdbcType=BIGINT},
+      community_answer_id = #{communityAnswerId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, content, user_id, create_time, community_id, community_answer_id
+    from `community_comment`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, content, user_id, create_time, community_id, community_answer_id
+    from `community_comment`
+  </select>
+  <select id="selectByCommunityAnswerId" resultMap="BaseResultMap">
+    select id, content, user_id, create_time, community_id, community_answer_id
+    from `community_comment`
+    where community_answer_id = #{communityAnswerId}
+  </select>
+  <select id="selectByCommunityIdWithNullCommunityAnswerId"
+          resultMap="BaseResultMap">
+    select id, content, user_id, create_time, community_id, community_answer_id
+    from `community_comment`
+    where community_id = #{communityId} and community_answer_id is null
+  </select>
+</mapper>
