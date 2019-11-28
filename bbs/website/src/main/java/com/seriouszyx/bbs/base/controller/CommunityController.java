@@ -24,11 +24,6 @@ public class CommunityController {
         return "community/index";
     }
 
-    @RequireLogin
-    @RequestMapping("addCommunity")
-    public String addCommunity(String id) {
-        return "community/addCommunity";
-    }
 
     @RequestMapping("communityContent")
     public String communityContent(Long id, Model model) {
@@ -47,9 +42,36 @@ public class CommunityController {
 
     @RequireLogin
     @RequestMapping("addCommunityAnswerComment")
-    private String addCommunityAnswerComment(Long communityId, Long communityAnswerId, String content) {
+    public String addCommunityAnswerComment(Long communityId, Long communityAnswerId, String content) {
         communityService.addCommunityAnswerComment(communityId, communityAnswerId, content);
         return "redirect:communityContent.do?id=" + communityId;
+    }
+
+
+    @RequireLogin
+    @RequestMapping("addCommunity")
+    public String addCommunity(String id) {
+        return "community/addCommunity";
+    }
+
+    @RequireLogin
+    @RequestMapping("submitCommunity")
+    public String submitCommunity(Community community, Model model) {
+        if (isNullOrEmpty(community.getTitle()) || isNullOrEmpty(community.getContent())) {
+            model.addAttribute("error_message", "发起提问失败！标题或内容不能为空");
+        } else {
+            try {
+                communityService.saveCommunity(community);
+            } catch (RuntimeException e) {
+                model.addAttribute("error_message", "发起提问失败！");
+            }
+            return "redirect:community.do";
+        }
+        return "redirect:addCommunity.do";
+    }
+
+    private boolean isNullOrEmpty(String s) {
+        return s == null || s.trim().equals("");
     }
 
 }

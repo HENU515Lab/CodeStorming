@@ -2,8 +2,10 @@ package com.seriouszyx.bbs.base.service.impl;
 
 import com.seriouszyx.bbs.base.domain.Community;
 import com.seriouszyx.bbs.base.domain.CommunityComment;
+import com.seriouszyx.bbs.base.domain.User;
 import com.seriouszyx.bbs.base.mapper.CommunityCommentMapper;
 import com.seriouszyx.bbs.base.mapper.CommunityMapper;
+import com.seriouszyx.bbs.base.mapper.UserMapper;
 import com.seriouszyx.bbs.base.service.ICommunityService;
 import com.seriouszyx.bbs.base.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class CommunityServiceImpl implements ICommunityService {
 
     @Autowired
     private CommunityCommentMapper communityCommentMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<Community> listAll() {
@@ -50,6 +55,23 @@ public class CommunityServiceImpl implements ICommunityService {
         communityComment.setUserId(UserContext.getCurrentUser().getId());
         communityComment.setCommunityAnswerId(communityAnswerId);
         communityCommentMapper.insert(communityComment);
+    }
+
+    @Override
+    public void saveCommunity(Community community) {
+        boolean isNew = (community.getId() == null);
+        if (isNew) {
+            User user = userMapper.selectByPrimaryKey(UserContext.getCurrentUser().getId());
+            community.setAsker(user);
+            community.setCreateTime(new Date());
+            community.setAnswerSize(0);
+            community.setReadSize(0);
+            community.setVoteSize(0);
+            community.setSolve(0);
+            communityMapper.insert(community);
+        } else {
+            communityMapper.updateByPrimaryKey(community);
+        }
     }
 
 }

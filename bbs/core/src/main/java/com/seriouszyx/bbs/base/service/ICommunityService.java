@@ -37,4 +37,10 @@ public interface ICommunityService {
      */
     void addCommunityAnswerComment(Long communityId, Long communityAnswerId, String content);
 
+    /**
+     * 添加问题
+     * @param community
+     * @return 添加后的新问题
+     */
+    void saveCommunity(Community community);
 }
