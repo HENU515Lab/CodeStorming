@@ -94,11 +94,50 @@
 
                             <div class="col-xs-offset-1 col-xs-11">
                                 <div class="comment_field">
-
-                                    <button class="add_a_comment btn btn-link" title="询问更详细的信息或提供建议，请不要在这里回答问题"
-                                            data-toggle="modal" data-target="#login-modal">
-                                        发表评论
-                                    </button>
+                                    <#list community.communityCommentList as comment>
+                                        <div id="cs_${comment.id}" class="subcomment">
+                                                <span class="nice_font">
+                                                    ${comment.content}&nbsp;–&nbsp;
+                                                </span>
+                                            <a href="/userspace.do?id=${comment.user.id}">
+                                                    <span class="nice_font" style="font-size: 16px;">
+                                                        ${comment.user.username}
+                                                    </span>
+                                            </a>
+                                            &nbsp;
+                                            <span class="datetime"
+                                                  title="${comment.createTime?string('yyyy-MM-dd hh:mm:ss')}">
+                                                    ${comment.createTime?string('yyyy-MM-dd hh:mm:ss')}
+                                                </span>
+                                        </div>
+                                        <hr class="comment_hr">
+                                    </#list>
+                                    <#if !logininfo??>
+                                        <button class="add_a_comment btn btn-link" title="询问更详细的信息或提供建议，请不要在这里回答问题"
+                                                data-toggle="modal" data-target="#login-modal">
+                                            发表评论
+                                        </button>
+                                    <#else>
+                                        <button class="add_a_comment btn btn-link" title="询问更详细的信息或提供建议，请不要在这里回答问题"
+                                                id="qc_btn" >
+                                            发表评论
+                                        </button>
+                                        <div id="qc_content" class="row" style="margin-top: 10px; display: none;">
+                                            <div class="col-md-1 col-sm-2 col-xs-3" style="padding-right:5px;">
+                                                <a href="/userspace.do?id=${user.id}">
+                                                    <img width="50px" src="${user.avatar}">
+                                                </a>
+                                            </div>
+                                            <div class="col-md-11 col-sm-10 col-xs-9" style="padding-left:5px;">
+                                                <form id="question_comment_add_form" action="/community/question/comment/add/698/0/" class="form" method="post">
+                                                    <textarea class="form-control" name="content" rows="2" maxlength="1000" required="" title="回复"></textarea>
+                                                    <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-7 col-xs-5">
+                                                        <button class="form-control btn btn-link" style="border-radius: 5px">提交评论</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </#if>
 
                                 </div>
                             </div>
@@ -179,11 +218,52 @@
 
                                 <div class="col-xs-offset-1 col-xs-11">
                                     <div class="comment_field">
+                                        <hr class="comment_hr">
+                                        <#list answer.communityAnswerCommentList as answerComment>
+                                            <div id="ac_${answer.id}_${answerComment.id}" class="subcomment">
+                                                <span class="nice_font">
+                                                    ${answerComment.content}&nbsp;–&nbsp;
+                                                </span>
+                                                <a href="/userspace.do?id=${answerComment.user.id}">
+                                                    <span class="nice_font" style="font-size: 16px;">
+                                                        ${answerComment.user.username}
+                                                    </span>
+                                                </a>
+                                                &nbsp;
+                                                <span class="datetime"
+                                                      title="${answerComment.createTime?string('yyyy-MM-dd hh:mm:ss')}">
+                                                    ${answerComment.createTime?string('yyyy-MM-dd hh:mm:ss')}
+                                                </span>
+                                            </div>
+                                            <hr class="comment_hr">
+                                        </#list>
 
-                                        <button class="add_a_comment btn btn-link" title="询问更详细的信息或提供建议，请不要在这里回答问题"
-                                                data-toggle="modal" data-target="#login-modal">
-                                            发表评论
-                                        </button>
+                                        <#if !logininfo??>
+                                            <button class="add_a_comment btn btn-link"
+                                                    data-toggle="modal" data-target="#login-modal">
+                                                发表评论
+                                            </button>
+                                        <#else>
+                                            <button class="add_a_comment btn btn-link"
+                                                    id="cs_${answer.id}_btn">
+                                                发表评论
+                                            </button>
+                                            <div id="cs_${answer.id}_content" class="row" style="margin-top: 10px; display: none;">
+                                                <div class="col-md-1 col-sm-2 col-xs-3" style="padding-right:5px;">
+                                                    <a href="/userspace.do?id=${user.id}">
+                                                        <img width="50px" src="${user.avatar}">
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-11 col-sm-10 col-xs-9" style="padding-left:5px;">
+                                                    <form action="/community/answer/comment/add/698/690/0/" class="form" method="post">
+                                                        <textarea class="form-control" name="content" rows="2" maxlength="1000" required="" title="回复"></textarea>
+                                                        <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3 col-xs-offset-7 col-xs-5">
+                                                            <button class="form-control btn btn-link" style="border-radius: 5px">提交评论</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </#if>
 
                                     </div>
                                 </div>
@@ -273,6 +353,20 @@
             sequenceDiagram : true,  // 默认不解析
         });
     </#list>
+</script>
+<script>
+    $(document).ready(function () {
+
+        $('#qc_btn').click(function () {
+            $('#qc_content').toggle(500);
+        });
+
+        <#list community.answers as answer>
+            $('#cs_${answer.id}_btn').click(function () {
+                $('#cs_${answer.id}_content').toggle(500);
+            });
+        </#list>
+    });
 </script>
 </body>
 </html>

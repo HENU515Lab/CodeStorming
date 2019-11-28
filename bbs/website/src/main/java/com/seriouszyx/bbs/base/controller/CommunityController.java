@@ -33,7 +33,7 @@ public class CommunityController {
     @RequestMapping("communityContent")
     public String communityContent(Long id, Model model) {
         Community community = communityService.listById(id);
-        community.setContent(community.getContent().trim());
+        System.out.println(community);
         model.addAttribute("community", community);
         return "community/content";
     }
