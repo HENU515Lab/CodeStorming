@@ -51,4 +51,31 @@ public interface ICommunityService {
      */
     void saveAnswer(CommunityAnswer communityAnswer);
 
+    /**
+     * 指定的问题浏览量+1
+     * @param id
+     */
+    void plusCommunityReadSize(Long id);
+
+    /**
+     * 为指定问题点赞
+     * @param communityId
+     * @return
+     */
+    Integer addCommunityVote(Long communityId);
+
+    /**
+     * 为置顶问题取消点赞
+     * @param communityId
+     * @return
+     */
+    Integer removeCommunityVote(Long communityId);
+
+    /**
+     * 根据问题id和用户id查询投票记录
+     * @param communityId
+     * @return
+     */
+    Integer selectCommunityVoteRecord(Long communityId);
+
 }

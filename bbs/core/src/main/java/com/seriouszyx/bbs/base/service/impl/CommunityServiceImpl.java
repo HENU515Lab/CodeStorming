@@ -1,13 +1,7 @@
 package com.seriouszyx.bbs.base.service.impl;
 
-import com.seriouszyx.bbs.base.domain.Community;
-import com.seriouszyx.bbs.base.domain.CommunityAnswer;
-import com.seriouszyx.bbs.base.domain.CommunityComment;
-import com.seriouszyx.bbs.base.domain.User;
-import com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper;
-import com.seriouszyx.bbs.base.mapper.CommunityCommentMapper;
-import com.seriouszyx.bbs.base.mapper.CommunityMapper;
-import com.seriouszyx.bbs.base.mapper.UserMapper;
+import com.seriouszyx.bbs.base.domain.*;
+import com.seriouszyx.bbs.base.mapper.*;
 import com.seriouszyx.bbs.base.service.ICommunityService;
 import com.seriouszyx.bbs.base.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +24,9 @@ public class CommunityServiceImpl implements ICommunityService {
 
     @Autowired
     private CommunityAnswerMapper communityAnswerMapper;
+
+    @Autowired
+    private CommunityVoteRecordMapper communityVoteRecordMapper;
 
     @Override
     public List<Community> listAll() {
@@ -93,6 +90,73 @@ public class CommunityServiceImpl implements ICommunityService {
         } else {
             communityAnswerMapper.updateByPrimaryKey(communityAnswer);
         }
+    }
+
+    @Override
+    public void plusCommunityReadSize(Long id) {
+        communityMapper.plusReadSizeByPrimaryKey(id);
+    }
+
+    @Override
+    public Integer addCommunityVote(Long communityId) {
+        CommunityVoteRecord record = new CommunityVoteRecord();
+
+        Integer offset = selectCommunityVoteRecord(communityId);
+        if (offset == 0) {
+            // 没有记录
+            record.setUid(UserContext.getCurrent().getId());
+            record.setCid(communityId);
+            record.setOffset(1);
+            communityVoteRecordMapper.insert(record);
+            communityMapper.updateVoteSizeByPrimaryKey(communityId, 1);
+        } else if (offset == -1) {
+            // 记录为vote down
+            communityVoteRecordMapper.updateVoteSizeByUserIdAndCommunityId(
+                    UserContext.getCurrent().getId(),
+                    communityId,
+                    1
+            );
+            communityMapper.updateVoteSizeByPrimaryKey(communityId, 2);
+        }
+        return communityMapper.selectVoteSizeByPrimaryKey(communityId);
+    }
+
+    @Override
+    public Integer removeCommunityVote(Long communityId) {
+        CommunityVoteRecord record = new CommunityVoteRecord();
+
+        Integer offset = selectCommunityVoteRecord(communityId);
+        if (offset == 0) {
+            // 没有记录
+            record.setUid(UserContext.getCurrent().getId());
+            record.setCid(communityId);
+            record.setOffset(-1);
+            communityVoteRecordMapper.insert(record);
+            communityMapper.updateVoteSizeByPrimaryKey(communityId, -1);
+        } else if (offset == 1) {
+            // 记录为vote up
+            communityVoteRecordMapper.updateVoteSizeByUserIdAndCommunityId(
+                    UserContext.getCurrent().getId(),
+                    communityId,
+                    -1
+            );
+            communityMapper.updateVoteSizeByPrimaryKey(communityId, -2);
+        }
+        return communityMapper.selectVoteSizeByPrimaryKey(communityId);
+    }
+
+    @Override
+    public Integer selectCommunityVoteRecord(Long communityId) {
+        if (UserContext.getCurrent() == null)
+            return 0;
+        Integer offset = communityVoteRecordMapper
+                .selectOffestByUserIdAndCommunityId(
+                        UserContext.getCurrent().getId(),
+                        communityId
+                );
+        if (offset == null)
+            return 0;
+        return offset;
     }
 
 }

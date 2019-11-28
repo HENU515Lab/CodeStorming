@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CommunityController {
@@ -28,7 +31,10 @@ public class CommunityController {
 
     @RequestMapping("communityContent")
     public String communityContent(Long id, Model model) {
+        communityService.plusCommunityReadSize(id);
         Community community = communityService.listById(id);
+        int voteOffset = communityService.selectCommunityVoteRecord(id);
+        model.addAttribute("voteOffset", voteOffset);
         model.addAttribute("community", community);
         return "community/content";
     }
@@ -84,6 +90,36 @@ public class CommunityController {
     public String submitAnswer(CommunityAnswer communityAnswer) {
         communityService.saveAnswer(communityAnswer);
         return "redirect:communityContent.do?id=" + communityAnswer.getCommunityId();
+    }
+
+    @RequireLogin
+    @RequestMapping("communityVoteUp")
+    @ResponseBody
+    public Map<String, Object> communityVoteUp(Long communityId,
+                                               Long communityAnswerId) {
+        Map<String, Object> result = new HashMap<>();
+        if (communityAnswerId == null) {
+            result.put("votecnt", communityService.addCommunityVote(communityId));
+        } else {
+//            communityService.addCommunityAnswerVote(communityId, communityAnswerId);
+        }
+        result.put("error_message", "add_success");
+        return result;
+    }
+
+    @RequireLogin
+    @RequestMapping("communityVoteDown")
+    @ResponseBody
+    public Map<String, Object> communityVoteDown(Long communityId,
+                                                 Long communityAnswerId) {
+        Map<String, Object> result = new HashMap<>();
+        if (communityAnswerId == null) {
+            result.put("votecnt", communityService.removeCommunityVote(communityId));
+        } else {
+//            communityService.addCommunityAnswerVote(communityId, communityAnswerId);
+        }
+        result.put("error_message", "remove_success");
+        return result;
     }
 
     private boolean isNullOrEmpty(String s) {

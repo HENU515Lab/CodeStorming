@@ -110,7 +110,7 @@ public class BlogServiceImpl implements IBlogService {
             blogVoteRecordMapper.insert(record);
             blogMapper.updateVoteSizeByPrimaryKey(blogId, -1);
         } else if (offset == 1) {
-            // 记录为vote down
+            // 记录为vote up
             blogVoteRecordMapper.updateVoteSizeByUserIdAndBlogId(
                     UserContext.getCurrent().getId(),
                     blogId,

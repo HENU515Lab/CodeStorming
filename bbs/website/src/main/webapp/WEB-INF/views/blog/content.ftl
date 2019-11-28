@@ -60,7 +60,7 @@
                                         <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-star vote"></span></a>
                                         <br>
                                     <#else >
-                                        <a id="vote_up_btn" <#if voteOffset != 1> onclick="$('#form_voteup').submit();"</#if>
+                                        <a id="vote_up_btn" onclick="$('#form_voteup').submit();"
                                            style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-triangle-top vote form_voteup
                                                 <#if voteOffset == 1> vote_active</#if>"></span>
@@ -68,7 +68,7 @@
                                         <br>
                                         <span class="votecnt">${blog.voteSize}</span>
                                         <br>
-                                        <a id="vote_down_btn" <#if voteOffset != -1> onclick="$('#form_votedown').submit();"</#if>
+                                        <a id="vote_down_btn" onclick="$('#form_votedown').submit();"
                                            style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-triangle-bottom vote form_votedown
                                                 <#if voteOffset == -1> vote_active</#if>"></span>

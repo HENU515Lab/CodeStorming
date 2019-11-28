@@ -28,21 +28,45 @@
                         <hr>
                         <div class="row">
                             <div class="col-xs-1 vote_cut" align="center">
-
-                                <a href='#' data-toggle="modal" data-target="#login-modal"><span
-                                            class="glyphicon glyphicon-triangle-top vote "></span></a>
-                                <br>
-                                <span class="votecnt">${community.voteSize}</span>
-                                <br>
-                                <a href='#' data-toggle="modal" data-target="#login-modal">
-                                    <span class="glyphicon glyphicon-triangle-bottom vote "></span>
-                                </a>
-                                <br>
-                                <a href='#' data-toggle="modal" data-target="#login-modal"><span
-                                            class="glyphicon glyphicon-star vote"></span></a>
-                                <br>
-                                <span class="favoritecnt"></span>
-
+                                <#if !logininfo??>
+                                    <a href='#' data-toggle="modal" data-target="#login-modal"><span
+                                                class="glyphicon glyphicon-triangle-top vote "></span></a>
+                                    <br>
+                                    <span class="votecnt">${community.voteSize}</span>
+                                    <br>
+                                    <a href='#' data-toggle="modal" data-target="#login-modal">
+                                        <span class="glyphicon glyphicon-triangle-bottom vote "></span>
+                                    </a>
+                                    <br>
+                                    <a href='#' data-toggle="modal" data-target="#login-modal"><span
+                                                class="glyphicon glyphicon-star vote"></span></a>
+                                    <br>
+                                    <span class="favoritecnt"></span>
+                                <#else>
+                                    <a id="vote_up_btn" onclick="$('#form_voteup').submit();"
+                                       style="cursor: pointer;">
+                                        <span class="glyphicon glyphicon-triangle-top vote form_voteup
+                                            <#if voteOffset == 1> vote_active</#if>"></span></a>
+                                    <br>
+                                    <span class="votecnt">${community.voteSize}</span>
+                                    <br>
+                                    <a id="vote_down_btn" onclick="$('#form_votedown').submit();"
+                                       style="cursor: pointer;">
+                                        <span class="glyphicon glyphicon-triangle-bottom vote form_votedown
+                                            <#if voteOffset == -1> vote_active</#if>"></span>
+                                    </a>
+                                    <br>
+                                    <a href='#' ><span
+                                                class="glyphicon glyphicon-star vote"></span></a>
+                                    <br>
+                                    <span class="favoritecnt"></span>
+                                </#if>
+                                <form id="form_voteup" class="form_vote" action="/communityVoteUp.do" method="post">
+                                    <input type="hidden" name="communityId" value="${community.id}">
+                                </form>
+                                <form id="form_votedown" class="form_vote" action="/communityVoteDown.do" method="post">
+                                    <input type="hidden" name="communityId" value="${community.id}">
+                                </form>
                             </div>
                             <div class="col-xs-11 vote_cut">
                                 <div class="main-martor main-martor-content" data-field-name="content">

@@ -87,6 +87,16 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <update id="plusReadSizeByPrimaryKey">
+        update `community`
+        set read_size = read_size + 1
+        where id = #{id}
+    </update>
+    <update id="updateVoteSizeByPrimaryKey">
+        update `community`
+        set vote_size = vote_size + #{offset}
+        where id = #{communityId}
+    </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapWithAnswers" parameterType="java.lang.Long">
     select c.id as cid, c.title, c.vote_size as cvs, c.answer_size,
     c.read_size, c.content as cc,
@@ -104,4 +114,9 @@
     on u.id = c.asker_id
     order by c.create_time desc
   </select>
+    <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
+        select vote_size
+        from `community`
+        where id = #{communityId}
+    </select>
 </mapper>

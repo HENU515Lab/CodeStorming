@@ -6,6 +6,7 @@ $(function () {
         // let postData = $form.children('input').attr('value')
         let postData = $form.serializeArray();
         let $id = $(this).attr('id');
+        console.log(123)
         $.ajax({
             url: hrefUrl,
             type: "POST",

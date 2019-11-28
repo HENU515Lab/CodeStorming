@@ -18,21 +18,21 @@
                 <h1 class="text-center">515技术问答</h1>
 
                 <br>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                        <form id="form_search" action="/community/search/1/" method="get">
-                            <input type='hidden' name='csrfmiddlewaretoken' value='jWQe9e7FjQTx2r3LppHfoFveM6GKKgyZLkWFiVLkKP4LQX71CY0AUm6j0soMgEX7'>
-                            <div class="input-group">
-                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、关键字、搜索标题、问题内容" style="border-radius: 5px;" maxlength="200">
-                                <span class="input-group-btn">
-                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">
-                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>
-                                </button>
-                              </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<#--                <div class="row">-->
+<#--                    <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">-->
+<#--                        <form id="form_search" action="/community/search/1/" method="get">-->
+<#--                            <input type='hidden' name='csrfmiddlewaretoken' value='jWQe9e7FjQTx2r3LppHfoFveM6GKKgyZLkWFiVLkKP4LQX71CY0AUm6j0soMgEX7'>-->
+<#--                            <div class="input-group">-->
+<#--                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、关键字、搜索标题、问题内容" style="border-radius: 5px;" maxlength="200">-->
+<#--                                <span class="input-group-btn">-->
+<#--                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">-->
+<#--                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>-->
+<#--                                </button>-->
+<#--                              </span>-->
+<#--                            </div>-->
+<#--                        </form>-->
+<#--                    </div>-->
+<#--                </div>-->
 
                 <div class="text-right">
                     <#if !logininfo??>
