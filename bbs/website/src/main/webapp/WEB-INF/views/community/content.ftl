@@ -49,7 +49,9 @@
                                 <div class="main-martor main-martor-content" data-field-name="content">
                                     <div class="section-martor">
                                         <div class="ui bottom attached tab active martor-preview">
-                                            <p>${community.content}</p>
+                                            <div id="community-question" class="blog-content">
+                                                <textarea style="display:none;" name="test-editormd-markdown-doc">${community.content}</textarea>
+                                            </div>
                                             <span class="label label-default community_question_keywords"></span>
                                             <br><br>
                                             <div align="right">
@@ -129,7 +131,9 @@
                                         <div class="section-martor">
                                             <div class="ui bottom attached tab active martor-preview"
                                                  data-tab="preview-tab-content">
-                                                ${answer.content}
+                                                <div id="community-answer-${answer.id}" class="blog-content">
+                                                    <textarea style="display:none;" name="test-editormd-markdown-doc">${answer.content}</textarea>
+                                                </div>
                                                 <div align="right">
 
                                                     <div class="information_card" align="left">
@@ -139,7 +143,7 @@
                                                         </span>
                                                         <div class="row">
                                                             <div class="col-xs-4" style="padding-right:0;">
-                                                                <a href="javascript:;">
+                                                                <a href="/userspace.do?id=${answer.answerUser.id}">
                                                                     <img class="img photo"
                                                                          src="${answer.answerUser.avatar}"
                                                                          width="40px" height="40px">
@@ -147,7 +151,7 @@
                                                             </div>
                                                             <div class="col-xs-8" style="padding-left:0;">
                                                                 <div style="height: 13px; line-height: 1;">
-                                                                    <a href="javascript:;">
+                                                                    <a href="/userspace.do?id=${answer.answerUser.id}">
                                                                         <span class="nice_font"
                                                                               title="${answer.answerUser.username}"
                                                                               style="font-size: 16px;">
@@ -250,7 +254,7 @@
 <script src="static/editor.md/lib/jquery.flowchart.min.js"></script>
 <script src="static/editor.md/editormd.min.js"></script>
 <script type="text/javascript">
-    testEditormdView2 = editormd.markdownToHTML("test-editormd-view", {
+    communityQuestion = editormd.markdownToHTML("community-question", {
         htmlDecode      : "style,script,iframe",  // you can filter tags decode
         emoji           : true,
         taskList        : true,
@@ -258,6 +262,17 @@
         flowChart       : true,  // 默认不解析
         sequenceDiagram : true,  // 默认不解析
     });
+    <#list community.answers as answer>
+        communityAnswer${answer.id} =
+            editormd.markdownToHTML("community-answer-${answer.id}", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true,  // 默认不解析
+        });
+    </#list>
 </script>
 </body>
 </html>
