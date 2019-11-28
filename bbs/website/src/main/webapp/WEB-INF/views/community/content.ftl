@@ -174,17 +174,49 @@
                             <div class="row answer_field" id="answer_666">
                                 <div class="col-xs-1 vote_cut" align="center">
 
-                                    <a href='#' data-toggle="modal" data-target="#login-modal">
-                                        <span class="glyphicon glyphicon-triangle-top vote "></span>
-                                    </a>
-                                    <br>
-                                    <span class="votecnt">${answer.voteSize}</span>
-                                    <br>
-                                    <a href='#' data-toggle="modal" data-target="#login-modal">
-                                        <span class="glyphicon glyphicon-triangle-bottom vote "></span>
-                                    </a>
-                                    <br>
-                                    <span class="votecnt glyphicon glyphicon-ok " style="color: #5fba7d;"></span>
+                                    <#if !logininfo??>
+                                        <a href='#' data-toggle="modal" data-target="#login-modal"><span
+                                                    class="glyphicon glyphicon-triangle-top vote "></span></a>
+                                        <br>
+                                        <span class="answer_votecnt">${answer.voteSize}</span>
+                                        <br>
+                                        <a href='#' data-toggle="modal" data-target="#login-modal">
+                                            <span class="glyphicon glyphicon-triangle-bottom vote "></span>
+                                        </a>
+                                        <br>
+                                        <a href='#' data-toggle="modal" data-target="#login-modal"><span
+                                                    class="glyphicon glyphicon-star vote"></span></a>
+                                        <br>
+                                        <span class="favoritecnt"></span>
+                                    <#else>
+                                        <a id="answer_vote_up_btn" onclick="$('#answer_form_voteup_${answer.id}').submit();"
+                                           style="cursor: pointer;">
+                                        <span class="glyphicon glyphicon-triangle-top vote answer_form_voteup_${answer.id}
+                                            <#if answer.voteOffset == 1> vote_active</#if>"></span></a>
+                                        <br>
+                                        <span class="answer_votecnt answer_votecnt_${answer.id}">${answer.voteSize}</span>
+                                        <br>
+                                        <a id="answer_vote_down_btn" onclick="$('#anser_form_votedown_${answer.id}').submit();"
+                                           style="cursor: pointer;">
+                                        <span class="glyphicon glyphicon-triangle-bottom vote answer_form_votedown_${answer.id}
+                                            <#if answer.voteOffset == -1> vote_active</#if>"></span>
+                                        </a>
+                                        <br>
+                                        <a href='#' ><span
+                                                    class="glyphicon glyphicon-star vote"></span></a>
+                                        <br>
+                                        <span class="favoritecnt"></span>
+                                        <form id="answer_form_voteup_${answer.id}" class="form_vote"
+                                              action="/communityVoteUp.do" method="post">
+                                            <input type="hidden" name="communityId" value="${community.id}">
+                                            <input type="hidden" name="communityAnswerId" value="${answer.id}">
+                                        </form>
+                                        <form id="anser_form_votedown_${answer.id}" class="form_vote"
+                                              action="/communityVoteDown.do" method="post">
+                                            <input type="hidden" name="communityId" value="${community.id}">
+                                            <input type="hidden" name="communityAnswerId" value="${answer.id}">
+                                        </form>
+                                    </#if>
 
                                 </div>
                                 <div class="col-xs-11 vote_cut">

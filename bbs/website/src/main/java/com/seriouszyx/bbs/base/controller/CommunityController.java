@@ -100,10 +100,13 @@ public class CommunityController {
         Map<String, Object> result = new HashMap<>();
         if (communityAnswerId == null) {
             result.put("votecnt", communityService.addCommunityVote(communityId));
+            result.put("error_message", "add_success");
         } else {
-//            communityService.addCommunityAnswerVote(communityId, communityAnswerId);
+            result.put("votecnt",
+                    communityService.addCommunityAnswerVote(communityId, communityAnswerId));
+            result.put("communityAnswerId", communityAnswerId);
+            result.put("error_message", "answer_add_success");
         }
-        result.put("error_message", "add_success");
         return result;
     }
 
@@ -115,10 +118,14 @@ public class CommunityController {
         Map<String, Object> result = new HashMap<>();
         if (communityAnswerId == null) {
             result.put("votecnt", communityService.removeCommunityVote(communityId));
+            result.put("error_message", "remove_success");
         } else {
-//            communityService.addCommunityAnswerVote(communityId, communityAnswerId);
+            result.put("votecnt",
+                    communityService.removeCommunityAnswerVote(communityId, communityAnswerId));
+            result.put("communityAnswerId", communityAnswerId);
+            result.put("error_message", "answer_remove_success");
         }
-        result.put("error_message", "remove_success");
+
         return result;
     }
 

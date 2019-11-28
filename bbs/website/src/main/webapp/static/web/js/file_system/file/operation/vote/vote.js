@@ -27,6 +27,14 @@ $(function () {
                     $span.addClass('vote_active');
                     $span_votecnt.text(resp.votecnt);
                     $('#vote_down_btn').removeAttr(onclick)
+                } else if (resp.error_message === 'answer_add_success') {
+                    $('span.answer_form_votedown_' + resp.communityAnswerId).removeClass('vote_active');
+                    $('span.answer_form_voteup_' + resp.communityAnswerId).addClass('vote_active');
+                    $('span.answer_votecnt_' + resp.communityAnswerId).text(resp.votecnt);
+                } else if (resp.error_message === 'answer_remove_success') {
+                    $('span.answer_form_voteup_' + resp.communityAnswerId).removeClass('vote_active');
+                    $('span.answer_form_votedown_' + resp.communityAnswerId).addClass('vote_active');
+                    $('span.answer_votecnt_' + resp.communityAnswerId).text(resp.votecnt);
                 }
                 if ($id.indexOf('answer') > -1) {
                     let $span_ok = $('span.' + $id + '_ok');

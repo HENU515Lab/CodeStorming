@@ -23,4 +23,15 @@ public interface CommunityVoteRecordMapper {
                                               @Param("communityId") Long communityId,
                                               @Param("offset") int offset);
 
+    Integer selectOffsetByUserIdAndCommunityIdAndCommunityAnswerId(
+            @Param("userId") Long userId,
+            @Param("communityId") Long communityId,
+            @Param("answerId") Long answerId);
+
+    void updateVoteSizeByUserIdAndCommunityIdAndCommunityAnswerId(
+            @Param("userId") Long userId,
+            @Param("communityId") Long communityId,
+            @Param("communityAnswerId") Long communityAnswerId,
+            @Param("offset") int offset);
+
 }

@@ -6,6 +6,7 @@ import com.seriouszyx.bbs.base.service.ICommunityService;
 import com.seriouszyx.bbs.base.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,25 @@ public class CommunityServiceImpl implements ICommunityService {
 
     @Override
     public Community listById(Long id) {
-        return communityMapper.selectByPrimaryKey(id);
+        Community community = communityMapper.selectByPrimaryKey(id);
+        User currentUser = UserContext.getCurrentUser();
+        if (currentUser != null) {
+            List<CommunityAnswer> answers = community.getAnswers();
+            for (int i = 0; i < answers.size(); i++) {
+                CommunityAnswer ca = answers.get(i);
+                Integer offset = communityVoteRecordMapper
+                        .selectOffsetByUserIdAndCommunityIdAndCommunityAnswerId(
+                                currentUser.getId(),
+                                id,
+                                ca.getId()
+                        );
+                if (offset == null)
+                    offset = 0;
+                ca.setVoteOffset(offset);
+                answers.set(i, ca);
+            }
+        }
+        return community;
     }
 
     @Override
@@ -153,6 +172,82 @@ public class CommunityServiceImpl implements ICommunityService {
                 .selectOffestByUserIdAndCommunityId(
                         UserContext.getCurrent().getId(),
                         communityId
+                );
+        if (offset == null)
+            return 0;
+        return offset;
+    }
+
+    @Override
+    @Transactional
+    public Integer addCommunityAnswerVote(Long communityId, Long communityAnswerId) {
+        CommunityVoteRecord record = new CommunityVoteRecord();
+
+        Integer offset =
+                selectCommunityAnswerVoteRecord(communityId, communityAnswerId);
+        if (offset == 0) {
+            // 没有记录
+            record.setUid(UserContext.getCurrent().getId());
+            record.setCid(communityId);
+            record.setCaid(communityAnswerId);
+            record.setOffset(1);
+            communityVoteRecordMapper.insert(record);
+            communityAnswerMapper
+                    .updateVoteSizeByPrimaryKey(communityId, communityAnswerId, 1);
+        } else if (offset == -1) {
+            // 记录为vote down
+            communityVoteRecordMapper
+                    .updateVoteSizeByUserIdAndCommunityIdAndCommunityAnswerId(
+                    UserContext.getCurrent().getId(),
+                    communityId,
+                    communityAnswerId,
+                    1
+            );
+            communityAnswerMapper
+                    .updateVoteSizeByPrimaryKey(communityId, communityAnswerId, 2);
+        }
+        return communityAnswerMapper.selectVoteSizeByPrimaryKey(communityAnswerId);
+    }
+
+    @Override
+    public Integer removeCommunityAnswerVote(Long communityId, Long communityAnswerId) {
+        CommunityVoteRecord record = new CommunityVoteRecord();
+
+        Integer offset =
+                selectCommunityAnswerVoteRecord(communityId, communityAnswerId);
+        if (offset == 0) {
+            // 没有记录
+            record.setUid(UserContext.getCurrent().getId());
+            record.setCid(communityId);
+            record.setCaid(communityAnswerId);
+            record.setOffset(-1);
+            communityVoteRecordMapper.insert(record);
+            communityAnswerMapper
+                    .updateVoteSizeByPrimaryKey(communityId, communityAnswerId, -1);
+        } else if (offset == 1) {
+            // 记录为vote up
+            communityVoteRecordMapper
+                    .updateVoteSizeByUserIdAndCommunityIdAndCommunityAnswerId(
+                            UserContext.getCurrent().getId(),
+                            communityId,
+                            communityAnswerId,
+                            -1
+                    );
+            communityAnswerMapper
+                    .updateVoteSizeByPrimaryKey(communityId, communityAnswerId, -2);
+        }
+        return communityAnswerMapper.selectVoteSizeByPrimaryKey(communityAnswerId);
+    }
+
+    @Override
+    public Integer selectCommunityAnswerVoteRecord(Long communityId, Long communityAnswerId) {
+        if (UserContext.getCurrent() == null)
+            return 0;
+        Integer offset = communityVoteRecordMapper
+                .selectOffsetByUserIdAndCommunityIdAndCommunityAnswerId(
+                        UserContext.getCurrent().getId(),
+                        communityId,
+                        communityAnswerId
                 );
         if (offset == null)
             return 0;

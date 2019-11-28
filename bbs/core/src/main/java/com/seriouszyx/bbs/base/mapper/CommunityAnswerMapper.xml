@@ -32,7 +32,12 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <update id="updateVoteSizeByPrimaryKey">
+      update `community_answer`
+      set vote_size = vote_size + #{offset}
+      where id = #{communityAnswerId} and community_id = #{communityId}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, answer_user_id, community_id, create_time, vote_size, content
     from `community_answer`
     where id = #{id,jdbcType=BIGINT}
@@ -46,5 +51,10 @@
     from `community_answer`
     where community_id = #{id}
     order by create_time
+  </select>
+  <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
+    select vote_size
+    from `community_answer`
+    where id = #{communityAnswerId}
   </select>
 </mapper>

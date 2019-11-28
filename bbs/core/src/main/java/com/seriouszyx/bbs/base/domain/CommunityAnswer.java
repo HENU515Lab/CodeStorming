@@ -22,4 +22,6 @@ public class CommunityAnswer {
 
     private List<CommunityComment> communityAnswerCommentList;
 
+    private Integer voteOffset;
+
 }

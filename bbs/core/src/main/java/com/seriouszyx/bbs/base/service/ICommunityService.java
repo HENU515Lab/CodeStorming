@@ -78,4 +78,26 @@ public interface ICommunityService {
      */
     Integer selectCommunityVoteRecord(Long communityId);
 
+    /**
+     * 为指定问题的指定回答点赞
+     * @param communityId
+     * @param communityAnswerId
+     * @return
+     */
+    Integer addCommunityAnswerVote(Long communityId, Long communityAnswerId);
+
+    /**
+     * 为指定问题的指定回答取消点赞
+     * @param communityId
+     * @param communityAnswerId
+     * @return
+     */
+    Integer removeCommunityAnswerVote(Long communityId, Long communityAnswerId);
+
+    /**
+     * 根据问题id和用户id和问题回答id查询投票记录
+     * @param communityId
+     * @return
+     */
+    Integer selectCommunityAnswerVoteRecord(Long communityId, Long communityAnswerId);
 }
