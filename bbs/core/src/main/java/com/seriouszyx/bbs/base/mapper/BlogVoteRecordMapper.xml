@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.BlogVoteRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.BlogVoteRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bid" property="bid" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="offset" property="offset" jdbcType="TINYINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `blog_vote_record`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.BlogVoteRecord" useGeneratedKeys="true" keyProperty="id" >
+    insert into `blog_vote_record` (bid, uid, offset
+      )
+    values (#{bid,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{offset,jdbcType=TINYINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.BlogVoteRecord" >
+    update `blog_vote_record`
+    set bid = #{bid,jdbcType=BIGINT},
+      uid = #{uid,jdbcType=BIGINT},
+      offset = #{offset,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateVoteSizeByUserIdAndBlogId">
+    update `blog_vote_record`
+    set offset = #{offset}
+    where uid = #{userId} and bid = #{blogId}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, bid, uid, offset
+    from `blog_vote_record`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, bid, uid, offset
+    from `blog_vote_record`
+  </select>
+  <select id="selectOffestByUserIdAndBlogId" resultType="java.lang.Integer">
+    SELECT IFNULL(offset, 0)
+    FROM `blog_vote_record`
+    where uid = #{userId} and bid = #{blogId}
+  </select>
+</mapper>

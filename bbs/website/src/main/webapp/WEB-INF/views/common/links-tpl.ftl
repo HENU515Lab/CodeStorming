@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="static/web/css/signform.css">
 <link rel="stylesheet" href="static/jquery-ui-dist/jquery-ui.min.css">
-
+<link rel="shortcut icon" type="image/png" href="static/web/img/icons/logo.ico">
 
 <!--link rel="stylesheet" href="https://cdn.acwing.com/static/web/css/pace.css"-->
 <!--script src="https://cdn.acwing.com/static/web/js/pace.js"></script-->
@@ -145,6 +145,9 @@
 <link rel="stylesheet" href="static/web/css/activity/content.css">
 <link rel="stylesheet" href="static/web/css/activity/punch_the_clock.css">
 
+<link rel="stylesheet" href="static/web/css/community/content.css">
+<link rel="stylesheet" href="static/web/css/community/index.css">
+
 
 <link href="static/web/third_party/videojs/video.js/dist/video-js.min.css" rel="stylesheet">
 <link href="static/web/third_party/videojs/videojs-watermark/dist/videojs-watermark.css" rel="stylesheet">
@@ -157,3 +160,4 @@
 
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput.min.css" />
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput-rtl.min.css" />
+

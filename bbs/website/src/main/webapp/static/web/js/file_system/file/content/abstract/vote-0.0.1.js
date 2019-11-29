@@ -4,7 +4,7 @@ let GLOBAL_FILE_VOTE_UP_FUNCTION = function (e) {
     let hrefUrl = $form.attr('action');
     let postData = $form.serializeArray();
     let $id = $(this).attr('id');
-
+    alert(123)
     $.ajax({
         url: hrefUrl,
         type: "POST",

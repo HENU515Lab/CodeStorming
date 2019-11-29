@@ -29,6 +29,7 @@
 				<li id="blog" class=""><a href="blog.do">分享</a></li>
 				<li id="community" class=""><a href="community.do">问答</a></li>
 				<li id="activity" class=""><a href="activity.do">活动</a></li>
+				<li id="application" class=""><a href="application.do">应用</a></li>
 <#--				<li class=""><a href="http_wss/danmu/world/Index.html">吐槽</a></li>-->
 			</ul>
 

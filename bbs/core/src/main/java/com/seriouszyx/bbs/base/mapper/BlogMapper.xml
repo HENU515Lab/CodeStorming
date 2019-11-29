@@ -54,7 +54,12 @@
       blog_type = #{blogType}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
+    <update id="updateVoteSizeByPrimaryKey">
+      update `blog`
+      set vote_size = vote_size + #{offset}
+      where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
      select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
     b.weight, b.blog_type, u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
     from `user` u inner join `blog` b
@@ -75,5 +80,10 @@
     on u.id = b.author_id
     where b.author_id = #{authorId}
     order by b.weight desc, b.create_time desc
+  </select>
+  <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
+    select vote_size
+    from `blog`
+    where id = #{id}
   </select>
 </mapper>

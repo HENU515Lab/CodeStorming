@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.CommunityMapper">
+    <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.Community">
+        <id column="cid" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="vote_size" property="voteSize" jdbcType="INTEGER"/>
+        <result column="answer_size" property="answerSize" jdbcType="INTEGER"/>
+        <result column="read_size" property="readSize" jdbcType="INTEGER"/>
+        <!--    <result column="asker_id" property="askerId" jdbcType="BIGINT" />-->
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="labels" property="labels" jdbcType="VARCHAR"/>
+        <result column="solve" property="solve" jdbcType="TINYINT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <association property="asker" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapWithAnswers" type="com.seriouszyx.bbs.base.domain.Community">
+        <id column="cid" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="cvs" property="voteSize" jdbcType="INTEGER"/>
+        <result column="answer_size" property="answerSize" jdbcType="INTEGER"/>
+        <result column="read_size" property="readSize" jdbcType="INTEGER"/>
+        <!--    <result column="asker_id" property="askerId" jdbcType="BIGINT" />-->
+        <result column="cct" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="labels" property="labels" jdbcType="VARCHAR"/>
+        <result column="solve" property="solve" jdbcType="TINYINT"/>
+        <result column="cc" property="content" jdbcType="LONGVARCHAR"/>
+        <association property="asker" resultMap="com.seriouszyx.bbs.base.mapper.UserMapper.BaseResultMap"/>
+        <collection property="answers" column="cid"
+                    select="com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper.selectByCommunityId"/>
+        <collection property="communityCommentList" column="cid"
+                    select="com.seriouszyx.bbs.base.mapper.CommunityCommentMapper.selectByCommunityIdWithNullCommunityAnswerId"/>
+    </resultMap>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `community`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.Community" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into `community` (title, vote_size, answer_size, 
+      read_size, asker_id, create_time, 
+      labels, solve, content
+      )
+    values (#{title,jdbcType=VARCHAR}, #{voteSize,jdbcType=INTEGER}, #{answerSize,jdbcType=INTEGER}, 
+      #{readSize,jdbcType=INTEGER}, #{asker.id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{labels,jdbcType=VARCHAR}, #{solve,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="addAnswerSizeByPrimaryId">
+        update `community`
+        set answer_size = answer_size + 1
+        where id = #{communityId}
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Community">
+    update `community`
+    <set>
+        <if test="title != null and title != ''">
+            title = #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="vote_size != null">
+            vote_size = #{voteSize,jdbcType=INTEGER},
+        </if>
+        <if test="answer_size != null">
+            answer_size = #{answerSize,jdbcType=INTEGER},
+        </if>
+        <if test="read_size != null">
+            read_size = #{read_size,jdbcType=INTEGER},
+        </if>
+        <if test="asker_id != null">
+            asker_id = #{asker.id,jdbcType=BIGINT},
+        </if>
+        <if test="create_time != null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="labels != null and labels != ''">
+            labels = #{labels,jdbcType=VARCHAR},
+        </if>
+        <if test="solve != null">
+            solve = #{solve,jdbcType=TINYINT},
+        </if>
+        <if test="content != null and content != ''">
+            content = #{content,jdbcType=LONGVARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="plusReadSizeByPrimaryKey">
+        update `community`
+        set read_size = read_size + 1
+        where id = #{id}
+    </update>
+    <update id="updateVoteSizeByPrimaryKey">
+        update `community`
+        set vote_size = vote_size + #{offset}
+        where id = #{communityId}
+    </update>
+    <update id="updateSolveByPrimaryKey">
+        update  `community`
+        set solve = 1
+        where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMapWithAnswers" parameterType="java.lang.Long">
+    select c.id as cid, c.title, c.vote_size as cvs, c.answer_size,
+    c.read_size, c.content as cc,
+    c.asker_id, c.create_time as cct, c.labels, c.solve,
+    u.username, u.id, u.avatar, u.visitors
+    from `user` u inner join `community` c
+    on u.id = c.asker_id
+    where c.id = #{id}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select c.id as cid, c.title, c.vote_size, c.answer_size, c.read_size,
+    c.asker_id, c.create_time, c.labels, c.solve, c.content,
+    u.username, u.id, u.avatar, u.visitors
+    from `user` u inner join `community` c
+    on u.id = c.asker_id
+    order by c.create_time desc
+  </select>
+    <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
+        select vote_size
+        from `community`
+        where id = #{communityId}
+    </select>
+</mapper>

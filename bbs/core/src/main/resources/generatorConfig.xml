@@ -63,7 +63,7 @@
 				value=""/> -->
 		</javaClientGenerator>
 	
-		<table tableName="activity_content_record" delimitIdentifiers="true">
+		<table tableName="community_vote_record" delimitIdentifiers="true">
 			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
 			<property name="constructorBased" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC"/>

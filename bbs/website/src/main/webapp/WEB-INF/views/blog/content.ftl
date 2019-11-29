@@ -60,18 +60,30 @@
                                         <a href='' data-toggle="modal" data-target="#login-modal"><span class="glyphicon glyphicon-star vote"></span></a>
                                         <br>
                                     <#else >
-                                        <a href=''><span class="glyphicon glyphicon-triangle-top vote"></span></a>
+                                        <a id="vote_up_btn" onclick="$('#form_voteup').submit();"
+                                           style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-triangle-top vote form_voteup
+                                                <#if voteOffset == 1> vote_active</#if>"></span>
+                                        </a>
                                         <br>
                                         <span class="votecnt">${blog.voteSize}</span>
                                         <br>
-                                        <a href='' >
-                                            <span class="glyphicon glyphicon-triangle-bottom vote"></span>
+                                        <a id="vote_down_btn" onclick="$('#form_votedown').submit();"
+                                           style="cursor: pointer;">
+                                            <span class="glyphicon glyphicon-triangle-bottom vote form_votedown
+                                                <#if voteOffset == -1> vote_active</#if>"></span>
                                         </a>
                                         <br>
                                         <a href=''><span class="glyphicon glyphicon-star vote"></span></a>
                                         <br>
                                     </#if>
 
+                                    <form id="form_voteup" class="form_vote" action="/blogVoteUp.do" method="post">
+                                        <input type="hidden" name="blogId" value="${blog.id}">
+                                    </form>
+                                    <form id="form_votedown" class="form_vote" action="/blogVoteDown.do" method="post">
+                                        <input type="hidden" name="blogId" value="${blog.id}">
+                                    </form>
 <#--                                    <span class="favoritecnt">-->
 
 <#--            2-->

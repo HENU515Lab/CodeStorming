@@ -4,7 +4,10 @@ import com.seriouszyx.bbs.base.domain.Logininfo;
 import com.seriouszyx.bbs.base.domain.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,6 +21,8 @@ public class UserContext {
 	public static final String USER_IN_SESSION = "logininfo";
 	public static final String USER_DETAIL_IN_SESSION = "user";
 	public static final String VERIFYCODE_IN_SESSION = "verifycode_in_session";
+	public static final String USER_IN_COOKIE = "logininfo";
+	public static final String USER_DETAIL_IN_COOKIE = "user";
 
 	/**
 	 * 反向获取request的方法,请查看RequestContextListener.requestInitialized打包过程
@@ -27,6 +32,21 @@ public class UserContext {
 	private static HttpSession getSession() {
 		return ((ServletRequestAttributes) RequestContextHolder
 				.getRequestAttributes()).getRequest().getSession();
+	}
+
+	private static Cookie[] getCookies() {
+		return ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest().getCookies();
+	}
+
+	/**
+	 * 反向获取response并设置cookie
+	 * @param cookie
+	 */
+	private static void setCookie(Cookie cookie) {
+		HttpServletResponse resp =
+				((ServletWebRequest)RequestContextHolder.getRequestAttributes()).getResponse();
+		resp.addCookie(cookie);
 	}
 
 	public static void putCurrent(Logininfo current) {

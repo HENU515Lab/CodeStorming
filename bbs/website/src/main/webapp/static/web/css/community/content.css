@@ -19,6 +19,13 @@
     padding-bottom: 10px;
 }
 
+.answer_votecnt {
+    font-size: 20px;
+    color: #afafaf;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .vote_active{
     color: darkorange;
 }

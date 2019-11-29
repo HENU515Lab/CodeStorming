@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.CommunityVoteRecordMapper">
+    <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.CommunityVoteRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="cid" property="cid" jdbcType="BIGINT"/>
+        <result column="caid" property="caid" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="offset" property="offset" jdbcType="TINYINT"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `community_vote_record`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.CommunityVoteRecord" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into `community_vote_record` (cid, caid, uid, 
+      offset)
+    values (#{cid,jdbcType=BIGINT}, #{caid,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, 
+      #{offset,jdbcType=TINYINT})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.CommunityVoteRecord">
+    update `community_vote_record`
+    set cid = #{cid,jdbcType=BIGINT},
+      caid = #{caid,jdbcType=BIGINT},
+      uid = #{uid,jdbcType=BIGINT},
+      offset = #{offset,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateVoteSizeByUserIdAndCommunityId">
+      update `community_vote_record`
+      set offset = #{offset}
+      where uid = ${userId} and cid = #{communityId} and caid is null
+    </update>
+    <update id="updateVoteSizeByUserIdAndCommunityIdAndCommunityAnswerId">
+    update `community_vote_record`
+      set offset = #{offset}
+      where uid = ${userId} and cid = #{communityId} and caid = #{communityAnswerId}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, cid, caid, uid, offset
+    from `community_vote_record`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, cid, caid, uid, offset
+    from `community_vote_record`
+  </select>
+    <select id="selectOffestByUserIdAndCommunityId" resultType="java.lang.Integer">
+    SELECT IFNULL(offset, 0)
+    FROM `community_vote_record`
+    where uid = #{userId} and cid = #{communityId} and caid is null
+  </select>
+    <select id="selectOffsetByUserIdAndCommunityIdAndCommunityAnswerId" resultType="java.lang.Integer">
+      select IFNULL(offset, 0)
+      from `community_vote_record`
+      where uid = #{userId} and cid = #{communityId} and caid = #{answerId}
+    </select>
+</mapper>

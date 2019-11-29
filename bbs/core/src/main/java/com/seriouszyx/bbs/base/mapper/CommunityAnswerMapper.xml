@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seriouszyx.bbs.base.mapper.CommunityAnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.seriouszyx.bbs.base.domain.CommunityAnswer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+<!--    <result column="answer_user_id" property="auid" jdbcType="BIGINT" />-->
+    <result column="community_id" property="communityId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="vote_size" property="voteSize" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="pass" property="pass" jdbcType="TINYINT" />
+    <association property="answerUser" column="answer_user_id"
+                 select="com.seriouszyx.bbs.base.mapper.UserMapper.selectByPrimaryKey" />
+    <collection property="communityAnswerCommentList" column="id"
+                select="com.seriouszyx.bbs.base.mapper.CommunityCommentMapper.selectByCommunityAnswerId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `community_answer`
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.CommunityAnswer" useGeneratedKeys="true" keyProperty="id" >
+    insert into `community_answer` (answer_user_id, community_id, create_time, 
+      vote_size, content, pass)
+    values (#{answerUser.id,jdbcType=BIGINT}, #{communityId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{voteSize,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}, #{pass})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.CommunityAnswer" >
+    update `community_answer`
+    set answer_user_id = #{answerUser.id,jdbcType=BIGINT},
+      community_id = #{communityId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      vote_size = #{voteSize,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      pass = #{pass}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateVoteSizeByPrimaryKey">
+      update `community_answer`
+      set vote_size = vote_size + #{offset}
+      where id = #{communityAnswerId} and community_id = #{communityId}
+    </update>
+  <update id="updatePassByPrimaryKey">
+    update `community_answer`
+    set pass = 1
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, answer_user_id, community_id, create_time, vote_size, content, pass
+    from `community_answer`
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, answer_user_id, community_id, create_time, vote_size, content, pass
+    from `community_answer`
+  </select>
+  <select id="selectByCommunityId" resultMap="BaseResultMap">
+    select id, answer_user_id, community_id, create_time, vote_size, content, pass
+    from `community_answer`
+    where community_id = #{id}
+    order by pass desc, vote_size desc
+  </select>
+  <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
+    select vote_size
+    from `community_answer`
+    where id = #{communityAnswerId}
+  </select>
+</mapper>
