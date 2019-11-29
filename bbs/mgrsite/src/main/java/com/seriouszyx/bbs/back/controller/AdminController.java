@@ -23,7 +23,7 @@ public class AdminController {
 
     @RequestMapping("toLogin")
     public String toLogin() {
-        return "user/login";
+        return "admin/login";
     }
 
     @RequestMapping("toRegister")
