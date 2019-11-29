@@ -32,6 +32,19 @@
 		<property name="configLocation" value="classpath:myBatis-config.xml"/>
 		<property name="typeAliasesPackage" value="com.seriouszyx.bbs.base.domain"/>
 		<property name="mapperLocations" value="classpath:com/seriouszyx/bbs/*/mapper/*Mapper.xml"/>
+		<!-- 配置pagehelper分页插件 -->
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<value>
+							helperDialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

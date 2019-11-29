@@ -1,9 +1,8 @@
 package com.seriouszyx.bbs.base.service.impl;
 
-import com.seriouszyx.bbs.base.domain.Blog;
-import com.seriouszyx.bbs.base.domain.BlogComment;
-import com.seriouszyx.bbs.base.domain.BlogVoteRecord;
-import com.seriouszyx.bbs.base.domain.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seriouszyx.bbs.base.domain.*;
 import com.seriouszyx.bbs.base.mapper.BlogCommentMapper;
 import com.seriouszyx.bbs.base.mapper.BlogMapper;
 import com.seriouszyx.bbs.base.mapper.BlogVoteRecordMapper;
@@ -47,8 +46,10 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public List<Blog> listAll() {
-        return blogMapper.selectAll();
+    public PageInfo<Blog> listAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogMapper.selectAll());
+        return pageInfo;
     }
 
     @Override

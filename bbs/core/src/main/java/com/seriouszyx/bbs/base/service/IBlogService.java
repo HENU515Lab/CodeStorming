@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
 
 import java.util.List;
@@ -17,9 +18,10 @@ public interface IBlogService {
 
     /**
      * 查询所有文章
+     * @param pageNum 当前页数
      * @return
      */
-    List<Blog> listAll();
+    PageInfo<Blog> listAll(int pageNum, int pageSize);
 
     /**
      * 根据主键查询文章
