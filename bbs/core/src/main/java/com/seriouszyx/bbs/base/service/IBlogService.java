@@ -42,7 +42,7 @@ public interface IBlogService {
      * @param authorId
      * @return
      */
-    List<Blog> listByAuthorId(Long authorId);
+    PageInfo<Blog> listByAuthorId(Long authorId, Integer pageNum, Integer pageSize);
 
     /**
      * 为指定文章点赞

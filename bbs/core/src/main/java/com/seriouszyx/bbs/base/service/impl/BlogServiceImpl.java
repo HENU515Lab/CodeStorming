@@ -68,8 +68,9 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public List<Blog> listByAuthorId(Long authorId) {
-        return blogMapper.selectByAuthorId(authorId);
+    public PageInfo<Blog> listByAuthorId(Long authorId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(blogMapper.selectByAuthorId(authorId));
     }
 
     @Override

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>个人设置-515lab</title>
+    <title>修改密码-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">

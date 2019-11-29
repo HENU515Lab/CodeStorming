@@ -109,7 +109,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <#list blogList as blog>
+                            <#list blogList.list as blog>
                                 <tr>
                                     <td><a href="/content.do?id=${blog.id}">${blog.title}</a></td>
                                     <td>${blog.createTime?string('yyyy-MM-dd hh:mm:ss')}</td>
@@ -120,23 +120,38 @@
                             </tbody>
                         </table>
 
-<#--                        <div align="right">-->
-<#--                            <ul class="pagination">-->
-<#--                                <li><a href="javascript:;">&laquo;</a></li>-->
-
-<#--                                <li class="active"><a href="javascript:;">1</a></li>-->
-
-<#--                                <li class=""><a href="javascript:;">2</a></li>-->
-
-<#--                                <li class=""><a href="javascript:;">3</a></li>-->
-
-<#--                                <li class=""><a href="javascript:;">4</a></li>-->
-
-<#--                                <li class=""><a href="javascript:;">5</a></li>-->
-
-<#--                                <li><a href="javascript:;">&raquo;</a></li>-->
-<#--                            </ul>-->
-<#--                        </div>-->
+                        <div align="right">
+                            <ul class="pagination">
+                                <li><a name="page_turning" id="page_${1}"
+                                       href="/userspace.do?id=${userspace.id}&pageNum=${1}">&laquo;</a></li>
+                                <#if blogList.pages gt 4 && blogList.pageNum gt 4>
+                                    <#list blogList.navigatepageNums as num>
+                                        <#if (num - blogList.pageNum > -4 && num - blogList.pageNum <= 1)
+                                        || (blogList.hasNextPage == false && num - blogList.pageNum > -5)>
+                                            <li <#if num == blogList.pageNum>class="active"</#if>>
+                                                <a name="page_turning" id="page_${num}"
+                                                   href="/userspace.do?id=${userspace.id}&pageNum=${num}">
+                                                    ${num}
+                                                </a>
+                                            </li>
+                                        </#if>
+                                    </#list>
+                                <#else>
+                                    <#list blogList.navigatepageNums as num>
+                                        <#if num <= 5>
+                                            <li <#if num == blogList.pageNum>class="active"</#if>>
+                                                <a name="page_turning" id="page_${num}"
+                                                   href="/userspace.do?id=${userspace.id}&pageNum=${num}">
+                                                    ${num}
+                                                </a>
+                                            </li>
+                                        </#if>
+                                    </#list>
+                                </#if>
+                                <li><a name="page_turning" id="page_${blogList.pageSize}"
+                                       href="/userspace.do?id=${userspace.id}&pageNum=${blogList.pages}">&raquo;</a></li>
+                            </ul>
+                        </div>
                         <div id="modal-danger" class="modal modal-message modal-danger fade" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
