@@ -185,8 +185,7 @@
                                         </a>
                                         <br>
                                         <#if answer.pass == 1>
-                                            <span class="votecnt glyphicon glyphicon-ok form_answer_voteup_${answer.id}_ok
-                                            form_answer_votedown_${answer.id}_ok " style="color: #5fba7d;"></span>
+                                            <span class="votecnt glyphicon glyphicon-ok" style="color: #5fba7d;"></span>
                                         </#if>
                                     <#else>
                                         <a id="answer_vote_up_btn" onclick="$('#answer_form_voteup_${answer.id}').submit();"
@@ -196,7 +195,7 @@
                                         <br>
                                         <span class="answer_votecnt answer_votecnt_${answer.id}">${answer.voteSize}</span>
                                         <br>
-                                        <a id="answer_vote_down_btn" onclick="$('#anser_form_votedown_${answer.id}').submit();"
+                                        <a id="answer_vote_down_btn" onclick="$('#answer_form_votedown_${answer.id}').submit();"
                                            style="cursor: pointer;">
                                         <span class="glyphicon glyphicon-triangle-bottom vote answer_form_votedown_${answer.id}
                                             <#if answer.voteOffset == -1> vote_active</#if>"></span>
@@ -206,8 +205,13 @@
                                             <span class="votecnt glyphicon glyphicon-ok form_answer_voteup_${answer.id}_ok
                                             form_answer_votedown_${answer.id}_ok " style="color: #5fba7d;"></span>
                                         </#if>
-                                        <form id="anser_form_votedown_${answer.id}" class="form_vote"
+                                        <form id="answer_form_votedown_${answer.id}" class="form_vote"
                                               action="/communityVoteDown.do" method="post">
+                                            <input type="hidden" name="communityId" value="${community.id}">
+                                            <input type="hidden" name="communityAnswerId" value="${answer.id}">
+                                        </form>
+                                        <form id="answer_form_voteup_${answer.id}" class="form_vote"
+                                              action="/communityVoteUp.do" method="post">
                                             <input type="hidden" name="communityId" value="${community.id}">
                                             <input type="hidden" name="communityAnswerId" value="${answer.id}">
                                         </form>
