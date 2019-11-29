@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.User;
 
 import java.util.List;

@@ -5,6 +5,7 @@ import com.seriouszyx.bbs.base.domain.User;
 import com.seriouszyx.bbs.base.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,8 +22,10 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping("toUserMgr")
-    public String toUserMgr() {
-        return "user/user/list";
+    public String toUserMgr(Model model) {
+        List<User> users = userService.listAll();
+        model.addAttribute("userList", users);
+        return "user/list";
     }
 
     @RequestMapping("toUserForm")
@@ -33,7 +36,7 @@ public class UserController {
     @RequestMapping("listWebUser")
     @ResponseBody
     public JsonResult listWebUser(Integer page, Integer limit) {
-        JsonResult jsonResult = new JsonResult(userService.listAll(page, limit).getList());
+        JsonResult jsonResult = new JsonResult();
         return jsonResult;
     }
 
