@@ -129,6 +129,14 @@ public class CommunityController {
         return result;
     }
 
+    @RequireLogin
+    @RequestMapping("communityAnswerOk")
+    public String communityAnswerOk(Long communityAnswerId, Long communityId) {
+        communityService.setCommunityAnswerOk(communityAnswerId, communityId);
+
+        return "redirect:communityContent.do?id=" + communityId;
+    }
+
     private boolean isNullOrEmpty(String s) {
         return s == null || s.trim().equals("");
     }

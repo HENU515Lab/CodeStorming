@@ -100,4 +100,11 @@ public interface ICommunityService {
      * @return
      */
     Integer selectCommunityAnswerVoteRecord(Long communityId, Long communityAnswerId);
+
+    /**
+     * 将指定问题答案设成通过
+     * @param communityAnswerId
+     * @param communityId
+     */
+    void setCommunityAnswerOk(Long communityAnswerId, Long communityId);
 }

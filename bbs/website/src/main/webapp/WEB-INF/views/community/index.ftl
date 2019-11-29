@@ -67,11 +67,13 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-1 col-sm-4 count_number">
-                                    <div class="row ">
-                                        <div class="col-xs-1 col-md-12 count_number ">
+                                    <div class="row <#if community.solve == 1> vote_accept</#if>">
+                                        <div class="col-xs-1 col-md-12 count_number
+                                            <#if community.solve == 1> vote_accept_text</#if>">
                                             ${community.answerSize}
                                         </div>
-                                        <div class="col-xs-1 col-md-12 count_description ">
+                                        <div class="col-xs-1 col-md-12 count_description
+                                            <#if community.solve == 1> vote_accept_text</#if>">
                                             回答
                                         </div>
                                     </div>
@@ -131,33 +133,33 @@
                     <hr>
                 </#list>
 
-                <div align="right">
-                    <ul class="pagination">
-                        <li><a name="page_turning" id="page_1" href="">&laquo;</a></li>
+<#--                <div align="right">-->
+<#--                    <ul class="pagination">-->
+<#--                        <li><a name="page_turning" id="page_1" href="">&laquo;</a></li>-->
 
-                        <li class="active">
-                            <a name="page_turning" id="page_1" href="4cc0231f-571c-4f4f-94a6-46da9912e828.html">1</a>
-                        </li>
+<#--                        <li class="active">-->
+<#--                            <a name="page_turning" id="page_1" href="4cc0231f-571c-4f4f-94a6-46da9912e828.html">1</a>-->
+<#--                        </li>-->
 
-                        <li class="">
-                            <a name="page_turning" id="page_2" href="77733b19-f0f6-4bc6-8e59-c3b3136b2168.html">2</a>
-                        </li>
+<#--                        <li class="">-->
+<#--                            <a name="page_turning" id="page_2" href="77733b19-f0f6-4bc6-8e59-c3b3136b2168.html">2</a>-->
+<#--                        </li>-->
 
-                        <li class="">
-                            <a name="page_turning" id="page_3" href="47694333-1c75-43b4-a435-d1f0cae345d1.html">3</a>
-                        </li>
+<#--                        <li class="">-->
+<#--                            <a name="page_turning" id="page_3" href="47694333-1c75-43b4-a435-d1f0cae345d1.html">3</a>-->
+<#--                        </li>-->
 
-                        <li class="">
-                            <a name="page_turning" id="page_4" href="c5159bd8-ec00-4292-a7fd-aaaa147f8a3e.html">4</a>
-                        </li>
+<#--                        <li class="">-->
+<#--                            <a name="page_turning" id="page_4" href="c5159bd8-ec00-4292-a7fd-aaaa147f8a3e.html">4</a>-->
+<#--                        </li>-->
 
-                        <li class="">
-                            <a name="page_turning" id="page_5" href="c9fd627e-bcec-4c13-93b4-b1e54a08636e.html">5</a>
-                        </li>
+<#--                        <li class="">-->
+<#--                            <a name="page_turning" id="page_5" href="c9fd627e-bcec-4c13-93b4-b1e54a08636e.html">5</a>-->
+<#--                        </li>-->
 
-                        <li><a name="page_turning" id="page_20" href="954681ea-a2de-4346-9395-4073e4ebab3b.html">&raquo;</a></li>
-                    </ul>
-                </div>
+<#--                        <li><a name="page_turning" id="page_20" href="954681ea-a2de-4346-9395-4073e4ebab3b.html">&raquo;</a></li>-->
+<#--                    </ul>-->
+<#--                </div>-->
             </div>
         </div>
     </div>

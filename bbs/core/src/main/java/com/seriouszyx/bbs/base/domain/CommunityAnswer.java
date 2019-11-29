@@ -20,6 +20,8 @@ public class CommunityAnswer {
 
     private String content;
 
+    private Integer pass;
+
     private List<CommunityComment> communityAnswerCommentList;
 
     private Integer voteOffset;

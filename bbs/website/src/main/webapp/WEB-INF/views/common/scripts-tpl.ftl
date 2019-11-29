@@ -78,6 +78,7 @@
 <script type="text/javascript" src="static/web/node_modules/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="static/web/js/canvas-toBlob.js"></script>
 <script type="text/javascript" src="static/web/js/jquery.bootstrap-growl.min.js"></script>
+<script type="text/javascript" src="static/web/js/file_system/file/operation/community/ok-0.0.1.js"></script>
 
 
 <script>

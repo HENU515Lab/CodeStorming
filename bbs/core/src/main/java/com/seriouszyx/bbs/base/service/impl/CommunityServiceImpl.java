@@ -103,6 +103,7 @@ public class CommunityServiceImpl implements ICommunityService {
             communityAnswer.setAnswerUser(user);
             communityAnswer.setCreateTime(new Date());
             communityAnswer.setVoteSize(0);
+            communityAnswer.setPass(0);
             communityAnswerMapper.insert(communityAnswer);
 
             communityMapper.addAnswerSizeByPrimaryId(communityAnswer.getCommunityId());
@@ -252,6 +253,15 @@ public class CommunityServiceImpl implements ICommunityService {
         if (offset == null)
             return 0;
         return offset;
+    }
+
+    @Override
+    @Transactional
+    public void setCommunityAnswerOk(Long communityAnswerId, Long communityId) {
+        if (UserContext.getCurrent() == null)
+            return;
+        communityAnswerMapper.updatePassByPrimaryKey(communityAnswerId);
+        communityMapper.updateSolveByPrimaryKey(communityId);
     }
 
 }

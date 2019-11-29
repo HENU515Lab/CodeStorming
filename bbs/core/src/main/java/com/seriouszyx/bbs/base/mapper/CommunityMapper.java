@@ -24,4 +24,7 @@ public interface CommunityMapper {
                                     @Param("offset") int offset);
 
     Integer selectVoteSizeByPrimaryKey(Long communityId);
+
+    void updateSolveByPrimaryKey(Long id);
+
 }

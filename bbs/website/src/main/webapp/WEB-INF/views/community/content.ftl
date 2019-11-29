@@ -184,10 +184,10 @@
                                             <span class="glyphicon glyphicon-triangle-bottom vote "></span>
                                         </a>
                                         <br>
-                                        <a href='#' data-toggle="modal" data-target="#login-modal"><span
-                                                    class="glyphicon glyphicon-star vote"></span></a>
-                                        <br>
-                                        <span class="favoritecnt"></span>
+                                        <#if answer.pass == 1>
+                                            <span class="votecnt glyphicon glyphicon-ok form_answer_voteup_${answer.id}_ok
+                                            form_answer_votedown_${answer.id}_ok " style="color: #5fba7d;"></span>
+                                        </#if>
                                     <#else>
                                         <a id="answer_vote_up_btn" onclick="$('#answer_form_voteup_${answer.id}').submit();"
                                            style="cursor: pointer;">
@@ -202,15 +202,10 @@
                                             <#if answer.voteOffset == -1> vote_active</#if>"></span>
                                         </a>
                                         <br>
-                                        <a href='#' ><span
-                                                    class="glyphicon glyphicon-star vote"></span></a>
-                                        <br>
-                                        <span class="favoritecnt"></span>
-                                        <form id="answer_form_voteup_${answer.id}" class="form_vote"
-                                              action="/communityVoteUp.do" method="post">
-                                            <input type="hidden" name="communityId" value="${community.id}">
-                                            <input type="hidden" name="communityAnswerId" value="${answer.id}">
-                                        </form>
+                                        <#if answer.pass == 1>
+                                            <span class="votecnt glyphicon glyphicon-ok form_answer_voteup_${answer.id}_ok
+                                            form_answer_votedown_${answer.id}_ok " style="color: #5fba7d;"></span>
+                                        </#if>
                                         <form id="anser_form_votedown_${answer.id}" class="form_vote"
                                               action="/communityVoteDown.do" method="post">
                                             <input type="hidden" name="communityId" value="${community.id}">
@@ -228,7 +223,18 @@
                                                     <textarea style="display:none;" name="test-editormd-markdown-doc">${answer.content}</textarea>
                                                 </div>
                                                 <div align="right">
+                                                    <div align="left">
+                                                        <#if !logininfo??>
+                                                        <#else>
+                                                            <#if community.asker.id == logininfo.id && answer.pass != 1>
+                                                                <button class="pass_a_comment btn btn-link" title="满意这个回答？" data-toggle="modal" data-target="#modal-ok"
+                                                                        onclick="setOkId('${answer.id}')">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                </button>
+                                                            </#if>
+                                                        </#if>
 
+                                                    </div>
                                                     <div class="information_card" align="left">
                                                         <span class="datetime"
                                                               title="${answer.createTime?string('yyyy-MM-dd hh:mm:ss')}">
@@ -368,6 +374,30 @@
                 </div>
             </div> <!-- / .modal-content -->
         </div> <!-- / .modal-dialog -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-ok" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="glyphicon glyphicon-ok-sign"></i>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    你确定同意这个答案吗？
+                </div>
+                <div class="modal-footer">
+                    <form id="modal_ok_pass_url" method="post" action="/communityAnswerOk.do" enctype="multipart/form-data">
+                        <input id="communityAnswerId" type="hidden" name="communityAnswerId" value="" />
+                        <input type="hidden" name="communityId" value="${community.id}" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">确定</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
