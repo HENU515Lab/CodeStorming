@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Activity;
 import com.seriouszyx.bbs.base.domain.ActivityContent;
 import com.seriouszyx.bbs.base.domain.ActivityContentRecord;
@@ -26,6 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ActivityController {
+
+    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int FIRST_PAGE_NUM = 1;
+
     @Autowired
     private IActivityService activityService;
     @Autowired
@@ -35,9 +40,14 @@ public class ActivityController {
     }
 
     @RequestMapping({"activity"})
-    public String activity(Model model) {
-        List<Activity> activities = this.activityService.listAll();
-        model.addAttribute("activityList", activities);
+    public String activity(Model model, Integer pageNum) {
+        if (pageNum == null) {
+            PageInfo<Activity> activities = this.activityService.listAll(FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("activityList", activities);
+        } else {
+            PageInfo<Activity> activities = this.activityService.listAll(pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("activityList", activities);
+        }
         return "activity/index";
     }
 
@@ -115,7 +125,7 @@ public class ActivityController {
     }
 
     @RequestMapping({"activityRecord"})
-    public String activityRecord(Long id, Model model) {
+    public String activityRecord(Long id, Model model, Integer pageNum) {
         Logininfo current = UserContext.getCurrent();
         if (current != null) {
             int result = this.activityService.selectApplyInfo(current.getId(), id);
@@ -123,9 +133,16 @@ public class ActivityController {
         }
 
         Activity activity = this.activityService.selectById(id);
-        List<ActivityContentRecord> activityContentRecords = this.activityService.selectRecordList(id);
-        model.addAttribute("activityContentRecordList", activityContentRecords);
         model.addAttribute("activity", activity);
+        if (pageNum == null) {
+            PageInfo<ActivityContentRecord> activityContentRecords =
+                    this.activityService.selectRecordList(id, FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("activityContentRecordList", activityContentRecords);
+        } else {
+            PageInfo<ActivityContentRecord> activityContentRecords =
+                    this.activityService.selectRecordList(id, pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("activityContentRecordList", activityContentRecords);
+        }
         return "activity/record";
     }
 }

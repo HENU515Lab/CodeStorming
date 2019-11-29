@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>活动-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">
@@ -87,7 +87,7 @@
                 </ul>
                 <br>
 
-                <#list activityContentRecordList as record>
+                <#list activityContentRecordList.list as record>
                     <div class="row">
                         <div class="col-xs-2 col-sm-1">
                             <a href="/userspace.do?id=${record.user.id}">
@@ -125,6 +125,38 @@
                     </div>
                     <hr>
                 </#list>
+                <div align="right">
+                    <ul class="pagination">
+                        <li><a name="page_turning" id="page_${1}"
+                               href="/activityRecord.do?id=${activity.id}&pageNum=${1}">&laquo;</a></li>
+                        <#if activityContentRecordList.pages gt 4 && activityContentRecordList.pageNum gt 4>
+                            <#list activityContentRecordList.navigatepageNums as num>
+                                <#if (num - activityContentRecordList.pageNum > -4 && num - activityContentRecordList.pageNum <= 1)
+                                || (activityContentRecordList.hasNextPage == false && num - activityContentRecordList.pageNum > -5)>
+                                    <li <#if num == activityContentRecordList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}"
+                                           href="/activityRecord.do?id=${activity.id}&pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        <#else>
+                            <#list activityContentRecordList.navigatepageNums as num>
+                                <#if num <= 5>
+                                    <li <#if num == activityContentRecordList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}"
+                                           href="/activityRecord.do?id=${activity.id}&pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        </#if>
+                        <li><a name="page_turning" id="page_${activityContentRecordList.pageSize}"
+                               href="/activityRecord.do?id=${activity.id}&pageNum=${activityContentRecordList.pages}">&raquo;</a></li>
+                    </ul>
+                </div>
 
             </div>
         </div>
