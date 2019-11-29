@@ -1,5 +1,7 @@
 package com.seriouszyx.bbs.base.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.*;
 import com.seriouszyx.bbs.base.mapper.*;
 import com.seriouszyx.bbs.base.service.ICommunityService;
@@ -30,8 +32,9 @@ public class CommunityServiceImpl implements ICommunityService {
     private CommunityVoteRecordMapper communityVoteRecordMapper;
 
     @Override
-    public List<Community> listAll() {
-        return communityMapper.selectAll();
+    public PageInfo<Community> listAll(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(communityMapper.selectAll());
     }
 
     @Override

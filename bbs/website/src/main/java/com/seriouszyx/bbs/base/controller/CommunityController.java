@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Community;
 import com.seriouszyx.bbs.base.domain.CommunityAnswer;
 import com.seriouszyx.bbs.base.service.ICommunityService;
@@ -17,14 +18,22 @@ import java.util.Map;
 @Controller
 public class CommunityController {
 
+    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int FIRST_PAGE_NUM = 1;
+
     @Autowired
     private ICommunityService communityService;
 
 
     @RequestMapping("community")
-    public String community(Model model) {
-        List<Community> communityList = communityService.listAll();
-        model.addAttribute("communityList", communityList);
+    public String community(Model model, Integer pageNum) {
+        if (pageNum == null) {
+            PageInfo<Community> communityList = communityService.listAll(FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("communityList", communityList);
+        } else {
+            PageInfo<Community> communityList = communityService.listAll(pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("communityList", communityList);
+        }
         return "community/index";
     }
 

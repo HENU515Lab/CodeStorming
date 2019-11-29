@@ -52,7 +52,7 @@
 
                 <hr>
 
-                <#list communityList as community>
+                <#list communityList.list as community>
                     <div class="row">
                         <div class="col-xs-12 col-sm-3 col-md-2" align="center">
                             <div class="row hidden-xs">
@@ -133,33 +133,36 @@
                     <hr>
                 </#list>
 
-<#--                <div align="right">-->
-<#--                    <ul class="pagination">-->
-<#--                        <li><a name="page_turning" id="page_1" href="">&laquo;</a></li>-->
-
-<#--                        <li class="active">-->
-<#--                            <a name="page_turning" id="page_1" href="4cc0231f-571c-4f4f-94a6-46da9912e828.html">1</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_2" href="77733b19-f0f6-4bc6-8e59-c3b3136b2168.html">2</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_3" href="47694333-1c75-43b4-a435-d1f0cae345d1.html">3</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_4" href="c5159bd8-ec00-4292-a7fd-aaaa147f8a3e.html">4</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_5" href="c9fd627e-bcec-4c13-93b4-b1e54a08636e.html">5</a>-->
-<#--                        </li>-->
-
-<#--                        <li><a name="page_turning" id="page_20" href="954681ea-a2de-4346-9395-4073e4ebab3b.html">&raquo;</a></li>-->
-<#--                    </ul>-->
-<#--                </div>-->
+                <div align="right">
+                    <ul class="pagination">
+                        <li><a name="page_turning" id="page_${1}"
+                               href="/community.do?pageNum=${1}">&laquo;</a></li>
+                        <#if communityList.pages gt 4 && communityList.pageNum gt 4>
+                            <#list communityList.navigatepageNums as num>
+                                <#if (num - communityList.pageNum > -4 && num - communityList.pageNum <= 1)
+                                || (communityList.hasNextPage == false && num - communityList.pageNum > -5)>
+                                    <li <#if num == communityList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/community.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        <#else>
+                            <#list communityList.navigatepageNums as num>
+                                <#if num <= 5>
+                                    <li <#if num == communityList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/community.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        </#if>
+                        <li><a name="page_turning" id="page_${communityList.pageSize}"
+                               href="/community.do?pageNum=${communityList.pages}">&raquo;</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
