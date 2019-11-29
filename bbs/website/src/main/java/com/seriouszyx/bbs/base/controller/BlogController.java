@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
 import com.seriouszyx.bbs.base.domain.Logininfo;
 import com.seriouszyx.bbs.base.service.IBlogService;
@@ -18,12 +19,21 @@ import java.util.Map;
 @Controller
 public class BlogController {
 
+    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int FIRST_PAGE_NUM = 1;
+
     @Autowired
     public IBlogService blogService;
 
     @RequestMapping("blog")
-    public String blog(Model model) {
-        model.addAttribute("blogList", blogService.listAll());
+    public String blog(Model model, Integer pageNum) {
+        if (pageNum == null) {
+            PageInfo<Blog> pageInfo = blogService.listAll(FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", pageInfo);
+        } else {
+            PageInfo<Blog> pageInfo = blogService.listAll(pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", pageInfo);
+        }
         model.addAttribute("currentNav", "blog");
         return "blog/index";
     }

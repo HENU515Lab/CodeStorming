@@ -20,17 +20,17 @@
                 <br>
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-<#--                        <form id="form_search" action="/blog/search/1/" method="get">-->
-<#--                            <input type='hidden' name='csrfmiddlewaretoken' value='TCRnFsGHNn9mmmcn8HC6buwSoYRjBHBSPtfXGqPn5fJCXBUtyfq6GlP1mctIOeV7'>-->
-<#--                            <div class="input-group">-->
-<#--                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、搜索标题、关键字、文章内容" style="border-radius: 5px;" maxlength="200">-->
-<#--                                <span class="input-group-btn">-->
-<#--                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">-->
-<#--                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>-->
-<#--                                </button>-->
-<#--                              </span>-->
-<#--                            </div>-->
-<#--                        </form>-->
+                        <#--                        <form id="form_search" action="/blog/search/1/" method="get">-->
+                        <#--                            <input type='hidden' name='csrfmiddlewaretoken' value='TCRnFsGHNn9mmmcn8HC6buwSoYRjBHBSPtfXGqPn5fJCXBUtyfq6GlP1mctIOeV7'>-->
+                        <#--                            <div class="input-group">-->
+                        <#--                                <input type="text" name="search_content" class="form-control" placeholder="搜索作者、搜索标题、关键字、文章内容" style="border-radius: 5px;" maxlength="200">-->
+                        <#--                                <span class="input-group-btn">-->
+                        <#--                                <button class="btn btn-link" type="submit" style="border-radius: 5px;">-->
+                        <#--                                    &nbsp;&nbsp;<span class="glyphicon glyphicon-search" style="font-size: 17px;"></span>-->
+                        <#--                                </button>-->
+                        <#--                              </span>-->
+                        <#--                            </div>-->
+                        <#--                        </form>-->
                     </div>
                 </div>
 
@@ -43,11 +43,11 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     <#else>
-                    <a href="/addBlog.do?id=${logininfo.id}"
-                       class="btn btn-info btn-index btn-lg">
-                        写分享&nbsp;
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
+                        <a href="/addBlog.do?id=${logininfo.id}"
+                           class="btn btn-info btn-index btn-lg">
+                            写分享&nbsp;
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
                     </#if>
                 </div>
 
@@ -63,20 +63,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <#list blogList as blog>
+                        <#list blogList.list as blog>
                             <tr>
                                 <td>
                                     <a href="/content.do?id=${blog.id}">${blog.title}
-                                        <#if blog.weight gt 10><span class="glyphicon glyphicon-arrow-up" style="color: rgb(192, 162, 100)"></span></#if>
-                                        <#if blog.readSize gt 100><span class="glyphicon glyphicon-fire" style="color: red"></span></#if>
-                                        <#if blog.blogType == 0><span class="glyphicon glyphicon-lock" style="color: darkgreen"></span></#if>
+                                        <#if blog.weight gt 10><span class="glyphicon glyphicon-arrow-up"
+                                                                     style="color: rgb(192, 162, 100)"></span></#if>
+                                        <#if blog.readSize gt 100><span class="glyphicon glyphicon-fire"
+                                                                        style="color: red"></span></#if>
+                                        <#if blog.blogType == 0><span class="glyphicon glyphicon-lock"
+                                                                      style="color: darkgreen"></span></#if>
                                     </a>
                                 </td>
                                 <td>
                                     <a href="/userspace.do?id=${blog.author.id}">
                                         <img class="img-circle" src="${blog.author.avatar}" width="30px">
                                         &nbsp;
-                                       ${blog.author.username}
+                                        ${blog.author.username}
                                     </a>
                                 </td>
                                 <td title="2019/09/16/ 18:29:06">${blog.createTime?string('yyyy-MM-dd hh:mm:ss')}</td>
@@ -87,33 +90,36 @@
                         </tbody>
                     </table>
                 </div>
-<#--                <div align="right">-->
-<#--                    <ul class="pagination">-->
-<#--                        <li><a name="page_turning" id="page_1" href="">&laquo;</a></li>-->
-
-<#--                        <li class="active">-->
-<#--                            <a name="page_turning" id="page_1" href="1/Index.html">1</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_2" href="2/Index.html">2</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_3" href="3/Index.html">3</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_4" href="4/Index.html">4</a>-->
-<#--                        </li>-->
-
-<#--                        <li class="">-->
-<#--                            <a name="page_turning" id="page_5" href="5/Index.html">5</a>-->
-<#--                        </li>-->
-
-<#--                        <li><a name="page_turning" id="page_6" href="6/Index.html">&raquo;</a></li>-->
-<#--                    </ul>-->
-<#--                </div>-->
+                <div align="right">
+                    <ul class="pagination">
+                        <li><a name="page_turning" id="page_${1}"
+                               href="/blog.do?pageNum=${1}">&laquo;</a></li>
+                        <#if blogList.pages gt 4 && blogList.pageNum gt 4>
+                            <#list blogList.navigatepageNums as num>
+                                <#if (num - blogList.pageNum > -4 && num - blogList.pageNum <= 1)
+                                    || (blogList.hasNextPage == false && num - blogList.pageNum > -5)>
+                                    <li <#if num == blogList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/blog.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        <#else>
+                            <#list blogList.navigatepageNums as num>
+                                <#if num <= 5>
+                                    <li <#if num == blogList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/blog.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        </#if>
+                        <li><a name="page_turning" id="page_${blogList.pageSize}"
+                               href="/blog.do?pageNum=${blogList.pages}">&raquo;</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
