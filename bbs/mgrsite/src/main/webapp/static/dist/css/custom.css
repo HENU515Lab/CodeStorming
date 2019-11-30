@@ -1,0 +1,10 @@
+/* dataTables */
+.table > tbody > tr > td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table > thead:first-child > tr:first-child > th {
+    text-align: center;
+    vertical-align: middle;
+}

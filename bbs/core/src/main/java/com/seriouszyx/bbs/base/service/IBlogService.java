@@ -17,11 +17,17 @@ public interface IBlogService {
     void saveBlog(Blog blog);
 
     /**
-     * 查询所有文章
+     * 分页查询所有文章
      * @param pageNum 当前页数
      * @return
      */
     PageInfo<Blog> listAll(int pageNum, int pageSize);
+
+    /**
+     * 部分也查询所有文章
+     * @return
+     */
+    List<Blog> listAll();
 
     /**
      * 根据主键查询文章
@@ -63,4 +69,10 @@ public interface IBlogService {
      * @param blogId
      */
     int selectBlogVoteRecord(Long blogId);
+
+    /**
+     * 根据文章id更新文章
+     * @param blog
+     */
+    int updateBlog(Blog blog);
 }

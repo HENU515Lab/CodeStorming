@@ -53,6 +53,11 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
+    public List<Blog> listAll() {
+        return blogMapper.selectAll();
+    }
+
+    @Override
     public Blog listById(Long id) {
         return blogMapper.selectByPrimaryKey(id);
     }
@@ -133,6 +138,11 @@ public class BlogServiceImpl implements IBlogService {
         if (offset == null)
             return 0;
         return offset;
+    }
+
+    @Override
+    public int updateBlog(Blog blog) {
+        return blogMapper.updateByPrimaryKey(blog);
     }
 
 }

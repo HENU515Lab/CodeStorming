@@ -44,14 +44,32 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
     update `blog`
-    set title = #{title,jdbcType=VARCHAR},
-      comment_size = #{commentSize,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      read_size = #{readSize,jdbcType=INTEGER},
-      vote_size = #{voteSize,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR},
-      weight = #{weight,jdbcType=TINYINT},
-      blog_type = #{blogType}
+    <set>
+      <if test="title != null and title != ''">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="commentSize != null">
+        comment_size = #{commentSize,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readSize != null">
+        read_size = #{readSize,jdbcType=INTEGER},
+      </if>
+      <if test="voteSize != null">
+        vote_size = #{voteSize,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="blogType != null">
+        blog_type = #{blogType},
+      </if>
+    </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
     <update id="updateVoteSizeByPrimaryKey">
