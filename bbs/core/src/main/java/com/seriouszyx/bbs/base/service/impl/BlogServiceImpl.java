@@ -145,4 +145,12 @@ public class BlogServiceImpl implements IBlogService {
         return blogMapper.updateByPrimaryKey(blog);
     }
 
+    @Override
+    @Transactional
+    public void removeBlogByPrimaryKey(Long id) {
+        blogVoteRecordMapper.deleteByBlogId(id);
+        blogCommentMapper.deleteByBlogId(id);
+        blogMapper.deleteByPrimaryKey(id);
+    }
+
 }

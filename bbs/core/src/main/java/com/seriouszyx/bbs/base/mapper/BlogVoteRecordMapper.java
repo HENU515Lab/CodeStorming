@@ -22,4 +22,6 @@ public interface BlogVoteRecordMapper {
     void updateVoteSizeByUserIdAndBlogId(@Param("userId") Long userId,
                                          @Param("blogId") Long blogId,
                                          @Param("offset") int offset);
+
+    void deleteByBlogId(Long id);
 }

@@ -44,4 +44,17 @@ public class BlogController {
         return result;
     }
 
+    @RequestMapping("blogItemRemove")
+    @ResponseBody
+    public Map<String, Object> blogItemRemove() {
+        return result;
+    }
+
+    @RequestMapping("blogItemDelete")
+    @ResponseBody
+    public Map<String, Object> blogItemDelete(Long id) {
+        blogService.removeBlogByPrimaryKey(id);
+        return result;
+    }
+
 }

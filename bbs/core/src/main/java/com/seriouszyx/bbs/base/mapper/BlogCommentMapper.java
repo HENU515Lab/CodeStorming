@@ -16,4 +16,5 @@ public interface BlogCommentMapper {
 
     List<BlogComment> selectByBid(Long bid);
 
+    void deleteByBlogId(Long id);
 }

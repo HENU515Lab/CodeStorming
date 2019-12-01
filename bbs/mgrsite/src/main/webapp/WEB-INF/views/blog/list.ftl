@@ -71,7 +71,7 @@
                                                 编辑
                                             </button>
                                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                                    data-target="#remove-modal">
+                                                    data-target="#remove-modal" onclick="itemRemove(${blog.id})">
                                                 删除
                                             </button>
                                         </td>
@@ -91,7 +91,7 @@
         <!-- /.content -->
     </div>
 
-    <!-- Modal -->
+    <!-- Edit Modal -->
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog"
                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -108,18 +108,19 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="edit-modal-success" tabindex="-1" role="dialog"
+    <!-- Remove Modal -->
+    <div class="modal fade" id="remove-modal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">提示信息</h5>
+                    <h5 class="modal-title">您确定要删除文章吗？</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="text-align: center;">
-                    <h2>修改成功！</h2>
+                <div id="remove-modal-form">
+
                 </div>
             </div>
         </div>
@@ -178,7 +179,6 @@
     });
 
     function itemEdit(id) {
-        console.log(id)
         $.ajax({
             url: '/blogItemEdit.do?id=' + id,
             type: "GET",
@@ -214,6 +214,28 @@
         })
     }
 
+    function itemRemove(id) {
+        $.ajax({
+            url: '/blogItemRemove.do?id=' + id,
+            type: "GET",
+            cache: false,
+            timeout: 60000,
+            success: function (response) {
+                var form_content = '<form id="remove-form">\n' +
+                    '    <div class="modal-footer">\n' +
+                    '        <input type="hidden" name="id" value="'+id+'" />\n' +
+                    '        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>\n' +
+                    '        <button onclick="blogItemRemove()" type="button" class="btn btn-danger" id="remove-modal-submit">删除</button>\n' +
+                    '    </div>\n' +
+                    '</form>'
+                $('#remove-modal-form').html(form_content)
+            },
+            error: function () {
+
+            }
+        })
+    }
+
     function blogItemUpdate() {
         $('#edit-modal-submit').addClass('disabled')
         let hrefUrl = '/blogItemUpdate.do'
@@ -232,6 +254,27 @@
             },
             error: function () {
                 toastr.fail('文章信息修改失败')
+            }
+        })
+    }
+
+    function blogItemRemove() {
+        $('#remove-modal-submit').addClass('disabled')
+        let hrefUrl = '/blogItemDelete.do'
+        let postData = $('#remove-form').serializeArray();
+        $.ajax({
+            url: hrefUrl,
+            type: "POST",
+            data: postData,
+            dataType: "Json",
+            cache: false,
+            timeout: 60000,
+            success: function (resp) {
+                toastr.success('文章删除成功')
+                setTimeout("location.href = '" + '/toBlogMgr.do' + "'", 1000)
+            },
+            error: function () {
+                toastr.fail('文章删除失败')
             }
         })
     }

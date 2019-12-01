@@ -11,7 +11,11 @@
     delete from `blog_comment`
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.BlogComment" useGeneratedKeys="true" keyProperty="id" >
+    <delete id="deleteByBlogId">
+      delete from `blog_comment`
+      where bid = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.seriouszyx.bbs.base.domain.BlogComment" useGeneratedKeys="true" keyProperty="id" >
     insert into `blog_comment` (uid, comment_content, create_time, bid
       )
     values (#{user.id,jdbcType=BIGINT}, #{commentContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},

@@ -75,4 +75,10 @@ public interface IBlogService {
      * @param blog
      */
     int updateBlog(Blog blog);
+
+    /**
+     * 删除置顶文章及相关评论、投票
+     * @param id
+     */
+    void removeBlogByPrimaryKey(Long id);
 }
