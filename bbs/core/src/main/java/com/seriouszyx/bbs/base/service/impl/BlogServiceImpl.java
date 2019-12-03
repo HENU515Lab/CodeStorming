@@ -3,6 +3,7 @@ package com.seriouszyx.bbs.base.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.*;
+import com.seriouszyx.bbs.base.domain.mgr.MgrBlogComment;
 import com.seriouszyx.bbs.base.mapper.BlogCommentMapper;
 import com.seriouszyx.bbs.base.mapper.BlogMapper;
 import com.seriouszyx.bbs.base.mapper.BlogVoteRecordMapper;
@@ -152,5 +153,26 @@ public class BlogServiceImpl implements IBlogService {
         blogCommentMapper.deleteByBlogId(id);
         blogMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<MgrBlogComment> listComments() {
+        return blogCommentMapper.selectAll();
+    }
+
+    @Override
+    public BlogComment listByCommentId(Long id) {
+        return blogCommentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateBlogComment(BlogComment blogComment) {
+        blogCommentMapper.updateByPrimaryKey(blogComment);
+    }
+
+    @Override
+    public void deleteBlogComment(Long id) {
+        blogCommentMapper.deleteByPrimaryKey(id);
+    }
+
 
 }
