@@ -7,6 +7,13 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <association property="user" column="uid" select="com.seriouszyx.bbs.base.mapper.UserMapper.selectByPrimaryKey" />
   </resultMap>
+  <resultMap id="MgrBaseResultMap" type="com.seriouszyx.bbs.base.domain.mgr.MgrBlogComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <association property="user" column="uid" select="com.seriouszyx.bbs.base.mapper.UserMapper.selectByPrimaryKey" />
+    <association property="blog" column="bid" select="com.seriouszyx.bbs.base.mapper.BlogMapper.selectSimpleInfoByPrimaryKey" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from `blog_comment`
     where id = #{id,jdbcType=BIGINT}
@@ -24,10 +31,20 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.BlogComment" >
     update `blog_comment`
-    set uid = #{user.id,jdbcType=BIGINT},
-      comment_content = #{commentContent,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      bid = #{bid,jdbcType=BIGINT}
+    <set>
+      <if test="user != null and user.id != null">
+        uid = #{user.id,jdbcType=BIGINT},
+      </if>
+      <if test="commentContent != null and commentContent != ''">
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=BIGINT},
+      </if>
+    </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -35,13 +52,13 @@
     from `blog_comment`
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, uid, comment_content, create_time, bid
-    from `blog_comment`
-  </select>
   <select id="selectByBid" resultMap="BaseResultMap">
      select id, uid, comment_content, create_time, bid
      from `blog_comment`
      where bid = #{bid}
+  </select>
+  <select id="selectAll" resultMap="MgrBaseResultMap">
+      select id, uid, comment_content, create_time, bid
+     from `blog_comment`
   </select>
 </mapper>

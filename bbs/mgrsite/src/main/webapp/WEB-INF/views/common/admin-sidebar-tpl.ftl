@@ -63,6 +63,12 @@
                                 <p>文章管理</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/toBlogCommentMgr.do" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>评论管理</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

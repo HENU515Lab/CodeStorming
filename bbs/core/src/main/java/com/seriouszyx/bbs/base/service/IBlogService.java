@@ -2,6 +2,8 @@ package com.seriouszyx.bbs.base.service;
 
 import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
+import com.seriouszyx.bbs.base.domain.BlogComment;
+import com.seriouszyx.bbs.base.domain.mgr.MgrBlogComment;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public interface IBlogService {
     PageInfo<Blog> listAll(int pageNum, int pageSize);
 
     /**
-     * 部分也查询所有文章
+     * 不分页查询所有文章
      * @return
      */
     List<Blog> listAll();
@@ -81,4 +83,29 @@ public interface IBlogService {
      * @param id
      */
     void removeBlogByPrimaryKey(Long id);
+
+    /**
+     * 查询所有评论
+     * @return
+     */
+    List<MgrBlogComment> listComments();
+
+    /**
+     * 根据评论id查询评论信息
+     * @param id
+     * @return
+     */
+    BlogComment listByCommentId(Long id);
+
+    /**
+     * 更新评论信息
+     * @param blogComment
+     */
+    void updateBlogComment(BlogComment blogComment);
+
+    /**
+     * 删除评论信息
+     * @param id
+     */
+    void deleteBlogComment(Long id);
 }

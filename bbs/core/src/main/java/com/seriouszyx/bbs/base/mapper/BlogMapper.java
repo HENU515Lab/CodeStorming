@@ -22,4 +22,6 @@ public interface BlogMapper {
                                    @Param("offset") int offset);
 
     int selectVoteSizeByPrimaryKey(Long id);
+
+    Blog selectSimpleInfoByPrimaryKey(Long id);
 }

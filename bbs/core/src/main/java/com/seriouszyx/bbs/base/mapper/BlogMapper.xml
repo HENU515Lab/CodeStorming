@@ -104,4 +104,9 @@
     from `blog`
     where id = #{id}
   </select>
+  <select id="selectSimpleInfoByPrimaryKey" resultType="com.seriouszyx.bbs.base.domain.Blog">
+    select id, title
+    from `blog`
+    where id = #{id}
+  </select>
 </mapper>
