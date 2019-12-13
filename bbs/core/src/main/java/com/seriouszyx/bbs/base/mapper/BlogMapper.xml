@@ -42,7 +42,12 @@
       #{createTime,jdbcType=TIMESTAMP}, #{readSize,jdbcType=INTEGER}, #{voteSize,jdbcType=INTEGER},
       #{content,jdbcType=LONGVARCHAR}, #{weight,jdbcType=TINYINT}, #{blogType})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
+    <update id="addReadSize">
+      update `blog`
+      set read_size = read_size + 1
+      where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
     update `blog`
     <set>
       <if test="title != null and title != ''">
@@ -77,7 +82,13 @@
       set vote_size = vote_size + #{offset}
       where id = #{id}
     </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
+  <update id="updateTitleAndContentByPrimarykey">
+    update `blog`
+    set title = #{title},
+    content = #{content}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
      select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
     b.weight, b.blog_type, u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
     from `user` u inner join `blog` b

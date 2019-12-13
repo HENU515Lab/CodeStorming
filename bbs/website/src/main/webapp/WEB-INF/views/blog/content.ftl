@@ -44,6 +44,18 @@
                                 阅读&nbsp;${blog.readSize}
                             </div>
 
+                            <div class="visible-xs">
+                                <br>
+                            </div>
+
+                            <#if logininfo?? && logininfo.id == blog.author.id>
+                                <div align="right">
+                                    <a id="file_update_btn" class="btn btn-link" href="/addBlog.do?id=${blog.id}">
+                                        <span class="glyphicon glyphicon-pencil" style="font-size: 20px;" title="编辑这个分享"></span>
+                                    </a>
+                                </div>
+                            </#if>
+
                             <hr style="margin-bottom: 10px;">
                             <div class="row">
                                 <div class="vote_cut col-xs-1" align="center">

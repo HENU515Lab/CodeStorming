@@ -42,7 +42,7 @@ public class BlogServiceImpl implements IBlogService {
             blog.setBlogType(1);
             blogMapper.insert(blog);
         } else {
-            blogMapper.updateByPrimaryKey(blog);
+            blogMapper.updateTitleAndContentByPrimarykey(blog);
         }
     }
 
@@ -172,6 +172,11 @@ public class BlogServiceImpl implements IBlogService {
     @Override
     public void deleteBlogComment(Long id) {
         blogCommentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void addBlogReadSize(Long id) {
+        blogMapper.addReadSize(id);
     }
 
 

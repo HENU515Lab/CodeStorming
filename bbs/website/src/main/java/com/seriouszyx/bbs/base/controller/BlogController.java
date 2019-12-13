@@ -40,7 +40,11 @@ public class BlogController {
 
     @RequireLogin
     @RequestMapping("addBlog")
-    public String addBlog(String id) {
+    public String addBlog(Long id, Model model) {
+        if (id != null) {
+            Blog blog = blogService.listById(id);
+            model.addAttribute("blog", blog);
+        }
         return "blog/addBlog";
     }
 
@@ -68,8 +72,7 @@ public class BlogController {
                 return "blog/error";
             }
         }
-        blog.setReadSize(blog.getReadSize() + 1);
-        blogService.saveBlog(blog);
+        blogService.addBlogReadSize(id);
         int voteOffset = blogService.selectBlogVoteRecord(id);
         model.addAttribute("voteOffset", voteOffset);
         model.addAttribute("blog", blog);

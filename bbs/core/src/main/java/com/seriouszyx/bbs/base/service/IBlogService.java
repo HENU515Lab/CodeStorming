@@ -108,4 +108,10 @@ public interface IBlogService {
      * @param id
      */
     void deleteBlogComment(Long id);
+
+    /**
+     * 增加文章浏览数
+     * @param id
+     */
+    void addBlogReadSize(Long id);
 }
