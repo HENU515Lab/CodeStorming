@@ -161,3 +161,6 @@
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput.min.css" />
 <link rel="stylesheet" href="static/bootstrap-fileinput/css/fileinput-rtl.min.css" />
 
+<link rel="stylesheet" href="static/web/css/success_modal.css" />
+<#-- toastr -->
+<link rel="stylesheet" href="static/web/third_party/toastr/toastr.min.css">

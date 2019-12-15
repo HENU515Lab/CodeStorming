@@ -104,6 +104,14 @@ public class BlogController {
         return result;
     }
 
+    @RequestMapping("blogCommentItemDelete")
+    @ResponseBody
+    public Map<String, Object> blogCommentItemDelete(Long id) {
+        Map<String, Object> result = new HashMap<>();
+        blogService.deleteBlogComment(id);
+        return result;
+    }
+
     private boolean isNullOrEmpty(String s) {
         return s == null || s.trim().equals("");
     }
