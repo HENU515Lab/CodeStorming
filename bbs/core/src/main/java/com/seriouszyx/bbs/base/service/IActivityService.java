@@ -15,6 +15,12 @@ public interface IActivityService {
      */
     PageInfo<Activity> listAll(Integer pageNum, Integer pageSize);
 
+    /**
+     * 不分页查询所有活动信息
+     * @return
+     */
+    List<Activity> listAll();
+
     Activity selectById(Long id);
 
     /**

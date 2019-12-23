@@ -33,6 +33,11 @@ public class ActivityServiceImpl implements IActivityService {
     }
 
     @Override
+    public List<Activity> listAll() {
+        return activityMapper.selectAll();
+    }
+
+    @Override
     public Activity selectById(Long id) {
         return activityMapper.selectByPrimaryKey(id);
     }
