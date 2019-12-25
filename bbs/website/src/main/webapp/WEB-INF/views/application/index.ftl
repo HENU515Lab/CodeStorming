@@ -25,20 +25,34 @@
                         <a href="/training.do" style="text-decoration: none;">
                             <div class="panel">
                                 <div class="panel-body" style="padding: 0; margin-top: 10px;">
-                                    <img src="https://i.loli.net/2019/11/21/jxqputfK4IrBVwg.jpg" alt="码不停题的图标" width="100%">
+                                    <img src="https://upyun.seriouszyx.com/picgo/jxqputfK4IrBVwg.jpg" alt="码不停题的图标" width="100%">
                                 </div>
                                 <div class="panel-footer text-center" style="background-color: white; ">
 
                                     <span style="font-size: 24px; font-weight: 500; color: #3c4043; line-height: 2.5rem;">码不停题</span>
                                     <br>
-<#--                                    <span style="font-size: 12px; color: #3c4043;">浏览：1587</span>-->
-
                                 </div>
                             </div>
+
                         </a>
 
                     </div>
 
+                    <div class="col-xs-4 col-sm-4">
+                        <a href="/training4j.do" style="text-decoration: none;">
+                            <div class="panel">
+                                <div class="panel-body" style="padding: 0; margin-top: 10px;">
+                                    <img src="https://upyun.seriouszyx.com/picgo/wallhaven-5w6p35 (1).jpg" alt="码不停题的图标" width="100%">
+                                </div>
+                                <div class="panel-footer text-center" style="background-color: white; ">
+                                    <span style="font-size: 24px; font-weight: 500; color: #3c4043; line-height: 2.5rem;">放码过来</span>
+                                    <br>
+                                </div>
+                            </div>
+
+                        </a>
+
+                    </div>
 
 
                 </div>
