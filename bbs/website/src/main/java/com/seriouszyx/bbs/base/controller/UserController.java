@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
 import com.seriouszyx.bbs.base.domain.Logininfo;
 import com.seriouszyx.bbs.base.domain.User;
@@ -27,6 +28,10 @@ import java.util.Map;
 @Controller
 public class UserController {
 
+
+    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int FIRST_PAGE_NUM = 1;
+
     @Autowired
     private ILogininfoService logininfoService;
 
@@ -41,10 +46,17 @@ public class UserController {
 
 
     @RequestMapping("userspace")
-    public String userspace(@RequestParam("id") Long otherId, Model model) {
+    public String userspace(@RequestParam("id") Long otherId, Model model, Integer pageNum) {
         Logininfo current = UserContext.getCurrent();
-        List<Blog> blogs = blogService.listByAuthorId(otherId);
-        model.addAttribute("blogList", blogs);
+
+        if (pageNum == null) {
+            PageInfo<Blog> blogs = blogService.listByAuthorId(otherId, FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", blogs);
+        } else {
+            PageInfo<Blog> blogs = blogService.listByAuthorId(otherId, pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", blogs);
+        }
+
         if (current == null || current.getId() != otherId) {
             // 访问其他人的空间
             User otherUser = userService.getUserById(otherId);

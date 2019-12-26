@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Activity;
 import com.seriouszyx.bbs.base.domain.ActivityContent;
 import com.seriouszyx.bbs.base.domain.ActivityContentRecord;
@@ -10,6 +11,12 @@ public interface IActivityService {
 
     /**
      * 按时间倒序查询所有活动
+     * @return
+     */
+    PageInfo<Activity> listAll(Integer pageNum, Integer pageSize);
+
+    /**
+     * 不分页查询所有活动信息
      * @return
      */
     List<Activity> listAll();
@@ -57,5 +64,12 @@ public interface IActivityService {
 
     void updateActivityContentRecord(Long userId, Long activityId, String filePath);
 
-    List<ActivityContentRecord> selectRecordList(Long id);
+    /**
+     * 查询指定活动的提交记录
+     * @param id
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageInfo<ActivityContentRecord> selectRecordList(Long id, Integer pageNum, Integer pageSize);
 }

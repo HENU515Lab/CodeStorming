@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class JsonResult implements Serializable {
 
     public static final int SUCCESS = 0;
-    public static final int ERROR = 1;
+    public static final int ERROR = -1;
 
     private int code;
     /** 错误消息  */

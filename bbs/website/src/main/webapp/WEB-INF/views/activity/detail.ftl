@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>AcWing</title>
+    <title>活动-515lab</title>
     <#include "../common/links-tpl.ftl" />
 </head>
 <body id="acwing_body">

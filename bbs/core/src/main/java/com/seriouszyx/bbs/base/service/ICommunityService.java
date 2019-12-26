@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Community;
 import com.seriouszyx.bbs.base.domain.CommunityAnswer;
 
@@ -14,7 +15,7 @@ public interface ICommunityService {
      * 按创建时间列出所有问答
      * @return
      */
-    List<Community> listAll();
+    PageInfo<Community> listAll(Integer pageNum, Integer pageSize);
 
     /**
      * 根据问题id查询问题详细内容

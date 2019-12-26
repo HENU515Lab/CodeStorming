@@ -1,6 +1,9 @@
 package com.seriouszyx.bbs.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
+import com.seriouszyx.bbs.base.domain.BlogComment;
+import com.seriouszyx.bbs.base.domain.mgr.MgrBlogComment;
 
 import java.util.List;
 
@@ -16,7 +19,14 @@ public interface IBlogService {
     void saveBlog(Blog blog);
 
     /**
-     * 查询所有文章
+     * 分页查询所有文章
+     * @param pageNum 当前页数
+     * @return
+     */
+    PageInfo<Blog> listAll(int pageNum, int pageSize);
+
+    /**
+     * 不分页查询所有文章
      * @return
      */
     List<Blog> listAll();
@@ -40,7 +50,7 @@ public interface IBlogService {
      * @param authorId
      * @return
      */
-    List<Blog> listByAuthorId(Long authorId);
+    PageInfo<Blog> listByAuthorId(Long authorId, Integer pageNum, Integer pageSize);
 
     /**
      * 为指定文章点赞
@@ -61,4 +71,47 @@ public interface IBlogService {
      * @param blogId
      */
     int selectBlogVoteRecord(Long blogId);
+
+    /**
+     * 根据文章id更新文章
+     * @param blog
+     */
+    int updateBlog(Blog blog);
+
+    /**
+     * 删除置顶文章及相关评论、投票
+     * @param id
+     */
+    void removeBlogByPrimaryKey(Long id);
+
+    /**
+     * 查询所有评论
+     * @return
+     */
+    List<MgrBlogComment> listComments();
+
+    /**
+     * 根据评论id查询评论信息
+     * @param id
+     * @return
+     */
+    BlogComment listByCommentId(Long id);
+
+    /**
+     * 更新评论信息
+     * @param blogComment
+     */
+    void updateBlogComment(BlogComment blogComment);
+
+    /**
+     * 删除评论信息
+     * @param id
+     */
+    void deleteBlogComment(Long id);
+
+    /**
+     * 增加文章浏览数
+     * @param id
+     */
+    void addBlogReadSize(Long id);
 }

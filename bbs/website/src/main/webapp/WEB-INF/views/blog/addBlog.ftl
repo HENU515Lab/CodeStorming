@@ -94,7 +94,12 @@
                         <form id="add_a_solution_form" method="post" action="/submitBlog.do" enctype="multipart/form-data">
                             <div class="row ui form">
                                 <div class="col-xs-8">
-                                    <input type="text" name="title" placeholder="标题" maxlength="200" id="id_title">
+                                    <#if !blog??>
+                                        <input type="text" name="title" placeholder="标题" maxlength="200" id="id_title">
+                                    <#else>
+                                        <input type="text" name="title" value="${blog.title}" maxlength="200" id="id_title">
+                                    </#if>
+
                                 </div>
                                 <div class="col-xs-4">
                                     <input type="text" name="keywords" placeholder="关键字（逗号分隔）" maxlength="50" id="id_keywords">
@@ -105,7 +110,13 @@
                                 <div class="col-xs-12">
 
                                     <div id="editor">
-                                        <textarea name="content" style="display:none;">### 请写下你的分享或见解</textarea>
+                                        <#if !blog??>
+                                            <textarea name="content" style="display:none;">### 请写下你的分享或见解</textarea>
+                                        <#else>
+                                            <textarea name="content" style="display:none;">${blog.content}</textarea>
+                                            <input type="hidden" name="id" value="${blog.id}" />
+                                        </#if>
+
                                     </div>
 
                                 </div>

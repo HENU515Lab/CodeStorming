@@ -1,9 +1,9 @@
 package com.seriouszyx.bbs.base.service.impl;
 
-import com.seriouszyx.bbs.base.domain.Blog;
-import com.seriouszyx.bbs.base.domain.BlogComment;
-import com.seriouszyx.bbs.base.domain.BlogVoteRecord;
-import com.seriouszyx.bbs.base.domain.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seriouszyx.bbs.base.domain.*;
+import com.seriouszyx.bbs.base.domain.mgr.MgrBlogComment;
 import com.seriouszyx.bbs.base.mapper.BlogCommentMapper;
 import com.seriouszyx.bbs.base.mapper.BlogMapper;
 import com.seriouszyx.bbs.base.mapper.BlogVoteRecordMapper;
@@ -42,8 +42,15 @@ public class BlogServiceImpl implements IBlogService {
             blog.setBlogType(1);
             blogMapper.insert(blog);
         } else {
-            blogMapper.updateByPrimaryKey(blog);
+            blogMapper.updateTitleAndContentByPrimarykey(blog);
         }
+    }
+
+    @Override
+    public PageInfo<Blog> listAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<Blog> pageInfo = new PageInfo<>(blogMapper.selectAll());
+        return pageInfo;
     }
 
     @Override
@@ -67,8 +74,9 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public List<Blog> listByAuthorId(Long authorId) {
-        return blogMapper.selectByAuthorId(authorId);
+    public PageInfo<Blog> listByAuthorId(Long authorId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(blogMapper.selectByAuthorId(authorId));
     }
 
     @Override
@@ -132,5 +140,44 @@ public class BlogServiceImpl implements IBlogService {
             return 0;
         return offset;
     }
+
+    @Override
+    public int updateBlog(Blog blog) {
+        return blogMapper.updateByPrimaryKey(blog);
+    }
+
+    @Override
+    @Transactional
+    public void removeBlogByPrimaryKey(Long id) {
+        blogVoteRecordMapper.deleteByBlogId(id);
+        blogCommentMapper.deleteByBlogId(id);
+        blogMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<MgrBlogComment> listComments() {
+        return blogCommentMapper.selectAll();
+    }
+
+    @Override
+    public BlogComment listByCommentId(Long id) {
+        return blogCommentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateBlogComment(BlogComment blogComment) {
+        blogCommentMapper.updateByPrimaryKey(blogComment);
+    }
+
+    @Override
+    public void deleteBlogComment(Long id) {
+        blogCommentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void addBlogReadSize(Long id) {
+        blogMapper.addReadSize(id);
+    }
+
 
 }

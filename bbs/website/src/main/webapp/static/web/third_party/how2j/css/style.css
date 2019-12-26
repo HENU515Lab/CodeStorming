@@ -1,0 +1,489 @@
+.show{
+border:1px solid red;
+
+}
+
+.testxxx{
+	
+}
+
+
+.body{
+	margin:0 20px;
+/* 	width:1920px; */
+}
+
+div#allContent{
+/* 	max-width:1440px; */
+	margin:0 auto;		
+}
+
+br{
+ margin-bottom:3px;
+}
+
+.boldWord{
+	font-weight:bold !important;
+}
+
+.success_bg{
+ background-color: #d6e9c6 !important;
+}
+
+H1,h2,h3,h4{
+  display:inline;
+  font-size:16px !important;
+  font-weight:normal !important;
+}
+
+.strong{
+/*	color:#a94442;*/
+	color:#F0AD4E;
+/*	color:#428BCA;*/
+	font-weight:bold;
+/* 	font-style:italic;	 */
+	padding-right:3px;
+	padding-left:3px;
+	font-size:14px;
+}
+
+a {
+	text-decoration: none;
+	color:#55f;
+}
+
+.basicColor{
+color:#428BCA;	
+}
+
+span.tab{
+	padding:0 10px;
+}
+
+a:hover{
+	text-decoration:none !important;
+}
+
+
+div.nav{
+	height:45px;
+}
+div.nav a{
+	line-height:45px;
+	color:white;
+	margin-left:12px;
+	margin-right:12px;
+}
+div.nav span{
+/* 	line-height:45px; */
+}
+div.nav a:hover{
+	color:white;
+}
+
+footer.footer{
+  padding: 20px 0;
+  color: #999;
+  font-size:0.8em;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
+
+.center{
+	
+margin:0 auto;	
+}
+
+
+span.logo{
+	font:bold 40px Impact;
+	margin:0px;
+}
+span.logo2{
+	font:bold 40px Impact;
+	color:blue;
+	margin:0px;
+	letter-spacing: 1px
+}
+
+*{
+font-size:15px;
+font-family: Helvetica;
+}
+
+
+.showTable td{
+border-style:solid;
+border-width:1px;
+border-color:gray;
+}
+
+td.homepageModule{
+	padding:10px;
+}
+
+td.homepageModule div{
+	background-color:#eee;
+}
+
+div.tryit table{
+    margin:20px;
+	border-spacing:2px;
+	border-collapse:separate;
+}
+
+span.moduleName{
+	font-weight:bold;
+}
+
+
+
+div.stepdesc a{
+text-decoration:underline;
+}
+
+div.stepdesc{
+background-color:#F5F5F5;	
+}
+div.moduledesc{
+	padding:10px;
+	background-color:#F5F5F5;	
+	margin:10px;
+}
+
+
+
+
+
+.syntaxhighlighter table .container:before {
+    display:none !important;
+}
+div.syntaxhighlighter table tbody tr td.gutter div.line {
+    font-size:18px !important;
+}
+div.syntaxhighlighter table tbody tr td.code div.line {
+    font-size:18px !important;
+}
+
+div.showDiv{
+	border: 0px dashed gray;
+	margin-bottom:0px;
+	padding:0px;
+}
+
+
+.smallword{
+	font-size:0.85em;
+}
+
+
+
+.codeodd {
+	background-color: #FBFBFB;
+}
+
+.codeeven {
+	background-color: #f0f0f0;
+}
+
+div.code {
+	margin-top:10px;
+	width: 100%;
+	border: 1px #ddd solid;
+	border-left:3px #ddd solid;
+	padding:0px;
+	
+}
+
+div.code div{
+	white-space:pre;
+	padding-left:10px;
+}
+
+div.code div.codefirst,div.codelast {
+	height:6px;
+	
+}
+
+
+table.allTable{
+	table-layout:fixed;	
+}
+
+fieldset.forstep{
+	padding: .35em .625em .75em !important;
+	margin: 2px 2px !important;
+	border: 1px dashed silver !important;
+}
+
+legend.forstep{
+	padding: 15 15 0 15 !important;
+	border: 0 !important;
+	width: auto !important;
+	font-size: 12px !important;
+	color: silver !important;
+	margin-bottom: 0px !important;
+}
+
+div#videoDiv{
+	display:none;
+}
+div.videoDiv4step{
+	display:none;
+}
+
+div.codemirrorTips span{
+	color:lightgray;
+/* 	display:list-item; */
+}
+div.codemirrorTips{
+	margin-bottom:20px;
+}
+
+.progress{
+/* 	height:20px !important; */
+/* 	background-color: #fff !important; */
+/*   	border-radius: 0px !important; */
+/* 	border-top-left-radius:4px !important; */
+/* 	border-top-right-radius:0px !important; */
+/* 	border-bottom-right-radius:0px !important; */
+/* 	border-bottom-left-radius:4px !important;	  	 */
+/*   	-webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 1)!important;; */
+/*     box-shadow: inset 0 0px 0px rgba(0, 0, 0, 1)!important;;	 */
+}
+
+
+div.eachCommentTabDiv,div.eachCommentDescDivIfOnly,div.answerOfComment{
+	white-space:pre-wrap;
+}
+
+img.stepImage{
+	max-width:80%;
+}
+
+.attributeNotSelected{
+	color:#D3D3D3;
+}
+
+div.cssAttributeDiv{
+	color:gray;
+	width:310px;
+	border:2px solid lightgray;
+	margin:10px 0px 10px 0px;
+	padding:10px 10px 0px 10px;
+}
+span.toggleThisStyle:hover{
+	 	cursor:pointer;
+/*  	border:1px solid #3c763d; */
+}
+div.cssAttributeDiv:hover{
+/*  	cursor:pointer; */
+/*  	border:1px solid #3c763d; */
+}
+div.cssAttributeDiv4practise{
+	color:gray;
+	width:310px;
+	border:1px solid #ddd;
+	margin:10px 0px 10px 0px;
+	padding:10px 10px 0px 10px;
+}
+
+div.cssAttribute{
+	margin-left:20px;
+	text-decoration: underline;
+	cursor:pointer;
+	display:inline;
+}
+
+div.cssAttributeDesc{
+	margin-left:40px;
+	font-weight:bold;
+	width:250px;
+}
+
+div.htmlpart{
+/* 	position: fixed; */
+/* 	top:243px; */
+/* 	left:0px; */
+/* 	width:100%; */
+/* 	margin-left:450px; */
+/* 	padding-right:500px; */
+
+	margin:50px;
+	padding:0px;
+	overflow-x:hidden;
+	overflow-y:auto;
+
+/* 	height:560px; 	 */
+}
+div.sytlesheader{
+	width:310px;
+	margin:10px 0px 10px 0px;
+	text-align:center;
+	font-weight:bold;
+	font-size:16px;
+}
+
+div.styles{
+	float:left;
+	margin-right:50px;
+}
+
+div.stylesDiv{
+	padding:0px 50px 0px 50px;
+}
+div.sytlessubheader{
+	font-size:12px;
+	margin:0px auto !important;
+	width:65px;
+	border:1px solid red;
+}
+
+div.styleBody{
+	border-top:1px dotted lightgray;
+	margin:10px -10px 10px -10px;	
+	padding:10px;
+}
+
+input.cssAttributeKey{
+	width:100px;
+	margin:20px 0px 0px 20px;
+}
+input.cssAttributeValue{
+	width:120px;
+	margin:20px 5px 0px 00px;
+}
+
+input.cssAttributeInput{
+	display:inline-block;
+}
+span.hideThisStyle,span.showThisStyle{
+	cursor:pointer;
+}
+
+a.addcssAttributes{
+
+}
+div.styleDesc{
+	width:200px;
+	font-size:0.9em;
+}
+
+input.cssAttributeEditInput{
+	display:block;
+	margin:5px 0px 0px 40px;
+}
+
+div.promoteCodeDiv{
+/* 	visibility:hidden; */
+}
+div.promoteCodeOutDiv{
+	margin-top:46px;
+	display:inline-block;
+	width:235px;
+}
+span.promoteMessage{
+	display:inline-block;
+	margin-top:53px;
+	margin-left:10px;
+}
+span.promotedMoney{
+	display:none;
+}
+div.noRight2VisitVideoDiv{
+	text-align:center;	
+}
+img.noRight2VisitVideo{
+	cursor:not-allowed;
+}
+span.viedoSuggestion{
+	display:block;
+	margin:15px auto 0px auto;
+	font-size:12px;
+	width:650px;
+	color:lightgray;
+}
+span.viedoIntro{
+	display:block;
+	margin:25px auto 0px auto;
+	font-size:12px;
+	width:600px;
+}
+
+span.practisePosture{
+	margin:0px 20px ;
+	font-size:12px;
+	color:gray;	
+}
+span.practisePosture a{
+	font-size:12px;
+}
+	
+
+div.productList{
+	width:800px;
+	margin:100px auto;
+	
+}
+
+div.scoreProductPageDIV p{
+	margin-left:20px;
+	color:#666;
+}
+
+div.practisePostureHeading{
+	font-size:16px;
+	color:dark;
+}
+div.practisePostureDesc{
+	font-size:12px;
+	color:gray;
+	text-indent:25px;
+	margin:5px 0px 5px 0px;	
+}
+
+p.shareCodePurpose{
+	font-size:1.2em;
+}
+p.shareCodeDesc{
+	text-indent: 50px;
+	font-size:0.8em;
+	color:gray;
+}
+p.shareCodeTitle{
+	font-size:1.2em;
+}
+
+div.showShareCodeAllDiv{
+	margin:20px auto;
+	display:block;
+	min-width:960px;
+	max-width:1440px;
+	width:90%;
+}
+div.showShareOneCodeAllDiv{
+	margin:20px auto;
+	display:block;
+	min-width:960px;
+	max-width:1440px;
+	width:90%;
+}
+
+div#submitShareCode{
+	margin-top:20px;
+}
+
+.mask4spider-true{
+	display:none;
+}
+
+ul.moreMenu li a{
+	color:red;
+	font-size:15px;
+	color:white;
+}
+
+.requireAuthentication{
+	display:none;
+}

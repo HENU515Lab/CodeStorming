@@ -22,4 +22,10 @@ public interface BlogMapper {
                                    @Param("offset") int offset);
 
     int selectVoteSizeByPrimaryKey(Long id);
+
+    Blog selectSimpleInfoByPrimaryKey(Long id);
+
+    void addReadSize(Long id);
+
+    void updateTitleAndContentByPrimarykey(Blog blog);
 }

@@ -1,5 +1,6 @@
 package com.seriouszyx.bbs.base.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Blog;
 import com.seriouszyx.bbs.base.domain.Logininfo;
 import com.seriouszyx.bbs.base.service.IBlogService;
@@ -18,19 +19,32 @@ import java.util.Map;
 @Controller
 public class BlogController {
 
+    private final int DEFAULT_PAGE_SIZE = 10;
+    private final int FIRST_PAGE_NUM = 1;
+
     @Autowired
     public IBlogService blogService;
 
     @RequestMapping("blog")
-    public String blog(Model model) {
-        model.addAttribute("blogList", blogService.listAll());
+    public String blog(Model model, Integer pageNum) {
+        if (pageNum == null) {
+            PageInfo<Blog> pageInfo = blogService.listAll(FIRST_PAGE_NUM, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", pageInfo);
+        } else {
+            PageInfo<Blog> pageInfo = blogService.listAll(pageNum, DEFAULT_PAGE_SIZE);
+            model.addAttribute("blogList", pageInfo);
+        }
         model.addAttribute("currentNav", "blog");
         return "blog/index";
     }
 
     @RequireLogin
     @RequestMapping("addBlog")
-    public String addBlog(String id) {
+    public String addBlog(Long id, Model model) {
+        if (id != null) {
+            Blog blog = blogService.listById(id);
+            model.addAttribute("blog", blog);
+        }
         return "blog/addBlog";
     }
 
@@ -58,8 +72,7 @@ public class BlogController {
                 return "blog/error";
             }
         }
-        blog.setReadSize(blog.getReadSize() + 1);
-        blogService.saveBlog(blog);
+        blogService.addBlogReadSize(id);
         int voteOffset = blogService.selectBlogVoteRecord(id);
         model.addAttribute("voteOffset", voteOffset);
         model.addAttribute("blog", blog);
@@ -88,6 +101,14 @@ public class BlogController {
         Map<String, Object> result = new HashMap<>();
         result.put("error_message", "remove_success");
         result.put("votecnt", blogService.removeBlogVote(Long.valueOf(blogId)));
+        return result;
+    }
+
+    @RequestMapping("blogCommentItemDelete")
+    @ResponseBody
+    public Map<String, Object> blogCommentItemDelete(Long id) {
+        Map<String, Object> result = new HashMap<>();
+        blogService.deleteBlogComment(id);
         return result;
     }
 

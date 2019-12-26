@@ -1,5 +1,7 @@
 package com.seriouszyx.bbs.base.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Activity;
 import com.seriouszyx.bbs.base.domain.ActivityContent;
 import com.seriouszyx.bbs.base.domain.ActivityContentRecord;
@@ -23,6 +25,12 @@ public class ActivityServiceImpl implements IActivityService {
     private ActivityContentMapper activityContentMapper;
     @Autowired
     private ActivityContentRecordMapper activityContentRecordMapper;
+
+    @Override
+    public PageInfo<Activity> listAll(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(activityMapper.selectAll());
+    }
 
     @Override
     public List<Activity> listAll() {
@@ -72,8 +80,9 @@ public class ActivityServiceImpl implements IActivityService {
     }
 
 
-    public List<ActivityContentRecord> selectRecordList(Long activityId) {
-        return this.activityContentRecordMapper.selectRecordList(activityId);
+    public PageInfo<ActivityContentRecord> selectRecordList(Long activityId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return new PageInfo<>(this.activityContentRecordMapper.selectRecordList(activityId));
     }
 }
 

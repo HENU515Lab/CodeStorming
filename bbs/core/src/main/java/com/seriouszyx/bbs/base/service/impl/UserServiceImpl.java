@@ -1,5 +1,7 @@
 package com.seriouszyx.bbs.base.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seriouszyx.bbs.base.domain.Logininfo;
 import com.seriouszyx.bbs.base.domain.User;
 import com.seriouszyx.bbs.base.mapper.LogininfoMapper;

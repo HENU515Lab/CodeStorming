@@ -21,4 +21,9 @@ public class ApplicationController {
         return "application/application-intro";
     }
 
+    @RequestMapping("training4j")
+    public String training4j() {
+        return "application/training4j";
+    }
+
 }

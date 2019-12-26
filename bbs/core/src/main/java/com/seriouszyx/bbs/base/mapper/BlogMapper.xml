@@ -42,16 +42,39 @@
       #{createTime,jdbcType=TIMESTAMP}, #{readSize,jdbcType=INTEGER}, #{voteSize,jdbcType=INTEGER},
       #{content,jdbcType=LONGVARCHAR}, #{weight,jdbcType=TINYINT}, #{blogType})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
+    <update id="addReadSize">
+      update `blog`
+      set read_size = read_size + 1
+      where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.seriouszyx.bbs.base.domain.Blog">
     update `blog`
-    set title = #{title,jdbcType=VARCHAR},
-      comment_size = #{commentSize,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      read_size = #{readSize,jdbcType=INTEGER},
-      vote_size = #{voteSize,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR},
-      weight = #{weight,jdbcType=TINYINT},
-      blog_type = #{blogType}
+    <set>
+      <if test="title != null and title != ''">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="commentSize != null">
+        comment_size = #{commentSize,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readSize != null">
+        read_size = #{readSize,jdbcType=INTEGER},
+      </if>
+      <if test="voteSize != null">
+        vote_size = #{voteSize,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="blogType != null">
+        blog_type = #{blogType},
+      </if>
+    </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
     <update id="updateVoteSizeByPrimaryKey">
@@ -59,7 +82,13 @@
       set vote_size = vote_size + #{offset}
       where id = #{id}
     </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
+  <update id="updateTitleAndContentByPrimarykey">
+    update `blog`
+    set title = #{title},
+    content = #{content}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="blogWithComments">
      select b.id as bid, b.title, b.author_id, b.comment_size, b.create_time, b.read_size, b.vote_size, b.content,
     b.weight, b.blog_type, u.id, u.truename, u.avatar, u.grade, u.introduce, u.username
     from `user` u inner join `blog` b
@@ -83,6 +112,11 @@
   </select>
   <select id="selectVoteSizeByPrimaryKey" resultType="java.lang.Integer">
     select vote_size
+    from `blog`
+    where id = #{id}
+  </select>
+  <select id="selectSimpleInfoByPrimaryKey" resultType="com.seriouszyx.bbs.base.domain.Blog">
+    select id, title
     from `blog`
     where id = #{id}
   </select>

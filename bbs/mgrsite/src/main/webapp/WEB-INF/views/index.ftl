@@ -1,483 +1,639 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>layuiAdmin std - 通用后台管理模板系统（iframe标准版）</title>
+  <title>AdminLTE 3 | Dashboard</title>
   <#include "common/links-tpl.ftl" />
 </head>
-<body class="layui-layout-body">
-  
-  <div id="LAY_app">
-    <div class="layui-layout layui-layout-admin">
-      <div class="layui-header">
-        <!-- 头部区域 -->
-        <ul class="layui-nav layui-layout-left">
-          <li class="layui-nav-item layadmin-flexible" lay-unselect>
-            <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-              <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="http://www.layui.com/admin/" target="_blank" title="前台">
-              <i class="layui-icon layui-icon-website"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item" lay-unselect>
-            <a href="javascript:;" layadmin-event="refresh" title="刷新">
-              <i class="layui-icon layui-icon-refresh-3"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords="> 
-          </li>
-        </ul>
-        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
-          
-          <li class="layui-nav-item" lay-unselect>
-            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
-              <i class="layui-icon layui-icon-notice"></i>  
-              
-              <!-- 如果有新消息，则显示小圆点 -->
-              <span class="layui-badge-dot"></span>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="theme">
-              <i class="layui-icon layui-icon-theme"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="note">
-              <i class="layui-icon layui-icon-note"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="fullscreen">
-              <i class="layui-icon layui-icon-screen-full"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item" lay-unselect>
-            <a href="javascript:;">
-              <cite>贤心</cite>
-            </a>
-            <dl class="layui-nav-child">
-              <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-              <dd><a lay-href="set/user/password.html">修改密码</a></dd>
-              <hr>
-              <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
-            </dl>
-          </li>
-          
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
-          </li>
-          <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-            <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-          </li>
-        </ul>
-      </div>
-      
-      <!-- 侧边菜单 -->
-      <div class="layui-side layui-side-menu">
-        <div class="layui-side-scroll">
-          <div class="layui-logo" lay-href="/console.do">
-            <span>layuiAdmin</span>
-          </div>
-          
-          <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a href="javascript:;" lay-tips="主页" lay-direction="2">
-                <i class="layui-icon layui-icon-home"></i>
-                <cite>主页</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd data-name="console" class="layui-this">
-                  <a lay-href="console.do">控制台</a>
-                </dd>
-                <dd data-name="console">
-                  <a lay-href="home/homepage1.html">主页一</a>
-                </dd>
-                <dd data-name="console">
-                  <a lay-href="home/homepage2.html">主页二</a>
-                </dd>
-              </dl>
-            </li>
-            <li data-name="component" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="组件" lay-direction="2">
-                <i class="layui-icon layui-icon-component"></i>
-                <cite>组件</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd data-name="grid">
-                  <a href="javascript:;">栅格</a>
-                  <dl class="layui-nav-child">
-                    <dd data-name="list"><a lay-href="component/grid/list.html">等比例列表排列</a></dd>
-                    <dd data-name="mobile"><a lay-href="component/grid/mobile.html">按移动端排列</a></dd>
-                    <dd data-name="mobile-pc"><a lay-href="component/grid/mobile-pc.html">移动桌面端组合</a></dd>
-                    <dd data-name="all"><a lay-href="component/grid/all.html">全端复杂组合</a></dd>
-                    <dd data-name="stack"><a lay-href="component/grid/stack.html">低于桌面堆叠排列</a></dd>
-                    <dd data-name="speed-dial"><a lay-href="component/grid/speed-dial.html">九宫格</a></dd>
-                  </dl>
-                </dd>
-                <dd data-name="button">
-                  <a lay-href="component/button/index.html">按钮</a>
-                </dd>
-                <dd data-name="form">
-                  <a href="javascript:;">表单</a>
-                  <dl class="layui-nav-child">
-                    <dd><a lay-href="component/form/element.html">表单元素</a></dd>
-                    <dd><a lay-href="component/form/group.html">表单组合</a></dd>
-                  </dl>
-                </dd>
-                <dd data-name="nav">
-                  <a lay-href="component/nav/index.html">导航</a>
-                </dd>
-                <dd data-name="tabs">
-                  <a lay-href="component/tabs/index.html">选项卡</a>
-                </dd>
-                <dd data-name="progress">
-                  <a lay-href="component/progress/index.html">进度条</a>
-                </dd>
-                <dd data-name="panel"> 
-                  <a lay-href="component/panel/index.html">面板</a>  
-                </dd>
-                <dd data-name="badge"> 
-                  <a lay-href="component/badge/index.html">徽章</a>  
-                </dd>
-                <dd data-name="timeline"> 
-                  <a lay-href="component/timeline/index.html">时间线</a>  
-                </dd>
-                <dd data-name="anim"> 
-                  <a lay-href="component/anim/index.html">动画</a>  
-                </dd>
-                <dd data-name="auxiliar"> 
-                  <a lay-href="component/auxiliar/index.html">辅助</a>  
-                </dd>
-                <dd data-name="layer"> 
-                  <a href="javascript:;">通用弹层<span class="layui-nav-more"></span></a>  
-                  <dl class="layui-nav-child">  
-                    <dd data-name="list"> 
-                      <a lay-href="component/layer/list.html" lay-text="layer 功能演示">功能演示</a> 
-                    </dd>  
-                    <dd data-name="special-demo"> 
-                      <a lay-href="component/layer/special-demo.html" lay-text="layer 特殊示例">特殊示例</a> 
-                    </dd>  
-                    <dd data-name="theme"> 
-                      <a lay-href="component/layer/theme.html" lay-text="layer 风格定制">风格定制</a> 
-                    </dd>  
-                  </dl>  
-                </dd>
-                <dd data-name="laydate"> 
-                  <a href="javascript:;">日期时间</a>
-                  <dl class="layui-nav-child">  
-                    <dd data-name="demo1"> 
-                      <a lay-href="component/laydate/demo1.html" lay-text="layDate 功能演示一">功能演示一</a> 
-                    </dd>
-                    <dd data-name="demo2"> 
-                      <a lay-href="component/laydate/demo2.html" lay-text="layDate 功能演示二">功能演示二</a> 
-                    </dd>
-                    <dd data-name="theme"> 
-                      <a lay-href="component/laydate/theme.html" lay-text="layDate 设定主题">设定主题</a> 
-                    </dd>
-                    <dd data-name="special-demo"> 
-                      <a lay-href="component/laydate/special-demo.html" lay-text="layDate 特殊示例">特殊示例</a> 
-                    </dd>  
-                  </dl>  
-                </dd>
-                <dd data-name="table-static"> 
-                  <a lay-href="component/table/static.html">静态表格</a>
-                </dd>
-                <dd data-name="table"> 
-                  <a href="javascript:;">数据表格</a>
-                  <dl class="layui-nav-child">  
-                    <dd data-name="simple"> 
-                      <a lay-href="component/table/simple.html" lay-text="">简单数据表格</a> 
-                    </dd>
-                    <dd data-name="auto"> 
-                      <a lay-href="component/table/auto.html" lay-text="">列宽自动分配</a> 
-                    </dd>
-                    <dd data-name="data"> 
-                      <a lay-href="component/table/data.html" lay-text="">赋值已知数据</a> 
-                    </dd>
-                    <dd data-name="tostatic"> 
-                      <a lay-href="component/table/tostatic.html" lay-text="">转化静态表格</a> 
-                    </dd>
-                    <dd data-name="page"> 
-                      <a lay-href="component/table/page.html" lay-text="">开启分页</a> 
-                    </dd>
-                    <dd data-name="resetPage"> 
-                      <a lay-href="component/table/resetPage.html" lay-text="">自定义分页</a> 
-                    </dd>
-                    <dd data-name="toolbar"> 
-                      <a lay-href="component/table/toolbar.html" lay-text="">开启头部工具栏</a> 
-                    </dd>
-                    <dd data-name="totalRow"> 
-                      <a lay-href="component/table/totalRow.html" lay-text="">开启合计行</a> 
-                    </dd>
-                    <dd data-name="height"> 
-                      <a lay-href="component/table/height.html" lay-text="">高度最大适应</a> 
-                    </dd>
-                    <dd data-name="checkbox"> 
-                      <a lay-href="component/table/checkbox.html" lay-text="">开启复选框</a> 
-                    </dd>
-                    <dd data-name="radio"> 
-                      <a lay-href="component/table/radio.html" lay-text="">开启单选框</a> 
-                    </dd>
-                    <dd data-name="cellEdit"> 
-                      <a lay-href="component/table/cellEdit.html" lay-text="">开启单元格编辑</a> 
-                    </dd>
-                    <dd data-name="form"> 
-                      <a lay-href="component/table/form.html" lay-text="">加入表单元素</a> 
-                    </dd>
-                    <dd data-name="style"> 
-                      <a lay-href="component/table/style.html" lay-text="">设置单元格样式</a> 
-                    </dd>
-                    <dd data-name="fixed"> 
-                      <a lay-href="component/table/fixed.html" lay-text="">固定列</a> 
-                    </dd>
-                    <dd data-name="operate"> 
-                      <a lay-href="component/table/operate.html" lay-text="">数据操作</a> 
-                    </dd>
-                    <dd data-name="parseData"> 
-                      <a lay-href="component/table/parseData.html" lay-text="">解析任意数据格式</a> 
-                    </dd>
-                    <dd data-name="onrow"> 
-                      <a lay-href="component/table/onrow.html" lay-text="">监听行事件</a> 
-                    </dd>
-                    <dd data-name="reload">
-                      <a lay-href="component/table/reload.html" lay-text="">数据表格的重载</a> 
-                    </dd>
-                    <dd data-name="initSort"> 
-                      <a lay-href="component/table/initSort.html" lay-text="">设置初始排序</a> 
-                    </dd>
-                    <dd data-name="cellEvent"> 
-                      <a lay-href="component/table/cellEvent.html" lay-text="">监听单元格事件</a> 
-                    </dd>
-                    <dd data-name="thead"> 
-                      <a lay-href="component/table/thead.html" lay-text="">复杂表头</a> 
-                    </dd>
-                  </dl>
-                </dd>
-                <dd data-name="laypage"> 
-                  <a href="javascript:;">分页</a>  
-                  <dl class="layui-nav-child">  
-                    <dd data-name="demo1"> 
-                      <a lay-href="component/laypage/demo1.html" lay-text="layPage 功能演示一">功能演示一</a> 
-                    </dd>
-                    <dd data-name="demo2"> 
-                      <a lay-href="component/laypage/demo2.html" lay-text="layPage 功能演示二">功能演示二</a> 
-                    </dd> 
-                  </dl>  
-                </dd>
-                <dd data-name="upload"> 
-                  <a href="javascript:;">上传</a>  
-                  <dl class="layui-nav-child">  
-                    <dd data-name="demo1"> 
-                      <a lay-href="component/upload/demo1.html" lay-text="上传功能演示一">功能演示一</a> 
-                    </dd>
-                    <dd data-name="demo2"> 
-                      <a lay-href="component/upload/demo2.html" lay-text="上传功能演示二">功能演示二</a> 
-                    </dd> 
-                  </dl>  
-                </dd>
-                <dd data-name="colorpicker">
-                  <a lay-href="component/colorpicker/index.html">颜色选择器</a>
-                </dd>
-                <dd data-name="slider">
-                  <a lay-href="component/slider/index.html">滑块组件</a>
-                </dd>
-                <dd data-name="rate">
-                  <a lay-href="component/rate/index.html">评分</a>
-                </dd>
-                <dd data-name="carousel"> 
-                  <a lay-href="component/carousel/index.html">轮播</a>  
-                </dd>
-                <dd data-name="flow"> 
-                  <a lay-href="component/flow/index.html">流加载</a>  
-                </dd>
-                <dd data-name="util"> 
-                  <a lay-href="component/util/index.html">工具</a>  
-                </dd>
-                <dd data-name="code"> 
-                  <a lay-href="component/code/index.html">代码修饰</a> 
-                </dd>
-              </dl>
-            </li>
-            <li data-name="template" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="页面" lay-direction="2">
-                <i class="layui-icon layui-icon-template"></i>
-                <cite>页面</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd><a lay-href="template/personalpage.html">个人主页</a></dd>
-                <dd><a lay-href="template/addresslist.html">通讯录</a></dd>
-                <dd><a lay-href="template/caller.html">客户列表</a></dd>
-                <dd><a lay-href="template/goodslist.html">商品列表</a></dd>
-                <dd><a lay-href="template/msgboard.html">留言板</a></dd>
-                <dd><a lay-href="template/search.html">搜索结果</a></dd>
-                <dd><a href="user/reg.ftl" target="_blank">注册</a></dd>
-                <dd><a href="user/login.ftl" target="_blank">登入</a></dd>
-                <dd><a href="user/forget.html" target="_blank">忘记密码</a></dd>
-                <dd><a lay-href="template/tips/404.html">404页面不存在</a></dd>
-                <dd><a lay-href="template/tips/error.html">错误提示</a></dd>
-                <dd><a lay-href="//www.baidu.com/">百度一下</a></dd>
-                <dd><a lay-href="//www.layui.com/">layui官网</a></dd>
-                <dd><a lay-href="//www.layui.com/admin/">layuiAdmin官网</a></dd>
-              </dl>
-            </li>
-            <li data-name="app" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="应用" lay-direction="2">
-                <i class="layui-icon layui-icon-app"></i>
-                <cite>应用</cite>
-              </a>
-              <dl class="layui-nav-child">
-                
-                <dd data-name="content">
-                  <a href="javascript:;">内容系统</a>
-                  <dl class="layui-nav-child">
-                    <dd data-name="list"><a lay-href="app/content/list.html">文章列表</a></dd>
-                    <dd data-name="tags"><a lay-href="app/content/tags.html">分类管理</a></dd>
-                    <dd data-name="comment"><a lay-href="app/content/comment.html">评论管理</a></dd>
-                  </dl>
-                </dd>
-                <dd data-name="forum">
-                  <a href="javascript:;">社区系统</a>
-                  <dl class="layui-nav-child">
-                    <dd data-name="list"><a lay-href="app/forum/list.html">帖子列表</a></dd>
-                    <dd data-name="replys"><a lay-href="app/forum/replys.html">回帖列表</a></dd>
-                  </dl>
-                </dd>
-                <dd>
-                  <a lay-href="app/message/index.html">消息中心</a>
-                </dd>
-                <dd data-name="workorder">
-                  <a lay-href="app/workorder/list.html">工单系统</a>
-                </dd>
-              </dl>
-            </li>
-            <li data-name="senior" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="高级" lay-direction="2">
-                <i class="layui-icon layui-icon-senior"></i>
-                <cite>高级</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd>
-                  <a layadmin-event="im">LayIM 通讯系统</a>  
-                </dd>
-                <dd data-name="echarts">
-                  <a href="javascript:;">Echarts集成</a>
-                  <dl class="layui-nav-child">
-                    <dd><a lay-href="senior/echarts/line.html">折线图</a></dd>
-                    <dd><a lay-href="senior/echarts/bar.html">柱状图</a></dd>
-                    <dd><a lay-href="senior/echarts/map.html">地图</a></dd>
-                  </dl>
-                </dd>
-              </dl>
-            </li>
-            <li data-name="user" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="用户" lay-direction="2">
-                <i class="layui-icon layui-icon-user"></i>
-                <cite>用户</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd>
-                  <a lay-href="user/user/list.html">网站用户</a>
-                </dd>
-                <dd>
-                  <a lay-href="user/administrators/list.html">后台管理员</a>
-                </dd>
-                <dd>
-                  <a lay-href="user/administrators/role.html">角色管理</a>
-                </dd>
-              </dl>
-            </li>
-            <li data-name="set" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="设置" lay-direction="2">
-                <i class="layui-icon layui-icon-set"></i>
-                <cite>设置</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd class="layui-nav-itemed">
-                  <a href="javascript:;">系统设置</a>
-                  <dl class="layui-nav-child">
-                    <dd><a lay-href="set/system/website.html">网站设置</a></dd>
-                    <dd><a lay-href="set/system/email.html">邮件服务</a></dd>
-                  </dl>
-                </dd>
-                <dd class="layui-nav-itemed">
-                  <a href="javascript:;">我的设置</a>
-                  <dl class="layui-nav-child">
-                    <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                    <dd><a lay-href="set/user/password.html">修改密码</a></dd>
-                  </dl>
-                </dd>
-              </dl>
-            </li>
-            <li data-name="get" class="layui-nav-item">
-              <a href="javascript:;" lay-href="//www.layui.com/admin/#get" lay-tips="授权" lay-direction="2">
-                <i class="layui-icon layui-icon-auz"></i>
-                <cite>授权</cite>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
 
-      <!-- 页面标签 -->
-      <div class="layadmin-pagetabs" id="LAY_app_tabs">
-        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
-        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
-        <div class="layui-icon layadmin-tabs-control layui-icon-down">
-          <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
-            <li class="layui-nav-item" lay-unselect>
-              <a href="javascript:;"></a>
-              <dl class="layui-nav-child layui-anim-fadein">
-                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
-                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
-                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
-              </dl>
-            </li>
-          </ul>
-        </div>
-        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
-          <ul class="layui-tab-title" id="LAY_app_tabsheader">
-            <li lay-id="/console.do" lay-attr="/console.do" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
-          </ul>
-        </div>
-      </div>
-      
-      
-      <!-- 主体内容 -->
-      <div class="layui-body" id="LAY_app_body">
-        <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="/console.do" frameborder="0" class="layadmin-iframe"></iframe>
-        </div>
-      </div>
-      
-      <!-- 辅助元素，一般用于移动设备下遮罩 -->
-      <div class="layadmin-body-shade" layadmin-event="shade"></div>
+  <!-- Navbar -->
+  <#include "common/navbar-tpl.ftl" />
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <#include "common/admin-sidebar-tpl.ftl" />
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-  </div>
+    <!-- /.content-header -->
 
-  <script src="static/layuiadmin/layui/layui.js"></script>
-  <script>
-  layui.config({
-    base: 'static/layuiadmin/' //静态资源所在路径
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use('index');
-  </script>
-  
-  <!-- 百度统计 -->
-  <script>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
-  </script>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>New Orders</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Bounce Rate</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>User Registrations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Unique Visitors</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  Sales
+                </h3>
+                <div class="card-tools">
+                  <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#sales-chart" data-toggle="tab">Donut</a>
+                    </li>
+                  </ul>
+                </div>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content p-0">
+                  <!-- Morris chart - Sales -->
+                  <div class="chart tab-pane active" id="revenue-chart"
+                       style="position: relative; height: 300px;">
+                      <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>                         
+                   </div>
+                  <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                    <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>                         
+                  </div>  
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- DIRECT CHAT -->
+            <div class="card direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title">Direct Chat</h3>
+
+                <div class="card-tools">
+                  <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
+                          data-widget="chat-pane-toggle">
+                    <i class="fas fa-comments"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="static/dist/img/user1-128x128.jpg" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Is this template really for free? That's unbelievable!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="static/dist/img/user3-128x128.jpg" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      You better believe it!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="static/dist/img/user1-128x128.jpg" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Working with AdminLTE on a great new app! Wanna join?
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="static/dist/img/user3-128x128.jpg" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      I would love to.
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                </div>
+                <!--/.direct-chat-messages-->
+
+                <!-- Contacts are loaded here -->
+                <div class="direct-chat-contacts">
+                  <ul class="contacts-list">
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user1-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Count Dracula
+                            <small class="contacts-list-date float-right">2/28/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">How have you been? I was...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user7-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Sarah Doe
+                            <small class="contacts-list-date float-right">2/23/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">I will be waiting for...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user3-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Nadia Jolie
+                            <small class="contacts-list-date float-right">2/20/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">I'll call you back at...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user5-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Nora S. Vans
+                            <small class="contacts-list-date float-right">2/10/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Where is your new...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user6-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            John K.
+                            <small class="contacts-list-date float-right">1/27/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Can I take a look at...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="static/dist/img/user8-128x128.jpg">
+
+                        <div class="contacts-list-info">
+                          <span class="contacts-list-name">
+                            Kenneth M.
+                            <small class="contacts-list-date float-right">1/4/2015</small>
+                          </span>
+                          <span class="contacts-list-msg">Never mind I found...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                  </ul>
+                  <!-- /.contacts-list -->
+                </div>
+                <!-- /.direct-chat-pane -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <div class="input-group">
+                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Send</button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!--/.direct-chat -->
+
+            <!-- TO DO List -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  To Do List
+                </h3>
+
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm">
+                    <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <ul class="todo-list" data-widget="todo-list">
+                  <li>
+                    <!-- drag handle -->
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <!-- checkbox -->
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                      <label for="todoCheck1"></label>
+                    </div>
+                    <!-- todo text -->
+                    <span class="text">Design a nice theme</span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+                    <!-- General tools such as edit or delete-->
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
+                      <label for="todoCheck2"></label>
+                    </div>
+                    <span class="text">Make the theme responsive</span>
+                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo3" id="todoCheck3">
+                      <label for="todoCheck3"></label>
+                    </div>
+                    <span class="text">Let theme shine like a star</span>
+                    <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo4" id="todoCheck4">
+                      <label for="todoCheck4"></label>
+                    </div>
+                    <span class="text">Let theme shine like a star</span>
+                    <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo5" id="todoCheck5">
+                      <label for="todoCheck5"></label>
+                    </div>
+                    <span class="text">Check your messages and notifications</span>
+                    <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo6" id="todoCheck6">
+                      <label for="todoCheck6"></label>
+                    </div>
+                    <span class="text">Let theme shine like a star</span>
+                    <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Add item</button>
+              </div>
+            </div>
+            <!-- /.card -->
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+
+            <!-- Map card -->
+            <div class="card bg-gradient-primary">
+              <div class="card-header border-0">
+                <h3 class="card-title">
+                  <i class="fas fa-map-marker-alt mr-1"></i>
+                  Visitors
+                </h3>
+                <!-- card tools -->
+                <div class="card-tools">
+                  <button type="button"
+                          class="btn btn-primary btn-sm daterange"
+                          data-toggle="tooltip"
+                          title="Date range">
+                    <i class="far fa-calendar-alt"></i>
+                  </button>
+                  <button type="button"
+                          class="btn btn-primary btn-sm"
+                          data-card-widget="collapse"
+                          data-toggle="tooltip"
+                          title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <div class="card-body">
+                <div id="world-map" style="height: 250px; width: 100%;"></div>
+              </div>
+              <!-- /.card-body-->
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-4 text-center">
+                    <div id="sparkline-1"></div>
+                    <div class="text-white">Visitors</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <div id="sparkline-2"></div>
+                    <div class="text-white">Online</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <div id="sparkline-3"></div>
+                    <div class="text-white">Sales</div>
+                  </div>
+                  <!-- ./col -->
+                </div>
+                <!-- /.row -->
+              </div>
+            </div>
+            <!-- /.card -->
+
+            <!-- solid sales graph -->
+            <div class="card bg-gradient-info">
+              <div class="card-header border-0">
+                <h3 class="card-title">
+                  <i class="fas fa-th mr-1"></i>
+                  Sales Graph
+                </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Mail-Orders</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">Online</div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-4 text-center">
+                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
+                           data-fgColor="#39CCCC">
+
+                    <div class="text-white">In-Store</div>
+                  </div>
+                  <!-- ./col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+
+            <!-- Calendar -->
+            <div class="card bg-gradient-success">
+              <div class="card-header border-0">
+
+                <h3 class="card-title">
+                  <i class="far fa-calendar-alt"></i>
+                  Calendar
+                </h3>
+                <!-- tools card -->
+                <div class="card-tools">
+                  <!-- button with a dropdown -->
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-bars"></i></button>
+                    <div class="dropdown-menu float-right" role="menu">
+                      <a href="#" class="dropdown-item">Add new event</a>
+                      <a href="#" class="dropdown-item">Clear events</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item">View calendar</a>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <!-- /. tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body pt-0">
+                <!--The calendar -->
+                <div id="calendar" style="width: 100%"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <#include "common/footer-tpl.ftl" />
+
+  <!-- Control Sidebar -->
+  <#include "common/control-sidebar-tpl.ftl" />
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<#include "common/scripts-tpl.ftl" />
 </body>
 </html>
-
-

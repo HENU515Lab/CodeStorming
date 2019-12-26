@@ -18,7 +18,7 @@
 
                 <h1 class="text-center">515lab 活动</h1>
 
-                <#list activityList as activity>
+                <#list activityList.list as activity>
 
                     <#if .now?date gt activity.startTime?date
                     && activity.endTime?date gt .now?date>
@@ -124,19 +124,39 @@
                     </#if>
                 </#list>
 
-
+                <div align="right">
+                    <ul class="pagination">
+                        <li><a name="page_turning" id="page_${1}"
+                               href="/activity.do?pageNum=${1}">&laquo;</a></li>
+                        <#if activityList.pages gt 4 && activityList.pageNum gt 4>
+                            <#list activityList.navigatepageNums as num>
+                                <#if (num - activityList.pageNum > -4 && num - activityList.pageNum <= 1)
+                                || (activityList.hasNextPage == false && num - activityList.pageNum > -5)>
+                                    <li <#if num == activityList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/activity.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        <#else>
+                            <#list activityList.navigatepageNums as num>
+                                <#if num <= 5>
+                                    <li <#if num == activityList.pageNum>class="active"</#if>>
+                                        <a name="page_turning" id="page_${num}" href="/activity.do?pageNum=${num}">
+                                            ${num}
+                                        </a>
+                                    </li>
+                                </#if>
+                            </#list>
+                        </#if>
+                        <li><a name="page_turning" id="page_${activityList.pageSize}"
+                               href="/activity.do?pageNum=${activityList.pages}">&raquo;</a></li>
+                    </ul>
+                </div>
 
 
             </div>
-        </div>
-        <div align="right">
-            <ul class="pagination">
-                <li><a href="">&laquo;</a></li>
-
-                <li class="active"><a href="javascript:;">1</a></li>
-
-                <li><a href="javascript:;">&raquo;</a></li>
-            </ul>
         </div>
     </div>
 

@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class Blog extends BaseDomain {
-
+public class Blog {
+    private Long id;
     private String title;
     private String keywords;
     private String content;
